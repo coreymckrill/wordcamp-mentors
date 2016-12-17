@@ -19,7 +19,7 @@ const JS_VERSION     = '1.0.0';
 const CSS_VERSION    = '1.0.0';
 
 define( __NAMESPACE__ . '\PLUGIN_DIR', \plugin_dir_path( __FILE__ ) );
-define( __NAMESPACE__ . '\PLUGIN_URL', \plugins_url( __FILE__ ) );
+define( __NAMESPACE__ . '\PLUGIN_URL', \plugins_url( '/', __FILE__ ) );
 
 const MENTOR_CAP    = 'manage_network';
 const ORGANIZER_CAP = 'switch_themes';
