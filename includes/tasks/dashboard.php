@@ -75,8 +75,27 @@ function render_page() {
  *
  * @return void
  */
-function enqueue_page_assets() {
-	// TODO
+function enqueue_page_assets( $hook_suffix ) {
+	if ( 'dashboard_page_mentors-tasks' !== $hook_suffix ) {
+		return;
+	}
+
+	wp_enqueue_style(
+		'wordcamp-mentors-tasks-dashboard',
+		Mentors\get_css_url() . 'tasks/dashboard.css',
+		array(),
+		Mentors\CSS_VERSION
+	);
+
+	wp_enqueue_script(
+		'wordcamp-mentors-tasks-dashboard',
+		Mentors\get_js_url() . 'tasks/dashboard.js',
+		array( 'jquery' ),
+		Mentors\JS_VERSION,
+		true
+	);
 }
+
+add_action( 'admin_enqueue_scripts', __NAMESPACE__ . '\enqueue_page_assets' );
 
 // TODO Ajax stuff
