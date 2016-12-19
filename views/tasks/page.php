@@ -17,7 +17,7 @@ use WordCamp\Mentors;
 
 	<p class="description"><?php echo wp_kses_post( $data['page']['description'] ); ?></p>
 
-	<?php foreach( $data['categories'] as $category_slug => $category_name ) : ?>
+	<?php foreach( $data['categories'] as $category_slug => $category_data ) : ?>
 		<?php require Mentors\get_views_dir_path() . 'tasks/category.php'; ?>
 	<?php endforeach; ?>
 </div>

@@ -10,11 +10,13 @@ use WordCamp\Mentors;
 
 /** @var \WordCamp\Mentors\Tasks $tasks */
 /** @var string $category_slug */
-/** @var string $category_name */
+/** @var string $category_data */
 
 ?>
-<section id="wordcamp-mentors-task-category-<?php echo esc_attr( $category_slug ); ?>" class="wordcamp-mentors-task-category card">
-	<h2><?php echo esc_html( $category_name ); ?></h2>
+<section id="wordcamp-mentors-task-category-<?php echo esc_attr( $category_slug ); ?>" class="wordcamp-mentors-task-category card" data-color="<?php echo esc_attr( $category_data['color'] ); ?>">
+    <header>
+        <h2><?php echo esc_html( $category_data['name'] ); ?></h2>
+    </header>
 
     <ul>
         <?php foreach ( $tasks->get_tasks_in_category( $category_slug ) as $task_id => $task ) : ?>

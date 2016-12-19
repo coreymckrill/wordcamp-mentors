@@ -14,20 +14,62 @@ $data = array_merge( $data, array(
 		'description' => __( '[Description]', 'wordcamp-mentors' ),
 	),
 	'categories' => array(
-		'after-party'     => __( 'After Party', 'wordcamp-mentors' ),
-		'audio-video'     => __( 'Audio/Video', 'wordcamp-mentors' ),
-		'budget'          => __( 'Budget', 'wordcamp-mentors' ),
-		'committee'       => __( 'Committee', 'wordcamp-mentors' ),
-		'contributor-day' => __( 'Contributor Day', 'wordcamp-mentors' ),
-		'design'          => __( 'Design', 'wordcamp-mentors' ),
-		'food'            => __( 'Food', 'wordcamp-mentors' ),
-		'lead'            => __( 'Lead', 'wordcamp-mentors' ),
-		'registration'    => __( 'Registration', 'wordcamp-mentors' ),
-		'speaker'         => __( 'Speaker', 'wordcamp-mentors' ),
-		'sponsor'         => __( 'Sponsor', 'wordcamp-mentors' ),
-		'swag'            => __( 'Swag', 'wordcamp-mentors' ),
-		'volunteer'       => __( 'Volunteer', 'wordcamp-mentors' ),
-		'web'             => __( 'Web', 'wordcamp-mentors' ),
+		'after-party'     => array(
+			'name'  => __( 'After Party', 'wordcamp-mentors' ),
+			'color' => '#a7863d',
+		),
+		'audio-video'     => array(
+			'name'  => __( 'Audio/Video', 'wordcamp-mentors' ),
+			'color' => '#a4c2f4',
+		),
+		'budget'          => array(
+			'name'  => __( 'Budget', 'wordcamp-mentors' ),
+			'color' => '#d64db8',
+		),
+		'committee'       => array(
+			'name'  => __( 'Committee', 'wordcamp-mentors' ),
+			'color' => '#e69138',
+		),
+		'contributor-day' => array(
+			'name'  => __( 'Contributor Day', 'wordcamp-mentors' ),
+			'color' => '#c67df4',
+		),
+		'design'          => array(
+			'name'  => __( 'Design', 'wordcamp-mentors' ),
+			'color' => '#76a5af',
+		),
+		'food'            => array(
+			'name'  => __( 'Food', 'wordcamp-mentors' ),
+			'color' => '#a64d79',
+		),
+		'lead'            => array(
+			'name'  => __( 'Lead', 'wordcamp-mentors' ),
+			'color' => '#cc0000',
+		),
+		'registration'    => array(
+			'name'  => __( 'Registration', 'wordcamp-mentors' ),
+			'color' => '#ffa6e7',
+		),
+		'speaker'         => array(
+			'name'  => __( 'Speaker', 'wordcamp-mentors' ),
+			'color' => '#3d85c6',
+		),
+		'sponsor'         => array(
+			'name'  => __( 'Sponsor', 'wordcamp-mentors' ),
+			'color' => '#38761d',
+		),
+		'swag'            => array(
+			'name'  => __( 'Swag', 'wordcamp-mentors' ),
+			'color' => '#93c47d',
+		),
+		'volunteer'       => array(
+			'name'  => __( 'Volunteer', 'wordcamp-mentors' ),
+			'color' => '#674ea7',
+		),
+		'web'             => array(
+			'name'  => __( 'Web', 'wordcamp-mentors' ),
+			'color' => '#bf9000',
+		),
 	),
 	'tasks' => array(
 		/* Template
