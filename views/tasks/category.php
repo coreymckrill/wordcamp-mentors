@@ -13,7 +13,7 @@ use WordCamp\Mentors;
 /** @var string $category_name */
 
 ?>
-<section id="wordcamp-mentors-task-group-<?php echo esc_attr( $category_slug ); ?>" class="wordcamp-mentors-task-group card">
+<section id="wordcamp-mentors-task-category-<?php echo esc_attr( $category_slug ); ?>" class="wordcamp-mentors-task-category card">
 	<h2><?php echo esc_html( $category_name ); ?></h2>
 
     <ul>
