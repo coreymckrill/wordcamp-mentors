@@ -300,7 +300,7 @@ class Task {
 	 * @return string
 	 */
 	public function get_html_id() {
-		return 'wordcamp-mentors-task-item-' . $this->id;
+		return 'tasks-dash-item-' . $this->id;
 	}
 
 	/**
@@ -311,7 +311,7 @@ class Task {
 	 * @return string
 	 */
 	public function get_html_class() {
-		$class = array( 'wordcamp-mentors-task-item' );
+		$class = array( 'tasks-dash-item' );
 
 		if ( $this->state ) {
 			$class[] = $this->state;
