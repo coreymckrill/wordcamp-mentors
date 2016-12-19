@@ -90,7 +90,7 @@ function enqueue_page_assets( $hook_suffix ) {
 	wp_enqueue_script(
 		'wordcamp-mentors-tasks-dashboard',
 		Mentors\get_js_url() . 'tasks/dashboard.js',
-		array( 'jquery' ),
+		array( 'jquery', 'jquery-ui-core', 'jquery-ui-tabs', 'jquery-ui-progressbar', 'jquery-ui-sortable' ),
 		Mentors\JS_VERSION,
 		true
 	);

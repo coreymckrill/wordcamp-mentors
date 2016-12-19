@@ -1,3 +1,28 @@
-.tasks-dash-category {
-    background: #ffffee;
+
+/* jQuery UI cleanup */
+#tasks-dash-container .ui-widget-header {
+    background: transparent;
+    border-color: #ccc;
+}
+
+.tasks-dash-tab-placeholder {
+    border: 1px dashed #ccc;
+}
+
+/* Tabs */
+.tasks-dash-tab {
+    min-width: 120px;
+}
+
+.tasks-dash-tab a {
+    display: block;
+    width: 100%;
+}
+
+.tasks-dash-tab-flag {
+    display: inline-block;
+    height: 16px;
+    width: 16px;
+    vertical-align: middle;
+    margin-right: 3px;
 }

@@ -13,7 +13,7 @@ use WordCamp\Mentors;
 /** @var string $category_data */
 
 ?>
-<section id="tasks-dash-category-<?php echo esc_attr( $category_slug ); ?>" class="tasks-dash-category card" data-color="<?php echo esc_attr( $category_data['color'] ); ?>">
+<section id="tasks-dash-category-<?php echo esc_attr( $category_slug ); ?>" class="tasks-dash-category" data-color="<?php echo esc_attr( $category_data['color'] ); ?>">
     <header>
         <h2><?php echo esc_html( $category_data['name'] ); ?></h2>
     </header>

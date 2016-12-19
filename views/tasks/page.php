@@ -17,7 +17,13 @@ use WordCamp\Mentors;
 
 	<p class="description"><?php echo wp_kses_post( $data['page']['description'] ); ?></p>
 
-    <div class="tasks-dash-container">
+    <div id="tasks-dash-container">
+        <ul class="tasks-dash-tabs">
+	        <?php foreach( $data['categories'] as $category_slug => $category_data ) : ?>
+		        <?php require Mentors\get_views_dir_path() . 'tasks/tab.php'; ?>
+	        <?php endforeach; ?>
+        </ul>
+
         <?php foreach( $data['categories'] as $category_slug => $category_data ) : ?>
             <?php require Mentors\get_views_dir_path() . 'tasks/category.php'; ?>
         <?php endforeach; ?>
