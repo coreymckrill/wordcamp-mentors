@@ -10,7 +10,7 @@ defined( 'WPINC' ) or die();
 /** @var \WordCamp\Mentors\Task_Dashboard\Task $task */
 
 ?>
-<li id="<?php echo esc_attr( $task->get_html_id() ); ?>" class="<?php echo esc_attr( $task->get_html_class() ); ?>" <?php echo esc_html( $task->get_html_data_attributes() ); ?>>
+<li id="<?php echo esc_attr( $task->get_html_id() ); ?>" class="<?php echo esc_attr( $task->get_html_class() ); ?>">
     <?php if ( ! is_rtl() ) : ?>
         <div class="spinner"></div>
         <div class="<?php echo esc_attr( $task->get_toggle_html_class() ); ?>"></div>

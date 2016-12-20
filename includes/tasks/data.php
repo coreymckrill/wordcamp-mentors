@@ -78,7 +78,6 @@ $data = array_merge( $data, array(
 			'text'         => __( '', 'wordcamp-mentors' ),
 			'category'     => '',
 			'order'        => 10,
-			'dependencies' => array(),
 		),
 		*/
 
@@ -88,28 +87,24 @@ $data = array_merge( $data, array(
 			'text'         => __( 'Update budget in Dashboard', 'wordcamp-mentors' ),
 			'category'     => 'budget',
 			'order'        => 10,
-			'dependencies' => array(),
 		),
 		array(
 			'id'           => 'bgt02',
 			'text'         => __( 'Request budget review meeting', 'wordcamp-mentors' ),
 			'category'     => 'budget',
 			'order'        => 10,
-			'dependencies' => array( 'bgt01' ),
 		),
 		array(
 			'id'           => 'bgt03',
 			'text'         => __( 'Collect invoices from vendors and get them to WordCamp Central', 'wordcamp-mentors' ),
 			'category'     => 'budget',
 			'order'        => 10,
-			'dependencies' => array(),
 		),
 		array(
 			'id'           => 'bgt04',
 			'text'         => __( 'Make sure all bills are paid', 'wordcamp-mentors' ),
 			'category'     => 'budget',
 			'order'        => 10,
-			'dependencies' => array(),
 		),
 
 		// Design
@@ -118,35 +113,30 @@ $data = array_merge( $data, array(
 			'text'         => __( 'Start thinking about Design process/branding', 'wordcamp-mentors' ),
 			'category'     => 'design',
 			'order'        => 10,
-			'dependencies' => array(),
 		),
 		array(
 			'id'           => 'dsg02',
 			'text'         => __( 'Badge/Name Tag design', 'wordcamp-mentors' ),
 			'category'     => 'design',
 			'order'        => 10,
-			'dependencies' => array(),
 		),
 		array(
 			'id'           => 'dsg03',
 			'text'         => __( 'Signage Design', 'wordcamp-mentors' ),
 			'category'     => 'design',
 			'order'        => 10,
-			'dependencies' => array(),
 		),
 		array(
 			'id'           => 'dsg04',
 			'text'         => __( 'Finalize name badge order', 'wordcamp-mentors' ),
 			'category'     => 'design',
 			'order'        => 10,
-			'dependencies' => array(),
 		),
 		array(
 			'id'           => 'dsg05',
 			'text'         => __( 'Order signage', 'wordcamp-mentors' ),
 			'category'     => 'design',
 			'order'        => 10,
-			'dependencies' => array(),
 		),
 	),
 ) );

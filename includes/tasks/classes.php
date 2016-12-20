@@ -300,29 +300,6 @@ class Task {
 	}
 
 	/**
-	 * Generate a string of HTML data attributes.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return string
-	 */
-	public function get_html_data_attributes() {
-		$data = array();
-
-		if ( ! empty( $this->dependencies ) ) {
-			$data['dep'] = implode( ',', $this->dependencies );
-		}
-
-		$attributes = array();
-
-		foreach ( $data as $key => $value ) {
-			$attributes[] = " data-$key=\"$value\"";
-		}
-
-		return implode( ' ', $attributes );
-	}
-
-	/**
 	 * Get a string for the toggle's `class` HTML attribute.
 	 *
 	 * @since 1.0.0
