@@ -3,7 +3,7 @@
  * @package WordCamp\Mentors
  */
 
-namespace WordCamp\Mentors;
+namespace WordCamp\Mentors\Task_Dashboard;
 defined( 'WPINC' ) or die();
 
 /**
@@ -11,7 +11,7 @@ defined( 'WPINC' ) or die();
  *
  * A manager for a collection of Task objects.
  *
- * @package WordCamp\Mentors
+ * @package WordCamp\Mentors\Task_Dashboard
  */
 class Tasks {
 	/**
@@ -119,7 +119,7 @@ class Tasks {
  *
  * An object containing data about a WordCamp planning task.
  *
- * @package WordCamp\Mentors
+ * @package WordCamp\Mentors\Task_Dashboard
  */
 class Task {
 	/**
@@ -320,5 +320,206 @@ class Task {
 		}
 
 		return implode( ' ', $attributes );
+	}
+
+	/**
+	 * Get a string for the toggle's `class` HTML attribute.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return string
+	 */
+	public function get_toggle_html_class() {
+		$class = array( 'tasks-dash-item-toggle', 'dashicons-before' );
+
+		if ( $this->state ) {
+			$class[] = 'dashicons-yes';
+		}
+
+		return implode( ' ', $class );
+	}
+}
+
+/**
+ * Class Ajax_Request
+ *
+ *
+ *
+ * @package WordCamp\Mentors\Task_Dashboard
+ */
+class Ajax_Request {
+	/**
+	 * @var array The request data
+	 */
+	private $data = array();
+
+	/**
+	 * @var array|string The response data
+	 */
+	private $response = array();
+
+	/**
+	 * @var bool Switch to determine which type of response to send
+	 */
+	private $success = false;
+
+	/**
+	 * Ajax_Request constructor.
+	 *
+	 * @param string $nonce
+	 * @param array  $data
+	 */
+	public function __construct( $nonce, $data ) {
+		if ( ! wp_verify_nonce( $nonce, 'wordcamp-mentors-tasks-dashboard' ) ) {
+			return;
+		}
+
+		$defaults = array(
+			'action' => '',
+		);
+		$this->data = wp_parse_args( (array) $data, $defaults );
+
+		switch ( $this->data['action'] ) {
+			case 'tab-order' :
+				$this->success = $this->tab_order( $this->data );
+				break;
+
+			case 'check-task' :
+				$this->success = $this->check_task( $this->data );
+				break;
+
+			case 'uncheck-task' :
+				$this->success = $this->uncheck_task( $this->data );
+				break;
+		}
+	}
+
+	/**
+	 * Send a JSON response with the results of the request.
+	 *
+	 * @since 1.0.0
+	 */
+	public function send_response() {
+		if ( $this->success ) {
+			wp_send_json_success( $this->response );
+		} else {
+			wp_send_json_error( $this->response );
+		}
+	}
+
+	/**
+	 * Get the static data related to categories.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return array
+	 */
+	private function get_category_data() {
+		$data = load_task_data();
+
+		return $data['categories'];
+	}
+
+	/**
+	 * Get the collection of Task objects.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return Tasks
+	 */
+	private function get_task_data() {
+		$data = load_task_data();
+
+		return new Tasks( $data['tasks'] );
+	}
+
+	/**
+	 * Handle a request to save a custom tab order.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $data
+	 *
+	 * @return bool|int
+	 */
+	private function tab_order( $data ) {
+		if ( isset( $data['tab-order'] ) ) {
+			$category_slugs = array_keys( $this->get_category_data() );
+			$order = array_intersect( $data['tab-order'], $category_slugs );
+
+			if ( ! empty( $order ) ) {
+				$user_options = get_user_option( USER_OPTION_KEY );
+
+				if ( ! is_array( $user_options ) ) {
+					$user_options = array();
+				}
+
+				$user_options['tab-order'] = $order;
+
+				// Use `update_user_option` instead of `update_user_meta` so that it's site-specific
+				return update_user_option( get_current_user_id(), USER_OPTION_KEY, $user_options );
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Handle a request to mark a task as complete.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $data
+	 *
+	 * @return bool
+	 */
+	private function check_task( $data ) {
+		if ( isset( $data['task-id'] ) ) {
+			$tasks = $this->get_task_data();
+			$id = $data['task-id'];
+
+			if ( $tasks->is_task( $id ) ) {
+				$task = $tasks->get_task( $id );
+				$completed_by = get_user_by( 'id', get_current_user_id() )->user_login;
+
+				$task->state        = 'complete';
+				$task->completed_by = $completed_by;
+
+				$this->response = array(
+					'completed_by' => $completed_by,
+				);
+
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Handle a request to mark a task as incomplete.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $data
+	 *
+	 * @return bool
+	 */
+	private function uncheck_task( $data ) {
+		if ( isset( $data['task-id'] ) ) {
+			$tasks = $this->get_task_data();
+			$id = $data['task-id'];
+
+			if ( $tasks->is_task( $id ) ) {
+				$task = $tasks->get_task( $id );
+
+				$task->state        = '';
+				$task->completed_by = '';
+
+				return true;
+			}
+		}
+
+		return false;
 	}
 }

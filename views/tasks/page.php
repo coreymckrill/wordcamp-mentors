@@ -17,7 +17,7 @@ use WordCamp\Mentors;
 
 	<p class="description"><?php echo wp_kses_post( $data['page']['description'] ); ?></p>
 
-    <div id="tasks-dash-container">
+    <div id="tasks-dash-container" data-nonce="<?php echo esc_attr( wp_create_nonce( 'wordcamp-mentors-tasks-dashboard' ) ); ?>">
         <ul class="tasks-dash-tabs">
 	        <?php foreach( $data['categories'] as $category_slug => $category_data ) : ?>
 		        <?php require Mentors\get_views_dir_path() . 'tasks/tab.php'; ?>
