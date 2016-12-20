@@ -10,8 +10,8 @@ defined( 'WPINC' ) or die();
 
 $data = array_merge( $data, array(
 	'page' => array(
-		'title'       => __( 'Tasks Dashboard', 'wordcamp-mentors' ),
-		'description' => __( '[Description]', 'wordcamp-mentors' ),
+		'title'       => __( 'Task Dashboard', 'wordcamp-mentors' ),
+		'description' => __( 'This tool provides a broad overview of the tasks necessary to plan and run a successful WordCamp. Drag and drop the categories into any order you wish.', 'wordcamp-mentors' ),
 	),
 	'categories' => array(
 		'after-party'     => array(
