@@ -50,17 +50,6 @@
             cache.$tabHeader = $container.find( '.tasks-dash-tab' );
             cache.$tabContent = $container.find( '.tasks-dash-category' );
 
-            // Set tab colors and targets
-            cache.$tabHeader.each( function() {
-                var $tab = $( this ),
-                    $target = $( $tab.find( 'a' ).attr( 'href' ) ),
-                    $flag = $tab.find( '.tasks-dash-tab-flag' ),
-                    color = $tab.data( 'color' );
-
-                $tab.data( 'target', $target );
-                $flag.css( { background: color } );
-            });
-
             // Set up category data
             cache.$tabContent.each( function() {
                 var $category = $( this ),
@@ -98,7 +87,7 @@
             cache.progressbar = [];
             cache.$tabHeader.each( function() {
                 var $tab = $( this ),
-                    $target = $tab.data( 'target' ),
+                    $target = $( $tab.find( 'a' ).attr( 'href' ) ),
                     $bar = $tab.find( '.tasks-dash-tab-progressbar' ),
                     $label = $tab.find( '.tasks-dash-tab-progresslabel' );
 

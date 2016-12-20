@@ -13,14 +13,14 @@ use WordCamp\Mentors;
 /** @var string $category_data */
 
 ?>
-<li id="tasks-dash-tab-<?php echo esc_attr( $category_slug ); ?>" class="tasks-dash-tab" data-color="<?php echo esc_attr( $category_data['color'] ); ?>" data-category="<?php echo esc_attr( $category_slug ); ?>">
+<li id="tasks-dash-tab-<?php echo esc_attr( $category_slug ); ?>" class="tasks-dash-tab" data-category="<?php echo esc_attr( $category_slug ); ?>">
 	<a href="#tasks-dash-category-<?php echo esc_attr( $category_slug ); ?>">
 		<?php if ( is_rtl() ) : ?>
 			<span class="tasks-dash-tab-progresslabel"></span>
 			<?php echo esc_html( $category_data['name'] ); ?>
-			<span class="tasks-dash-tab-flag"></span>
+			<span class="tasks-dash-tab-flag" style="background: <?php echo esc_attr( $category_data['color'] ); ?>"></span>
 		<?php else : ?>
-			<span class="tasks-dash-tab-flag"></span>
+			<span class="tasks-dash-tab-flag" style="background: <?php echo esc_attr( $category_data['color'] ); ?>"></span>
 			<?php echo esc_html( $category_data['name'] ); ?>
 			<span class="tasks-dash-tab-progresslabel"></span>
 		<?php endif; ?>
