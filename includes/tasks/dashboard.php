@@ -100,7 +100,7 @@ function enqueue_page_assets( $hook_suffix ) {
 	wp_enqueue_style(
 		'wordcamp-mentors-tasks-dashboard',
 		Mentors\get_css_url() . 'tasks/dashboard.css',
-		array(),
+		array( 'jquery-ui' ),
 		Mentors\CSS_VERSION
 	);
 
@@ -121,7 +121,7 @@ function enqueue_page_assets( $hook_suffix ) {
 	);
 }
 
-add_action( 'admin_enqueue_scripts', __NAMESPACE__ . '\enqueue_page_assets' );
+add_action( 'admin_enqueue_scripts', __NAMESPACE__ . '\enqueue_page_assets', 20 );
 
 /**
  * Handle Ajax requests from the Tasks Dashboard page.
