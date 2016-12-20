@@ -35,30 +35,9 @@ class Tasks {
 		foreach ( $data as $task_data ) {
 			if ( $this->has_required_fields( $task_data ) ) {
 				$id = sanitize_key( $task_data['id'] );
-				$task_meta = $this->get_task_meta( $id );
-
-				$this->tasks[ $id ] = new Task( $task_data, $task_meta );
+				$this->tasks[ $id ] = new Task( $task_data );
 			}
 		}
-	}
-
-	/**
-	 * Get the metadata for a particular task.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param string $id The task ID
-	 *
-	 * @return array
-	 */
-	private function get_task_meta( $id ) {
-		$all_task_meta = get_option( self::OPTION_KEY, array() );
-
-		if ( isset( $all_task_meta[ $id ] ) ) {
-			return $all_task_meta[ $id ];
-		}
-
-		return array();
 	}
 
 	/**
@@ -107,38 +86,6 @@ class Tasks {
 	}
 
 	/**
-	 * Update the metadata for a particular task.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param string $id   The task ID
-	 * @param array  $meta An associative array of metadata
-	 *
-	 * @return bool
-	 */
-	public function update_task_meta( $id, array $meta ) {
-		$task = $this->get_task( $id );
-
-		if ( is_null( $task ) ) {
-			return false;
-		}
-
-		$all_task_meta = get_option( self::OPTION_KEY, array() );
-
-		if ( empty( $meta ) && isset( $all_task_meta[ $id ] ) ) {
-			$this->tasks[ $id ] = $task->reset_meta();
-			unset( $all_task_meta[ $id ] );
-		} else {
-			foreach ( $meta as $prop => $value ) {
-				$this->tasks[ $id ] = $task->set( $prop, $value );
-			}
-			$all_task_meta[ $id ] = $meta;
-		}
-
-		return update_option( self::OPTION_KEY, $all_task_meta, false );
-	}
-
-	/**
 	 * Get an array of Task objects that have a particular category set.
 	 *
 	 * @since 1.0.0
@@ -176,6 +123,11 @@ class Tasks {
  */
 class Task {
 	/**
+	 * @const string The option key for the tasks metadata
+	 */
+	const OPTION_KEY = 'wordcamp-mentors-task-meta';
+
+	/**
 	 * @var string Arbitrary unique ID for the task
 	 */
 	private $id = '';
@@ -201,37 +153,21 @@ class Task {
 	private $dependencies = array();
 
 	/**
-	 * @var string Meta | State of the task
-	 */
-	private $state = '';
-
-	/**
-	 * @var string Meta | Username of person who switched the task to a complete state
-	 */
-	private $completed_by = '';
-
-	/**
 	 * Task constructor.
 	 *
 	 * @since 1.0.0
 	 *
 	 * @param array $data Static task data
-	 * @param array $meta Dynamic task data
 	 */
-	public function __construct( array $data, array $meta ) {
+	public function __construct( array $data ) {
 		// Data
 		foreach ( $data as $prop => $value ) {
-			$this->set( $prop, $value );
-		}
-
-		// Meta
-		foreach ( $meta as $prop => $value ) {
-			$this->set( $prop, $value );
+			$this->$prop = $value;
 		}
 	}
 
 	/**
-	 * Allow properties to be accessed with ->
+	 * Allow properties and metadata to be accessed with ->
 	 *
 	 * @since 1.0.0
 	 *
@@ -240,11 +176,51 @@ class Task {
 	 * @return mixed|null
 	 */
 	public function __get( $prop ) {
-		return $this->get( $prop );
+		if ( isset( $this->$prop ) ) {
+			return $this->$prop;
+		} else if ( ! is_null( $meta = $this->get_meta( $prop ) ) ) {
+			return $meta;
+		}
+
+		return null;
 	}
 
 	/**
-	 * Get the value of a property, if it exists.
+	 * Allow properties and metadata to be set with ->
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $prop
+	 * @param mixed  $value
+	 *
+	 * @return Task
+	 */
+	public function __set( $prop, $value ) {
+		if ( isset( $this->$prop ) ) {
+			$this->$prop = $value;
+		} else {
+			$this->update_meta( $prop, $value );
+		}
+
+		return $this;
+	}
+
+	/**
+	 * The default keys and values for the meta array.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return array
+	 */
+	private function get_meta_defaults() {
+		return array(
+			'state'        => '',
+			'completed_by' => '',
+		);
+	}
+
+	/**
+	 * Get the value of a particular meta property.
 	 *
 	 * @since 1.0.0
 	 *
@@ -252,44 +228,47 @@ class Task {
 	 *
 	 * @return mixed|null
 	 */
-	public function get( $prop ) {
-		if ( isset( $this->$prop ) ) {
-			return $this->$prop;
+	private function get_meta( $prop ) {
+		$stored_meta = get_option( self::OPTION_KEY, array() );
+
+		if ( ! isset( $stored_meta[ $this->id ] ) ) {
+			$stored_meta[ $this->id ] = $this->get_meta_defaults();
+		}
+
+		if ( isset( $stored_meta[ $this->id ][ $prop ] ) ) {
+			return $stored_meta[ $this->id ][ $prop ];
 		}
 
 		return null;
 	}
 
 	/**
-	 * Set the value of a property if it has been defined.
+	 * Set the value of a particular meta property, if it is an allowed property.
 	 *
 	 * @since 1.0.0
 	 *
 	 * @param string $prop
 	 * @param mixed  $value
 	 *
-	 * @return $this
+	 * @return bool
 	 */
-	public function set( $prop, $value ) {
-		if ( isset( $this->$prop ) ) {
-			$this->$prop = $value;
+	private function update_meta( $prop, $value ) {
+		$defaults = $this->get_meta_defaults();
+
+		// Only set allowed properties
+		if ( ! isset( $defaults[ $prop ] ) ) {
+			return false;
 		}
 
-		return $this;
-	}
+		$stored_meta = get_option( self::OPTION_KEY, array() );
 
-	/**
-	 * Reset the properties associated with metadata back to their default values.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return $this
-	 */
-	public function reset_meta() {
-		$this->state = '';
-		$this->completed_by = '';
+		if ( ! isset( $stored_meta[ $this->id ] ) ) {
+			$stored_meta[ $this->id ] = $this->get_meta_defaults();
+		}
 
-		return $this;
+		$stored_meta[ $this->id ][ $prop ] = $value;
+
+		return update_option( self::OPTION_KEY, $stored_meta );
 	}
 
 	/**
