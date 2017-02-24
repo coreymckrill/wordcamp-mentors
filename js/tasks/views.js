@@ -16,6 +16,7 @@
 		initialize: function() {
 			this.tasks      = new wp.api.collections.Wcm_task();
 			this.categories = new wp.api.collections.Wcm_task_category();
+			this.filter     = new wordcamp.mentors.views.Filter( { el: '#tasks-filter' } );
 
 			var view = this,
 				taskData = {
@@ -30,6 +31,8 @@
 					view.render();
 				}
 			});
+
+			this.listeners();
 		},
 
 		render: function() {
@@ -50,6 +53,44 @@
 				});
 
 				view.$el.append( task.$el );
+			});
+		},
+
+
+		listeners: function() {
+			this.listenTo( this.filter, 'filter:tasks', this.updateVisibleTasks );
+		},
+
+
+		_getVisibleTasks: function( filter ) {
+			var taskCollection = this.tasks,
+				tasks;
+
+			if ( 'any' !== filter.wcm_task_category ) {
+				taskCollection = new Backbone.Collection( _.filter( taskCollection.models, function ( task ) {
+					return _.contains( task.get( 'wcm_task_category' ), parseInt( filter.wcm_task_category ) );
+				}) );
+			}
+
+			if ( 'any' !== filter.status ) {
+				tasks = taskCollection.where( { status: filter.status } );
+			} else {
+				tasks = taskCollection.models;
+			}
+
+			return tasks;
+		},
+
+
+		updateVisibleTasks: function( filter ) {
+			var visibleTasks = this._getVisibleTasks( filter );
+
+			_.each( this.tasks.models, function( task ) {
+				task.trigger( 'visibility:hide' );
+			});
+
+			_.each( visibleTasks, function( task ) {
+				task.trigger( 'visibility:show' );
 			});
 		}
 
@@ -82,6 +123,8 @@
 
 			this.render( data );
 
+			this.listeners();
+
 			return this;
 		},
 
@@ -90,6 +133,22 @@
 			this.$el.html( this.template( data ) );
 
 			return this;
+		},
+
+
+		listeners: function() {
+			this.listenTo( this.model, 'visibility:show', this.showMe );
+			this.listenTo( this.model, 'visibility:hide', this.hideMe );
+		},
+
+
+		showMe: function() {
+			this.$el.show();
+		},
+
+
+		hideMe: function() {
+			this.$el.hide();
 		},
 
 
@@ -111,6 +170,31 @@
 		updateStatus: function() {
 
 		}
+	});
+
+
+	wordcamp.mentors.views.Filter = Backbone.View.extend( {
+
+		events: {
+			'submit': 'setFilter'
+		},
+
+
+		setFilter: function( event ) {
+			event.preventDefault();
+
+			var filter = {};
+
+			$( event.target ).find( 'select' ).each( function() {
+				var attribute = $( this ).data( 'attribute' ),
+					value     = $( this ).val();
+
+				filter[ attribute ] = value;
+			});
+
+			this.trigger( 'filter:tasks', filter );
+		}
+
 	});
 
 } )( window, jQuery );

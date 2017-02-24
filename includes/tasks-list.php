@@ -67,10 +67,10 @@ class List_Table extends \WP_List_Table {
 		) );
 		?>
 		<label for="filter-by-task-category" class="screen-reader-text"><?php esc_html_e( 'Filter by task category', 'wordcamp-mentors' ); ?></label>
-		<select id="filter-by-task-category">
-			<option value="all"><?php esc_html_e( 'All task categories', 'wordcamp-mentors' ); ?></option>
+		<select id="filter-by-task-category" data-attribute="wcm_task_category">
+			<option value="any"><?php esc_html_e( 'All task categories', 'wordcamp-mentors' ); ?></option>
 			<?php foreach ( $task_categories as $cat ) : ?>
-				<option value="<?php echo esc_attr( $cat->slug ); ?>"><?php echo esc_html( $cat->name ); ?></option>
+				<option value="<?php echo esc_attr( $cat->term_id ); ?>"><?php echo esc_html( $cat->name ); ?></option>
 			<?php endforeach; ?>
 		</select>
 	<?php
@@ -83,8 +83,8 @@ class List_Table extends \WP_List_Table {
 		$task_statuses = get_task_statuses();
 		?>
 		<label for="filter-by-task-status" class="screen-reader-text"><?php esc_html_e( 'Filter by status', 'wordcamp-mentors' ); ?></label>
-		<select id="filter-by-task-status">
-			<option value="all"><?php esc_html_e( 'All statuses', 'wordcamp-mentors' ); ?></option>
+		<select id="filter-by-task-status" data-attribute="status">
+			<option value="any"><?php esc_html_e( 'All statuses', 'wordcamp-mentors' ); ?></option>
 			<?php foreach ( $task_statuses as $status ) : ?>
 				<option value="<?php echo esc_attr( $status->name ); ?>"><?php echo esc_html( $status->label ); ?></option>
 			<?php endforeach; ?>
