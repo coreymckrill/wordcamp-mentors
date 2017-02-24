@@ -1,79 +1,30 @@
 
-/* jQuery UI cleanup */
-#tasks-dash-container .ui-widget-header {
-    background: transparent;
-    border-color: #ccc;
+/* Layout */
+.fixed .tasks-dash-column-category {
+    width: 10%;
 }
 
-.tasks-dash-tab-placeholder {
-    border: 1px dashed #ccc;
+.fixed .tasks-dash-column-task {
+
 }
 
-#tasks-dash-container .ui-progressbar {
-    height: 5px;
+.fixed .tasks-dash-column-status {
+    width: 15%;
 }
 
-#tasks-dash-container .ui-corner-all,
-#tasks-dash-container .ui-corner-left,
-#tasks-dash-container .ui-corner-right {
-    border-radius: 0;
+.fixed .tasks-dash-column-updatedby {
+    width: 10%;
 }
 
-#tasks-dash-container .ui-progressbar-value {
-    background: #333;
+.fixed .tasks-dash-column-modified {
+    width: 10%;
 }
 
-/* Tabs */
-.tasks-dash-tab {
-    min-width: 150px;
-}
 
-.tasks-dash-tab a {
-    display: block;
-    width: 100%;
-}
-
-.tasks-dash-tab-flag {
+/* Elements */
+.tasks-dash-category-flag {
+    color: #fff;
     display: inline-block;
-    height: 16px;
-    width: 16px;
-    vertical-align: middle;
-    margin-right: 3px;
-}
-.rtl .tasks-dash-tab-flag {
-    margin-left: 3px;
-    margin-right: 0;
-}
-
-.tasks-dash-tab-flag {
-    cursor: move;
-}
-
-/* Items */
-.tasks-dash-item .spinner {
-    float: left;
-}
-.rtl .tasks-dash-item .spinner {
-    float: right;
-}
-
-.tasks-dash-item-toggle {
-    border: 3px solid #333;
-    float: left;
-    height: 20px;
-    margin-right: 3px;
-    width: 20px;
-}
-.rtl .tasks-dash-item-toggle {
-    float: right;
-    margin-left: 3px;
-    margin-right: 0;
-}
-
-.tasks-dash-item-content {
-    line-height: 26px;
-    vertical-align: middle;
-}
-.tasks-dash-item.complete .tasks-dash-item-content {
-    text-decoration: line-through;
+    font-weight: bold;
+    padding: 0.3em 1em;
 }

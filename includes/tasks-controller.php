@@ -1,0 +1,97 @@
+<?php
+/**
+ * @package WordCamp\Mentors
+ */
+
+namespace WordCamp\Mentors\Tasks;
+defined( 'WPINC' ) or die();
+
+use WordCamp\Mentors;
+
+
+class Controller extends \WP_REST_Posts_Controller {
+	/**
+	 * Retrieves the Task post's schema, conforming to JSON Schema.
+	 *
+	 * Task-specific modifications to the standard post schema.
+	 *
+	 * @access public
+	 *
+	 * @return array Item schema data.
+	 */
+	public function get_item_schema() {
+		$schema = parent::get_item_schema();
+
+		// Show the custom statuses in REST response
+		if ( false === array_search( 'view', $schema['properties']['status']['context'] ) ) {
+			$schema['properties']['status']['context'][] = 'view';
+		}
+
+		// Specify custom statuses
+		$schema['properties']['status']['enum'] = array_keys( get_task_statuses() );
+
+		return $this->add_additional_fields_schema( $schema );
+	}
+
+	/**
+	 * Retrieves the query params for the posts collection.
+	 *
+	 * Task-specific modifications to the standard posts collection query params.
+	 *
+	 * @since 4.7.0
+	 * @access public
+	 *
+	 * @return array Collection parameters.
+	 */
+	public function get_collection_params() {
+		$query_params = parent::get_collection_params();
+
+		// Allow posts with our custom statuses
+		$query_params['status']['items']['enum'] = array_merge(
+			array_keys( get_post_stati( array( 'internal' => false ) ) ),
+			array_keys( get_task_statuses() ),
+			array( 'any' )
+		);
+
+		$query_params['status']['default'] = $query_params['status']['items']['enum'];
+
+		return $query_params;
+	}
+
+	/**
+	 * Sanitizes and validates the list of post statuses, including whether the
+	 * user can query private statuses.
+	 *
+	 * @since 4.7.0
+	 * @access public
+	 *
+	 * @param  string|array    $statuses  One or more post statuses.
+	 * @param  WP_REST_Request $request   Full details about the request.
+	 * @param  string          $parameter Additional parameter to pass to validation.
+	 * @return array|WP_Error A list of valid statuses, otherwise WP_Error object.
+	 */
+	public function sanitize_post_statuses( $statuses, $request, $parameter ) {
+		$statuses = wp_parse_slug_list( $statuses );
+
+		$task_statuses = array_keys( get_task_statuses() );
+
+		foreach ( $statuses as $status ) {
+			if ( in_array( $status, $task_statuses ) ) {
+				continue;
+			}
+
+			$post_type_obj = get_post_type_object( $this->post_type );
+
+			if ( current_user_can( $post_type_obj->cap->edit_posts ) ) {
+				$result = rest_validate_request_arg( $status, $request, $parameter );
+				if ( is_wp_error( $result ) ) {
+					return $result;
+				}
+			} else {
+				return new WP_Error( 'rest_forbidden_status', __( 'Status is forbidden.' ), array( 'status' => rest_authorization_required_code() ) );
+			}
+		}
+
+		return $statuses;
+	}
+}

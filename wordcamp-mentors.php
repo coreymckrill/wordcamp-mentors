@@ -21,6 +21,8 @@ const CSS_VERSION    = '1.0.0';
 define( __NAMESPACE__ . '\PLUGIN_DIR', \plugin_dir_path( __FILE__ ) );
 define( __NAMESPACE__ . '\PLUGIN_URL', \plugins_url( '/', __FILE__ ) );
 
+const PREFIX = 'wcm';
+
 const MENTOR_CAP    = 'manage_network';
 const ORGANIZER_CAP = 'switch_themes';
 
@@ -77,8 +79,9 @@ function get_css_url() {
  */
 function load_files() {
 	$files = array(
-		'tasks/classes.php',
-		'tasks/dashboard.php',
+		'tasks.php',
+		'tasks-list.php',
+		'tasks-controller.php',
 	);
 
 	foreach ( $files as $file ) {

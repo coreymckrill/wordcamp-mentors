@@ -1,0 +1,19 @@
+<?php
+/**
+ * @package WordCamp\Mentors
+ */
+
+namespace WordCamp\Mentors\Tasks\Dashboard;
+defined( 'WPINC' ) or die();
+
+use WordCamp\Mentors\Tasks;
+
+/** @var Tasks\List_Table $list_table */
+
+$list_table->prepare_items();
+?>
+<div class="wrap">
+	<h1><?php esc_html_e( 'Planning Checklist', 'wordcamp-mentors' ); ?></h1>
+
+	<?php $list_table->display(); ?>
+</div>
