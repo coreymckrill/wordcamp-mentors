@@ -68,7 +68,7 @@ class List_Table extends \WP_List_Table {
 		?>
 		<label for="filter-by-task-category" class="screen-reader-text"><?php esc_html_e( 'Filter by task category', 'wordcamp-mentors' ); ?></label>
 		<select id="filter-by-task-category" data-attribute="wcm_task_category">
-			<option value="any"><?php esc_html_e( 'All task categories', 'wordcamp-mentors' ); ?></option>
+			<option value="any" selected><?php esc_html_e( 'All task categories', 'wordcamp-mentors' ); ?></option>
 			<?php foreach ( $task_categories as $cat ) : ?>
 				<option value="<?php echo esc_attr( $cat->term_id ); ?>"><?php echo esc_html( $cat->name ); ?></option>
 			<?php endforeach; ?>
@@ -86,7 +86,7 @@ class List_Table extends \WP_List_Table {
 		<select id="filter-by-task-status" data-attribute="status">
 			<option value="any"><?php esc_html_e( 'All statuses', 'wordcamp-mentors' ); ?></option>
 			<?php foreach ( $task_statuses as $status ) : ?>
-				<option value="<?php echo esc_attr( $status->name ); ?>"><?php echo esc_html( $status->label ); ?></option>
+				<option value="<?php echo esc_attr( $status->name ); ?>"<?php echo ( Mentors\PREFIX . '_task_pending' === $status->name ) ? ' selected' : ''; ?>><?php echo esc_html( $status->label ); ?></option>
 			<?php endforeach; ?>
 		</select>
 	<?php

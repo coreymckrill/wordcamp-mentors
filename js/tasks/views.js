@@ -54,6 +54,8 @@
 
 				view.$el.append( task.$el );
 			});
+
+			this.filter.$el.trigger( 'submit' );
 		},
 
 
