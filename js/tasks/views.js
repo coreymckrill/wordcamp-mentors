@@ -16,7 +16,7 @@
 		initialize: function() {
 			this.tasks      = new wp.api.collections.Wcm_task();
 			this.categories = new wp.api.collections.Wcm_task_category();
-			this.filter     = new wordcamp.mentors.views.Filter( { el: '#tasks-filter' } );
+			this.filter     = new wordcamp.mentors.views.Filter( { el: '#tasks-filter', list: this } );
 
 			var view = this,
 				taskData = {
@@ -55,7 +55,7 @@
 				view.$el.append( task.$el );
 			});
 
-			this.filter.$el.trigger( 'submit' );
+			this.trigger( 'setFilter' );
 		},
 
 
@@ -176,6 +176,20 @@
 
 
 	wordcamp.mentors.views.Filter = Backbone.View.extend( {
+
+		initialize: function( options ) {
+			this.list = options.list;
+
+			this.listeners();
+		},
+
+
+		listeners: function() {
+			this.listenTo( this.list, 'setFilter', function() {
+				this.$el.trigger( 'submit' );
+			} );
+		},
+
 
 		events: {
 			'submit': 'setFilter'
