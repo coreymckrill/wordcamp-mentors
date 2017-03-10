@@ -1,30 +1,4 @@
 
-/* Layout */
-.fixed .tasks-dash-column-category {
-    width: 10%;
-}
-
-.fixed .tasks-dash-column-task {
-
-}
-
-.fixed .tasks-dash-column-status {
-    width: 15%;
-}
-
-.fixed .tasks-dash-column-updatedby {
-    width: 10%;
-}
-
-.fixed .tasks-dash-column-modified {
-    width: 10%;
-}
-
-
-/* Elements */
-.tasks-dash-category-flag {
-    color: #fff;
-    display: inline-block;
-    font-weight: bold;
-    padding: 0.3em 1em;
+.striped > tbody > .wcm-highlight {
+    background-color: #f7fcfe;
 }

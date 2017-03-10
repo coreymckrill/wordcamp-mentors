@@ -13,6 +13,12 @@
 
 	wordcamp.mentors.views.List = Backbone.View.extend( {
 
+		pfx: wordcamp.mentors.prefix,
+
+
+		tick: 5000,
+
+
 		initialize: function() {
 			this.tasks      = new wp.api.collections.Wcm_task();
 			this.categories = new wp.api.collections.Wcm_task_category();
@@ -30,6 +36,10 @@
 				if ( view.tasks.length ) {
 					view.render();
 				}
+
+				view.ticker = setInterval( function() {
+					view.trigger( 'tick:' + view.tick );
+				}, view.tick );
 			});
 
 			this.listeners();
@@ -44,33 +54,41 @@
 				var categories, task;
 
 				categories = _.filter( view.categories.models, function( category ) {
-					return _.contains( model.get( 'wcm_task_category' ), category.get( 'id' ) );
+					return _.contains( model.get( view.pfx + '_task_category' ), category.get( 'id' ) );
 				});
 
 				task = new wordcamp.mentors.views.Task( {
 					model: model,
+					list: view,
 					categories: categories
 				});
 
 				view.$el.append( task.$el );
 			});
 
-			this.trigger( 'setFilter' );
+			this.trigger( 'setFilter', { skipHighlight: true } );
 		},
 
 
 		listeners: function() {
 			this.listenTo( this.filter, 'filter:tasks', this.updateVisibleTasks );
+			this.listenTo( this, 'tick:' + this.tick, this.pollCollection );
+		},
+
+
+		pollCollection: function() {
+			this.tasks.fetch( { reset: false } );
 		},
 
 
 		_getVisibleTasks: function( filter ) {
-			var taskCollection = this.tasks,
+			var view = this,
+				taskCollection = this.tasks,
 				tasks;
 
-			if ( 'any' !== filter.wcm_task_category ) {
+			if ( 'any' !== filter[ view.pfx + '_task_category' ] ) {
 				taskCollection = new Backbone.Collection( _.filter( taskCollection.models, function ( task ) {
-					return _.contains( task.get( 'wcm_task_category' ), parseInt( filter.wcm_task_category ) );
+					return _.contains( task.get( view.pfx + '_task_category' ), parseInt( filter[ view.pfx + '_task_category' ] ) );
 				}) );
 			}
 
@@ -84,18 +102,19 @@
 		},
 
 
-		updateVisibleTasks: function( filter ) {
+		updateVisibleTasks: function( filter, data ) {
 			var visibleTasks = this._getVisibleTasks( filter );
 
 			_.each( this.tasks.models, function( task ) {
-				task.trigger( 'visibility:hide' );
+				if ( ! _.contains( visibleTasks, task ) ) {
+					task.trigger( 'visibility:hide', data );
+				}
 			});
 
 			_.each( visibleTasks, function( task ) {
-				task.trigger( 'visibility:show' );
+				task.trigger( 'visibility:show', data );
 			});
 		}
-
 	});
 
 
@@ -115,15 +134,19 @@
 		template: wp.template( wordcamp.mentors.prefix + '-task' ),
 
 
-		initialize: function( options ) {
-			this.categories = options.categories;
-
-			var data = $.extend( {}, this.model.attributes, {
+		_compileData: function( model ) {
+			return $.extend( {}, model.attributes, {
 				wcm_task_category: this.categories,
 				stati: wordcamp.mentors.stati
 			} );
+		},
 
-			this.render( data );
+
+		initialize: function( options ) {
+			this.list       = options.list;
+			this.categories = options.categories;
+
+			this.render( this._compileData( this.model ) );
 
 			this.listeners();
 
@@ -141,36 +164,68 @@
 		listeners: function() {
 			this.listenTo( this.model, 'visibility:show', this.showMe );
 			this.listenTo( this.model, 'visibility:hide', this.hideMe );
+			this.listenTo( this.model, 'change:status',   this.changeStatus );
 		},
 
 
-		showMe: function() {
-			this.$el.show();
+		showMe: function( data ) {
+			var data = data || {},
+				duration = 800;
+
+			if ( 'undefined' !== typeof data.skipHighlight ) {
+				duration = 0;
+			} else {
+				this.$el.addClass( 'wcm-highlight' );
+			}
+
+			this.$el.fadeIn( duration, function() {
+				$( this ).removeClass( 'wcm-highlight' );
+			});
 		},
 
 
-		hideMe: function() {
-			this.$el.hide();
+		hideMe: function( data ) {
+			var data = data || {},
+				duration = 800;
+
+			if ( 'undefined' !== typeof data.skipHighlight ) {
+				duration = 0;
+			} else {
+				this.$el.addClass( 'wcm-highlight' );
+			}
+
+			this.$el.fadeOut( duration, function() {
+				$( this ).removeClass( 'wcm-highlight' );
+			});
+		},
+
+
+		changeStatus: function( model ) {
+			var list = this.list;
+
+			this.$el.addClass( 'wcm-highlight' );
+
+			this.render( this._compileData( model ) );
+
+			// Slight delay before re-filtering the list
+			setTimeout( function() {
+				list.trigger( 'setFilter' );
+			}, 1500 );
 		},
 
 
 		events: {
-			'change .column-status select': 'changeStatus'
+			'change .column-status select': 'updateStatus'
 		},
 
 
-		changeStatus: function( event ) {
+		updateStatus: function( event ) {
 			var value = $( event.target ).val();
 
 			this.model.set( 'status', value );
 			this.model.save();
 
 			return this;
-		},
-
-
-		updateStatus: function() {
-
 		}
 	});
 
@@ -185,8 +240,8 @@
 
 
 		listeners: function() {
-			this.listenTo( this.list, 'setFilter', function() {
-				this.$el.trigger( 'submit' );
+			this.listenTo( this.list, 'setFilter', function( data ) {
+				this.$el.trigger( 'submit', data );
 			} );
 		},
 
@@ -196,7 +251,7 @@
 		},
 
 
-		setFilter: function( event ) {
+		setFilter: function( event, data ) {
 			event.preventDefault();
 
 			var filter = {};
@@ -208,9 +263,8 @@
 				filter[ attribute ] = value;
 			});
 
-			this.trigger( 'filter:tasks', filter );
+			this.trigger( 'filter:tasks', filter, data );
 		}
-
 	});
 
 } )( window, jQuery );

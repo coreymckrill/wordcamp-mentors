@@ -193,14 +193,12 @@ function enqueue_page_assets( $hook_suffix ) {
 		return;
 	}
 
-	/*
 	wp_enqueue_style(
 		Mentors\PREFIX . '-planning-checklist',
 		Mentors\get_css_url() . 'tasks/dashboard.css',
 		array(),
 		Mentors\CSS_VERSION
 	);
-	*/
 
 	$script_dependencies = array(
 		'wp-api',
