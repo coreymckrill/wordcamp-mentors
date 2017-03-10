@@ -1,4 +1,4 @@
-/** global wp, jQuery, Backbone, _, WordCampMentors */
+/** global jQuery, Backbone, _, WordCampMentors, wp, userSettings */
 
 ( function( window, $ ) {
 
