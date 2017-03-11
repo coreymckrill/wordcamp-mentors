@@ -10,14 +10,14 @@
 		return;
 	}
 
-
+	/**
+	 * A Backbone view for the list of tasks.
+	 */
 	wordcamp.mentors.views.List = Backbone.View.extend( {
 
 		pfx: wordcamp.mentors.prefix,
 
-
 		tick: 5000,
-
 
 		initialize: function() {
 			this.tasks      = new wp.api.collections.Wcm_task();
@@ -69,17 +69,14 @@
 			this.trigger( 'setFilter', { skipHighlight: true } );
 		},
 
-
 		listeners: function() {
 			this.listenTo( this.filter, 'filter:tasks', this.updateVisibleTasks );
 			this.listenTo( this, 'tick:' + this.tick, this.pollCollection );
 		},
 
-
 		pollCollection: function() {
 			this.tasks.fetch( { reset: false } );
 		},
-
 
 		_getVisibleTasks: function( filter ) {
 			var view = this,
@@ -101,7 +98,6 @@
 			return tasks;
 		},
 
-
 		updateVisibleTasks: function( filter, data ) {
 			var visibleTasks = this._getVisibleTasks( filter );
 
@@ -117,22 +113,20 @@
 		}
 	});
 
-
+	/**
+	 * A Backbone view for an individual task.
+	 */
 	wordcamp.mentors.views.Task = Backbone.View.extend( {
 
 		tagName: 'tr',
-
 
 		id: function() {
 			return wordcamp.mentors.prefix + '-task-' + this.model.get( 'id' );
 		},
 
-
 		className: wordcamp.mentors.prefix + '-task',
 
-
 		template: wp.template( wordcamp.mentors.prefix + '-task' ),
-
 
 		_compileData: function( model ) {
 			return $.extend( {}, model.attributes, {
@@ -140,7 +134,6 @@
 				stati: wordcamp.mentors.stati
 			} );
 		},
-
 
 		initialize: function( options ) {
 			this.list       = options.list;
@@ -153,20 +146,17 @@
 			return this;
 		},
 
-
 		render: function( data ) {
 			this.$el.html( this.template( data ) );
 
 			return this;
 		},
 
-
 		listeners: function() {
 			this.listenTo( this.model, 'visibility:show', this.showMe );
 			this.listenTo( this.model, 'visibility:hide', this.hideMe );
 			this.listenTo( this.model, 'change:status',   this.changeStatus );
 		},
-
 
 		showMe: function( data ) {
 			var data = data || {},
@@ -183,7 +173,6 @@
 			});
 		},
 
-
 		hideMe: function( data ) {
 			var data = data || {},
 				duration = 800;
@@ -199,7 +188,6 @@
 			});
 		},
 
-
 		changeStatus: function( model ) {
 			var list = this.list;
 
@@ -213,11 +201,9 @@
 			}, 1500 );
 		},
 
-
 		events: {
 			'change .column-status select': 'updateStatus'
 		},
-
 
 		updateStatus: function( event ) {
 			var value = $( event.target ).val();
@@ -229,7 +215,9 @@
 		}
 	});
 
-
+	/**
+	 * A Backbone view for the controls that filter visible tasks.
+	 */
 	wordcamp.mentors.views.Filter = Backbone.View.extend( {
 
 		initialize: function( options ) {
@@ -238,19 +226,16 @@
 			this.listeners();
 		},
 
-
 		listeners: function() {
 			this.listenTo( this.list, 'setFilter', function( data ) {
 				this.$el.trigger( 'submit', data );
 			} );
 		},
 
-
 		events: {
 			'submit': 'setFilter'
 		},
-
-
+		
 		setFilter: function( event, data ) {
 			event.preventDefault();
 

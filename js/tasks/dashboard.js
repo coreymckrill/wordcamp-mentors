@@ -16,12 +16,18 @@
 	wordcamp.mentors = new wordcamp.MentorsApp();
 
 	var App = $.extend( wordcamp.mentors, WordCampMentors, {
-
+		/**
+		 * Load scripts and then kick off the app.
+		 *
+		 * The scripts will populate properties of the App object, such as views.
+		 */
 		load: function() {
 			App.getMultipleScripts( App.scripts ).done( App.init );
 		},
 
-
+		/**
+		 * Initialize the app.
+		 */
 		init: function() {
 			var cache = App.cache;
 
@@ -50,6 +56,7 @@
 		}
 	});
 
+	// Ensure the Backbone client is loaded before getting started.
 	wp.api.loadPromise.done( App.load );
 
 } )( window, jQuery );
