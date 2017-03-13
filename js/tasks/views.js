@@ -235,17 +235,26 @@
 		events: {
 			'submit': 'setFilter'
 		},
-		
+
 		setFilter: function( event, data ) {
 			event.preventDefault();
 
-			var filter = {};
+			var filter = {},
+				settingPrefix = wordcamp.mentors.prefix;
 
 			$( event.target ).find( 'select' ).each( function() {
 				var attribute = $( this ).data( 'attribute' ),
 					value     = $( this ).val();
 
 				filter[ attribute ] = value;
+			});
+
+			// Save filter values as user settings
+			_.each( filter, function( value, key ) {
+				setUserSetting(
+					settingPrefix + '-' + key,
+					value
+				);
 			});
 
 			this.trigger( 'filter:tasks', filter, data );

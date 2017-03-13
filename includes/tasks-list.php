@@ -65,12 +65,14 @@ class List_Table extends \WP_List_Table {
 			'taxonomy'   => Mentors\PREFIX . '_task_category',
 			'hide_empty' => false,
 		) );
+
+		$pref = get_user_setting( Mentors\PREFIX . '-' . Mentors\PREFIX . '_task_category', 'any' );
 		?>
 		<label for="filter-by-task-category" class="screen-reader-text"><?php esc_html_e( 'Filter by task category', 'wordcamp-mentors' ); ?></label>
-		<select id="filter-by-task-category" data-attribute="wcm_task_category">
-			<option value="any" selected><?php esc_html_e( 'All task categories', 'wordcamp-mentors' ); ?></option>
+		<select id="filter-by-task-category" data-attribute="<?php echo esc_attr( Mentors\PREFIX ); ?>_task_category">
+			<option value="any" <?php selected( 'any', $pref ); ?>><?php esc_html_e( 'All task categories', 'wordcamp-mentors' ); ?></option>
 			<?php foreach ( $task_categories as $cat ) : ?>
-				<option value="<?php echo esc_attr( $cat->term_id ); ?>"><?php echo esc_html( $cat->name ); ?></option>
+				<option value="<?php echo esc_attr( $cat->term_id ); ?>" <?php selected( $cat->term_id, $pref ); ?>><?php echo esc_html( $cat->name ); ?></option>
 			<?php endforeach; ?>
 		</select>
 	<?php
@@ -81,12 +83,13 @@ class List_Table extends \WP_List_Table {
 	 */
 	protected function status_dropdown() {
 		$task_statuses = get_task_statuses();
+		$pref = get_user_setting( Mentors\PREFIX . '-status', Mentors\PREFIX . '_task_pending' );
 		?>
 		<label for="filter-by-task-status" class="screen-reader-text"><?php esc_html_e( 'Filter by status', 'wordcamp-mentors' ); ?></label>
 		<select id="filter-by-task-status" data-attribute="status">
-			<option value="any"><?php esc_html_e( 'All statuses', 'wordcamp-mentors' ); ?></option>
+			<option value="any" <?php selected( 'any', $pref ); ?>><?php esc_html_e( 'All statuses', 'wordcamp-mentors' ); ?></option>
 			<?php foreach ( $task_statuses as $status ) : ?>
-				<option value="<?php echo esc_attr( $status->name ); ?>"<?php echo ( Mentors\PREFIX . '_task_pending' === $status->name ) ? ' selected' : ''; ?>><?php echo esc_html( $status->label ); ?></option>
+				<option value="<?php echo esc_attr( $status->name ); ?>" <?php selected( $status->name, $pref ); ?>><?php echo esc_html( $status->label ); ?></option>
 			<?php endforeach; ?>
 		</select>
 	<?php

@@ -203,6 +203,7 @@ function enqueue_page_assets( $hook_suffix ) {
 	$script_dependencies = array(
 		'wp-api',
 		'wp-util',
+		'utils',
 	);
 
 	wp_enqueue_script(
