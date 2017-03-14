@@ -104,7 +104,15 @@
 		},
 
 		updateVisibleTasks: function( filter, data ) {
-			var visibleTasks = this._getVisibleTasks( filter );
+			var visibleTasks = this._getVisibleTasks( filter ),
+				$parentTable = this.$el.parents( 'table' );
+
+			// Remove row stripes if not showing everything
+			if ( _.every( filter, function( value ) { return 'any' === value } ) ) {
+				$parentTable.addClass( 'striped' );
+			} else {
+				$parentTable.removeClass( 'striped' );
+			}
 
 			this.tasks.each( function( task ) {
 				if ( ! _.contains( visibleTasks, task ) ) {
