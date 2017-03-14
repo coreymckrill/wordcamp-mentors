@@ -2,3 +2,51 @@
 .striped > tbody > .wcm-highlight {
     background-color: #f7fcfe;
 }
+
+.column-task_category li {
+	color: #fff;
+	padding: 3px 6px;
+}
+
+.category-after-party {
+	background-color: #a7863d;
+}
+.category-audio-video {
+	background-color: #a4c2f4;
+}
+.category-budget {
+	background-color: #d64db8;
+}
+.category-committee {
+	background-color: #e69138;
+}
+.category-contributor-day {
+	background-color: #c67df4;
+}
+.category-design {
+	background-color: #76a5af;
+}
+.category-food {
+	background-color: #a64d79;
+}
+.category-lead {
+	background-color: #cc0000;
+}
+.category-registration {
+	background-color: #ffa6e7;
+}
+.category-speaker {
+	background-color: #3d85c6;
+}
+.category-sponsor {
+	background-color: #38761d;
+}
+.category-swag {
+	background-color: #93c47d;
+}
+.category-volunteer {
+	background-color: #674ea7;
+}
+.category-web {
+	background-color: #bf9000;
+}
