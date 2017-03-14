@@ -82,6 +82,7 @@ function load_files() {
 		'tasks.php',
 		'tasks-list.php',
 		'tasks-controller.php',
+		'tasks-data.php',
 	);
 
 	foreach ( $files as $file ) {

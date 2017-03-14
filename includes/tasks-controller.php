@@ -55,6 +55,9 @@ class Controller extends \WP_REST_Posts_Controller {
 
 		$query_params['status']['default'] = $query_params['status']['items']['enum'];
 
+		// Allow a higher maximum for query results
+		$query_params['per_page']['maximum'] = 300;
+
 		return $query_params;
 	}
 

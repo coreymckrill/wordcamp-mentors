@@ -26,13 +26,21 @@
 
 			var view = this,
 				taskData = {
-					filter: {
-						'orderby': 'menu_order',
-						'order': 'ASC'
+					data: {
+						per_page: 300,
+						filter: {
+							'orderby': 'menu_order',
+							'order': 'ASC'
+						}
+					}
+				},
+				categoryData = {
+					data: {
+						per_page: 100
 					}
 				};
 
-			$.when( this.tasks.fetch( taskData ), this.categories.fetch() ).done( function() {
+			$.when( this.tasks.fetch( taskData ), this.categories.fetch( categoryData ) ).done( function() {
 				if ( view.tasks.length ) {
 					view.render();
 				}
@@ -48,7 +56,7 @@
 		render: function() {
 			var view = this;
 
-			view.$el.html( '' );
+			view.$el.empty();
 
 			this.tasks.each( function( model ) {
 				var categories, task;
@@ -75,27 +83,24 @@
 		},
 
 		pollCollection: function() {
-			this.tasks.fetch( { reset: false } );
+			this.tasks.fetch( { remove: false } );
 		},
 
 		_getVisibleTasks: function( filter ) {
 			var view = this,
-				taskCollection = this.tasks,
-				tasks;
+				visibleTasks = new Backbone.Collection( this.tasks.models );
 
 			if ( 'any' !== filter[ view.pfx + '_task_category' ] ) {
-				taskCollection = new Backbone.Collection( _.filter( taskCollection.models, function ( task ) {
+				visibleTasks = new Backbone.Collection( _.filter( visibleTasks.models, function( task ) {
 					return _.contains( task.get( view.pfx + '_task_category' ), parseInt( filter[ view.pfx + '_task_category' ] ) );
 				}) );
 			}
 
 			if ( 'any' !== filter.status ) {
-				tasks = taskCollection.where( { status: filter.status } );
-			} else {
-				tasks = taskCollection.models;
+				visibleTasks = new Backbone.Collection( visibleTasks.where( { status: filter.status } ) );
 			}
 
-			return tasks;
+			return visibleTasks.models;
 		},
 
 		updateVisibleTasks: function( filter, data ) {
@@ -110,6 +115,8 @@
 			_.each( visibleTasks, function( task ) {
 				task.trigger( 'visibility:show', data );
 			});
+
+			return this;
 		}
 	});
 
