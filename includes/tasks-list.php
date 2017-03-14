@@ -75,6 +75,7 @@ class List_Table extends \WP_List_Table {
 			'taxonomy'   => Mentors\PREFIX . '_task_category',
 			'hide_empty' => false,
 		) );
+		$task_category_data = get_task_category_data();
 
 		$pref = get_user_setting( Mentors\PREFIX . '-' . Mentors\PREFIX . '_task_category', 'any' );
 		?>
@@ -82,7 +83,7 @@ class List_Table extends \WP_List_Table {
 		<select id="filter-by-task-category" data-attribute="<?php echo esc_attr( Mentors\PREFIX ); ?>_task_category">
 			<option value="any" <?php selected( 'any', $pref ); ?>><?php esc_html_e( 'All task categories', 'wordcamp-mentors' ); ?></option>
 			<?php foreach ( $task_categories as $cat ) : ?>
-				<option value="<?php echo esc_attr( $cat->term_id ); ?>" <?php selected( $cat->term_id, $pref ); ?>><?php echo esc_html( $cat->name ); ?></option>
+				<option value="<?php echo esc_attr( $cat->term_id ); ?>" <?php selected( $cat->term_id, $pref ); ?>><?php echo esc_html( $task_category_data[ $cat->slug ] ); ?></option>
 			<?php endforeach; ?>
 		</select>
 	<?php

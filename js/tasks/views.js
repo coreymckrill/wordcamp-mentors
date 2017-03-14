@@ -49,7 +49,7 @@
 
 			$.when( this.tasks.fetch( this.taskRequest ), this.categories.fetch( this.categoryRequest ) ).done( function() {
 				view.$el.removeClass( 'loading-content' );
-				
+
 				if ( view.tasks.length ) {
 					view.render();
 				} else {
