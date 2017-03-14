@@ -144,10 +144,6 @@ class List_Table extends \WP_List_Table {
 		$columns['task_category'] = get_taxonomy( Mentors\PREFIX . '_task_category' )->labels->singular_name;
 		$columns['status']        = esc_html__( 'Status', 'wordcamp-mentors' );
 
-		if ( is_rtl() ) {
-			$columns = array_reverse( $columns );
-		}
-
 		return $columns;
 	}
 
