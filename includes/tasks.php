@@ -159,6 +159,17 @@ function register_status() {
 }
 
 /**
+ * Get the array of Task-specific status objects.
+ *
+ * @since 1.0.0
+ *
+ * @return array
+ */
+function get_task_statuses() {
+	return get_post_stati( array( Mentors\PREFIX . '_task' => true ), false );
+}
+
+/**
  * Add a page to the Dashboard menu.
  *
  * @since 1.0.0
@@ -242,12 +253,17 @@ function enqueue_page_assets( $hook_suffix ) {
 
 add_action( 'admin_enqueue_scripts', __NAMESPACE__ . '\enqueue_page_assets', 20 );
 
-
+/**
+ * Render JS templates.
+ *
+ * @since 1.0.0
+ *
+ * @return void
+ */
 function print_templates() {
 	$js_list_table = new List_Table( array( 'js' => true ) );
 	$js_list_table->prepare_items();
 	?>
-	<!--Hello-->
 	<script id="tmpl-<?php echo esc_attr( Mentors\PREFIX ); ?>-task" type="text/template">
 		<?php $js_list_table->single_row_columns( $js_list_table->items[0] ); ?>
 	</script>
@@ -255,120 +271,6 @@ function print_templates() {
 }
 
 add_action( 'admin_print_footer_scripts-dashboard_page_' . Mentors\PREFIX . '-planning-checklist', __NAMESPACE__ . '\print_templates' );
-
-/**
- * Get the array of Task-specific status objects.
- *
- * @since 1.0.0
- *
- * @return array
- */
-function get_task_statuses() {
-	return get_post_stati( array( Mentors\PREFIX . '_task' => true ), false );
-}
-
-/**
- * Handle a POST request to reset the task data.
- *
- * @since 1.0.0
- *
- * @return void
- */
-function handle_tasks_reset() {
-	// Base redirect URL
-	$redirect_url = add_query_arg( array(
-		'page' => Mentors\PREFIX . '-planning-checklist',
-	), admin_url( 'index.php' ) );
-
-	if ( ! isset( $_POST[ Mentors\PREFIX . '-tasks-reset-nonce' ] ) ||
-	     ! wp_verify_nonce( $_POST[ Mentors\PREFIX . '-tasks-reset-nonce' ], Mentors\PREFIX . '-tasks-reset' ) ) {
-		$status_code = 'invalid-nonce';
-	} else {
-		$status_code = _reset_tasks();
-	}
-
-	$redirect_url = add_query_arg( 'status', $status_code, $redirect_url );
-
-	wp_safe_redirect( esc_url_raw( $redirect_url ) );
-}
-
-add_action( 'admin_post_' . Mentors\PREFIX . '-tasks-reset', __NAMESPACE__ . '\handle_tasks_reset' );
-
-/**
- * Reset the list of task posts and their related taxonomy terms.
- *
- * @access private
- *
- * @since 1.0.0
- *
- * @return string Status code
- */
-function _reset_tasks() {
-	$results = array();
-
-	// Delete existing tasks
-	$existing_tasks = get_posts( array(
-		'post_type'      => Mentors\PREFIX . '_task',
-		'post_status'    => get_task_statuses(),
-		'posts_per_page' => 999,
-	) );
-
-	foreach ( $existing_tasks as $existing_task ) {
-		$results[] = wp_delete_post( $existing_task->ID, true );
-	}
-
-	// Delete existing categories
-	$existing_categories = get_terms( array(
-		'taxonomy'   => Mentors\PREFIX . '_task_category',
-		'hide_empty' => false,
-	) );
-
-	foreach ( $existing_categories as $existing_category ) {
-		$results[] = wp_delete_term( $existing_category->term_id, Mentors\PREFIX . '_task_category' );
-	}
-
-	// Create new categories
-	$new_category_data = get_task_category_data();
-
-	foreach ( $new_category_data as $slug => $label ) {
-		$results[] = wp_insert_term(
-			$label,
-			Mentors\PREFIX . '_task_category',
-			array(
-				'slug' => $slug,
-			)
-		);
-	}
-
-	// Create new tasks
-	$new_task_data = get_task_data();
-	$order = 0;
-
-	foreach ( $new_task_data as $l10n_id => $data ) {
-		$order += 10;
-
-		$args = array(
-			'post_type'   => Mentors\PREFIX . '_task',
-			'post_title'  => $data['title'],
-			'menu_order'  => $order,
-			'meta_input'  => array(
-				Mentors\PREFIX . '-task-l10n' => $l10n_id,
-			),
-			'post_status' => Mentors\PREFIX . '_task_pending',
-		);
-
-		$post_id = wp_insert_post( $args );
-
-		$results[] = wp_set_object_terms( $post_id, $data['cat'], Mentors\PREFIX . '_task_category' );
-	}
-
-	if ( in_array( false, $results, true ) ||
-	     ! empty( array_filter( $results, function( $i ) { return $i instanceof \WP_Error; } ) ) ) {
-		return 'reset-errors';
-	}
-
-	return 'reset-success';
-}
 
 /**
  * Display admin notices at the top of the Planning Checklist page.

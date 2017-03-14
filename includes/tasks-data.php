@@ -6,7 +6,15 @@
 namespace WordCamp\Mentors\Tasks;
 defined( 'WPINC' ) or die();
 
+use WordCamp\Mentors;
 
+/**
+ * Define the task categories for the Planning Checklist.
+ *
+ * @since 1.0.0
+ *
+ * @return array
+ */
 function get_task_category_data() {
 	return array(
 		'after-party'     => esc_html__( 'After Party', 'wordcamp-mentors' ),
@@ -26,7 +34,13 @@ function get_task_category_data() {
 	);
 }
 
-
+/**
+ * Define the tasks for the Planning Checklist.
+ *
+ * @since 1.0.0
+ *
+ * @return array
+ */
 function get_task_data() {
 	/**
 	 * This array can be generated with the following steps:
@@ -525,7 +539,147 @@ function get_task_data() {
 	);
 }
 
+/**
+ * Handle a POST request to reset the task data.
+ *
+ * @access private
+ *
+ * @since 1.0.0
+ *
+ * @return void
+ */
+function handle_tasks_reset() {
+	// Base redirect URL
+	$redirect_url = add_query_arg( array(
+		'page' => Mentors\PREFIX . '-planning-checklist',
+	), admin_url( 'index.php' ) );
 
+	if ( ! isset( $_POST[ Mentors\PREFIX . '-tasks-reset-nonce' ] ) ||
+	     ! wp_verify_nonce( $_POST[ Mentors\PREFIX . '-tasks-reset-nonce' ], Mentors\PREFIX . '-tasks-reset' ) ) {
+		$status_code = 'invalid-nonce';
+	} else {
+		$status_code = _reset_tasks();
+	}
 
+	$redirect_url = add_query_arg( 'status', $status_code, $redirect_url );
 
+	wp_safe_redirect( esc_url_raw( $redirect_url ) );
+}
 
+add_action( 'admin_post_' . Mentors\PREFIX . '-tasks-reset', __NAMESPACE__ . '\handle_tasks_reset' );
+
+/**
+ * Reset the list of task posts and their related taxonomy terms.
+ *
+ * @access private
+ *
+ * @since 1.0.0
+ *
+ * @return string Status code
+ */
+function _reset_tasks() {
+	$results = array();
+
+	// Delete existing tasks
+	$existing_tasks = get_posts( array(
+		'post_type'      => Mentors\PREFIX . '_task',
+		'post_status'    => get_task_statuses(),
+		'posts_per_page' => 999,
+	) );
+
+	foreach ( $existing_tasks as $existing_task ) {
+		$results[] = wp_delete_post( $existing_task->ID, true );
+	}
+
+	// Delete existing categories
+	$existing_categories = get_terms( array(
+		'taxonomy'   => Mentors\PREFIX . '_task_category',
+		'hide_empty' => false,
+	) );
+
+	foreach ( $existing_categories as $existing_category ) {
+		$results[] = wp_delete_term( $existing_category->term_id, Mentors\PREFIX . '_task_category' );
+	}
+
+	// Create new categories
+	$new_category_data = get_task_category_data();
+
+	foreach ( $new_category_data as $slug => $label ) {
+		$results[] = wp_insert_term( $slug, Mentors\PREFIX . '_task_category' );
+	}
+
+	// Create new tasks
+	$new_task_data = get_task_data();
+	$order = 0;
+
+	foreach ( $new_task_data as $l10n_id => $data ) {
+		$order += 10;
+
+		$args = array(
+			'post_type'   => Mentors\PREFIX . '_task',
+			'post_status' => Mentors\PREFIX . '_task_pending',
+			'post_title'  => $l10n_id,
+			'menu_order'  => $order,
+		);
+
+		$post_id = wp_insert_post( $args );
+
+		$results[] = wp_set_object_terms( $post_id, $data['cat'], Mentors\PREFIX . '_task_category' );
+	}
+
+	if ( in_array( false, $results, true ) ||
+	     ! empty( array_filter( $results, function( $i ) { return $i instanceof \WP_Error; } ) ) ) {
+		return 'reset-errors';
+	}
+
+	return 'reset-success';
+}
+
+/**
+ * Insert translated strings into REST response for tasks.
+ *
+ * @access private
+ *
+ * @since 1.0.0
+ *
+ * @param \WP_REST_Response $response
+ * @param \WP_Post $post
+ *
+ * @return \WP_REST_Response
+ */
+function localize_task( $response, $post ) {
+	$l10n_id = $post->post_title;
+	$task_data = get_task_data();
+
+	if ( isset( $task_data[ $l10n_id ] ) ) {
+		$response->data['title']['rendered'] = apply_filters( 'the_title', $task_data[ $l10n_id ]['title'] );
+	}
+
+	return $response;
+}
+
+add_filter( 'rest_prepare_' . Mentors\PREFIX . '_task', __NAMESPACE__ . '\localize_task', 10, 2 );
+
+/**
+ * Insert translated strings into REST response for task categories.
+ *
+ * @access private
+ *
+ * @since 1.0.0
+ *
+ * @param \WP_REST_Response$response
+ * @param $item
+ *
+ * @return \WP_REST_Response
+ */
+function localize_task_category( $response, $item ) {
+	$task_category_data = get_task_category_data();
+
+	if ( isset( $task_category_data[ $item->slug ] ) ) {
+		$response->data['name'] = $task_category_data[ $item->slug ];
+	}
+
+	return $response;
+}
+
+add_filter( 'rest_prepare_' . Mentors\PREFIX . '_task_category', __NAMESPACE__ . '\localize_task_category', 10, 2 );
