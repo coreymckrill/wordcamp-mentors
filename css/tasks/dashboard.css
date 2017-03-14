@@ -25,6 +25,11 @@
 	margin-right: 2px;
 	padding: 3px 6px;
 }
+.rtl .column-task_category li {
+	float: right;
+	margin-right: 0;
+	margin-left: 2px;
+}
 
 .category-after-party {
 	background-color: #a7863d;

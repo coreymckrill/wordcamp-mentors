@@ -47,7 +47,7 @@ class List_Table extends \WP_List_Table {
 	 */
 	public function extra_tablenav( $which = 'top' ) {
 		if ( 'top' === $which ) : ?>
-		<div class="alignleft actions">
+		<div class="<?php echo ( is_rtl() ) ? 'alignright' : 'alignleft'; ?> actions">
 			<form id="tasks-filter">
 				<?php $this->task_category_dropdown(); ?>
 				<?php $this->status_dropdown(); ?>
@@ -55,7 +55,7 @@ class List_Table extends \WP_List_Table {
 			</form>
 		</div>
 	<?php elseif ( 'bottom' === $which ) : ?>
-		<div class="alignright actions">
+		<div class="<?php echo ( is_rtl() ) ? 'alignleft' : 'alignright'; ?> actions">
 			<?php if ( current_user_can( Mentors\MENTOR_CAP ) ) : ?>
 				<form id="tasks-reset" method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
 					<input type="hidden" name="action" value="<?php echo esc_attr( Mentors\PREFIX ); ?>-tasks-reset" />
@@ -143,6 +143,10 @@ class List_Table extends \WP_List_Table {
 		$columns['task']          = esc_html__( 'Task', 'wordcamp-mentors' );
 		$columns['task_category'] = get_taxonomy( Mentors\PREFIX . '_task_category' )->labels->singular_name;
 		$columns['status']        = esc_html__( 'Status', 'wordcamp-mentors' );
+
+		if ( is_rtl() ) {
+			$columns = array_reverse( $columns );
+		}
 
 		return $columns;
 	}
