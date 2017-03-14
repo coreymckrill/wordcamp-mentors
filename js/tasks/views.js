@@ -35,18 +35,25 @@
 		},
 
 		initialize: function() {
-			this.$el.html( '<tr><td colspan="3"><span class="spinner is-active"></span></td></tr>' );
+			var view = this,
+				origContent = this.$el.html();
+
+			this.$el
+				.addClass( 'loading-content' )
+				.html( '<tr><td colspan="3"><span class="spinner"></span></td></tr>' );
 
 			this.tasks      = new wp.api.collections.Wcm_task();
 			this.categories = new wp.api.collections.Wcm_task_category();
 			this.filter     = new wordcamp.mentors.views.Filter( { el: '#tasks-filter', list: this } );
 			this.reset      = new wordcamp.mentors.views.Reset( { el: '#tasks-reset' } );
 
-			var view = this;
-
 			$.when( this.tasks.fetch( this.taskRequest ), this.categories.fetch( this.categoryRequest ) ).done( function() {
+				view.$el.removeClass( 'loading-content' );
+				
 				if ( view.tasks.length ) {
 					view.render();
+				} else {
+					view.$el.html( origContent );
 				}
 
 				view.ticker = setInterval( function() {
@@ -196,7 +203,7 @@
 
 		hideMe: function( data ) {
 			var data = data || {},
-				duration = 800;
+				duration = 500;
 
 			if ( 'undefined' !== typeof data.skipHighlight ) {
 				duration = 0;
@@ -219,7 +226,7 @@
 			// Slight delay before re-filtering the list
 			setTimeout( function() {
 				list.trigger( 'setFilter' );
-			}, 1500 );
+			}, 1000 );
 		},
 
 		events: {

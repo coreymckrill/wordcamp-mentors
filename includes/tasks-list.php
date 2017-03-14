@@ -133,6 +133,13 @@ class List_Table extends \WP_List_Table {
 	}
 
 	/**
+	 * Message to be displayed when there are no items
+	 */
+	public function no_items() {
+		esc_html_e( 'No tasks found.', 'wordcamp-mentors' );
+	}
+
+	/**
 	 * Specify the column names and order
 	 *
 	 * @return array
