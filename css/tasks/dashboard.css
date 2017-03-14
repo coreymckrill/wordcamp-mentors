@@ -3,8 +3,26 @@
     background-color: #f7fcfe;
 }
 
+.widefat td {
+	vertical-align: middle;
+}
+
+.wcm-task td {
+	border-bottom: 1px solid #f9f9f9;
+}
+
+.column-task {
+	width: 50%;
+}
+
+.column-task_category ul {
+	margin: 0;
+}
+
 .column-task_category li {
 	color: #fff;
+	float: left;
+	margin-right: 2px;
 	padding: 3px 6px;
 }
 
