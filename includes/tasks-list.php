@@ -172,8 +172,8 @@ class List_Table extends \WP_List_Table {
 
 		if ( $this->js ) {
 			?>
-			<# if ( data.wcm_task_category.length ) { #>
-				<# _.each( data.wcm_task_category, function( category ) { #>
+			<# if ( data.task_category.length ) { #>
+				<# _.each( data.task_category, function( category ) { #>
 					<li class="category-{{ category.get( 'slug' ) }}">{{ category.get( 'name' ) }}</li>
 				<# }); #>
 			<# } else { #>

@@ -10,12 +10,12 @@
 		return;
 	}
 
+	var prefix = wordcamp.mentors.prefix;
+
 	/**
 	 * A Backbone view for the list of tasks.
 	 */
 	wordcamp.mentors.views.List = Backbone.View.extend( {
-
-		pfx: wordcamp.mentors.prefix,
 
 		tick: 5000,
 
@@ -66,7 +66,7 @@
 				var categories, task;
 
 				categories = _.filter( view.categories.models, function( category ) {
-					return _.contains( model.get( view.pfx + '_task_category' ), category.get( 'id' ) );
+					return _.contains( model.get( prefix + '_task_category' ), category.get( 'id' ) );
 				});
 
 				task = new wordcamp.mentors.views.Task( {
@@ -96,9 +96,9 @@
 			var view = this,
 				visibleTasks = new Backbone.Collection( this.tasks.models );
 
-			if ( 'any' !== filter[ view.pfx + '_task_category' ] ) {
+			if ( 'any' !== filter[ prefix + '_task_category' ] ) {
 				visibleTasks = new Backbone.Collection( _.filter( visibleTasks.models, function( task ) {
-					return _.contains( task.get( view.pfx + '_task_category' ), parseInt( filter[ view.pfx + '_task_category' ] ) );
+					return _.contains( task.get( prefix + '_task_category' ), parseInt( filter[ prefix + '_task_category' ] ) );
 				}) );
 			}
 
@@ -151,7 +151,7 @@
 
 		_compileData: function( model ) {
 			return $.extend( {}, model.attributes, {
-				wcm_task_category: this.categories,
+				task_category: this.categories,
 				stati: wordcamp.mentors.stati
 			} );
 		},
@@ -186,11 +186,11 @@
 			if ( 'undefined' !== typeof data.skipHighlight ) {
 				duration = 0;
 			} else {
-				this.$el.addClass( 'wcm-highlight' );
+				this.$el.addClass( prefix + '-highlight' );
 			}
 
 			this.$el.fadeIn( duration, function() {
-				$( this ).removeClass( 'wcm-highlight' );
+				$( this ).removeClass( prefix + '-highlight' );
 			});
 		},
 
@@ -201,18 +201,18 @@
 			if ( 'undefined' !== typeof data.skipHighlight ) {
 				duration = 0;
 			} else {
-				this.$el.addClass( 'wcm-highlight' );
+				this.$el.addClass( prefix + '-highlight' );
 			}
 
 			this.$el.fadeOut( duration, function() {
-				$( this ).removeClass( 'wcm-highlight' );
+				$( this ).removeClass( prefix + '-highlight' );
 			});
 		},
 
 		changeStatus: function( model ) {
 			var list = this.list;
 
-			this.$el.addClass( 'wcm-highlight' );
+			this.$el.addClass( prefix + '-highlight' );
 
 			this.render( this._compileData( model ) );
 
