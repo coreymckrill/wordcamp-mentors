@@ -20,9 +20,12 @@
 		tick: 5000,
 
 		initialize: function() {
+			this.$el.html( '<tr><td><span class="spinner is-active alignleft"></span></td></tr>' );
+
 			this.tasks      = new wp.api.collections.Wcm_task();
 			this.categories = new wp.api.collections.Wcm_task_category();
 			this.filter     = new wordcamp.mentors.views.Filter( { el: '#tasks-filter', list: this } );
+			this.reset      = new wordcamp.mentors.views.Reset( { el: '#tasks-reset' } );
 
 			var view = this,
 				taskData = {
@@ -273,6 +276,21 @@
 			});
 
 			this.trigger( 'filter:tasks', filter, data );
+		}
+	});
+
+	/**
+	 * A Backbone view for the button to reset task data.
+	 */
+	wordcamp.mentors.views.Reset = Backbone.View.extend( {
+		events: {
+			'submit': 'confirm'
+		},
+
+		confirm: function( event ) {
+			if ( ! window.confirm( wordcamp.mentors.l10n.confirmReset ) ) {
+				event.preventDefault();
+			}
 		}
 	});
 

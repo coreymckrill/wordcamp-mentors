@@ -233,6 +233,9 @@ function enqueue_page_assets( $hook_suffix ) {
 				Mentors\get_js_url() . 'tasks/views.js',
 			),
 			'stati'   => get_task_statuses(),
+			'l10n'    => array(
+				'confirmReset' => esc_html__( 'Are you sure you want to reset the task data? This action cannot be undone.', 'wordcamp-mentors' ),
+			),
 		)
 	);
 }
@@ -265,13 +268,13 @@ function get_task_statuses() {
 }
 
 /**
- * Reset the list of task posts and their related taxonomy terms.
+ * Handle a POST request to reset the task data.
  *
  * @since 1.0.0
  *
  * @return void
  */
-function reset_tasks() {
+function handle_tasks_reset() {
 	// Base redirect URL
 	$redirect_url = add_query_arg( array(
 		'page' => Mentors\PREFIX . '-planning-checklist',
@@ -279,9 +282,29 @@ function reset_tasks() {
 
 	if ( ! isset( $_POST[ Mentors\PREFIX . '-tasks-reset-nonce' ] ) ||
 	     ! wp_verify_nonce( $_POST[ Mentors\PREFIX . '-tasks-reset-nonce' ], Mentors\PREFIX . '-tasks-reset' ) ) {
-		$redirect_url = add_query_arg( 'status', 'invalid-nonce', $redirect_url );
-		wp_safe_redirect( esc_url_raw( $redirect_url ) );
+		$status_code = 'invalid-nonce';
+	} else {
+		$status_code = _reset_tasks();
 	}
+
+	$redirect_url = add_query_arg( 'status', $status_code, $redirect_url );
+
+	wp_safe_redirect( esc_url_raw( $redirect_url ) );
+}
+
+add_action( 'admin_post_' . Mentors\PREFIX . '-tasks-reset', __NAMESPACE__ . '\handle_tasks_reset' );
+
+/**
+ * Reset the list of task posts and their related taxonomy terms.
+ *
+ * @access private
+ *
+ * @since 1.0.0
+ *
+ * @return string Status code
+ */
+function _reset_tasks() {
+	$results = array();
 
 	// Delete existing tasks
 	$existing_tasks = get_posts( array(
@@ -291,7 +314,7 @@ function reset_tasks() {
 	) );
 
 	foreach ( $existing_tasks as $existing_task ) {
-		wp_delete_post( $existing_task->ID, true );
+		$results[] = wp_delete_post( $existing_task->ID, true );
 	}
 
 	// Delete existing categories
@@ -301,14 +324,14 @@ function reset_tasks() {
 	) );
 
 	foreach ( $existing_categories as $existing_category ) {
-		wp_delete_term( $existing_category->term_id, Mentors\PREFIX . '_task_category' );
+		$results[] = wp_delete_term( $existing_category->term_id, Mentors\PREFIX . '_task_category' );
 	}
 
 	// Create new categories
 	$new_category_data = get_task_category_data();
 
 	foreach ( $new_category_data as $slug => $label ) {
-		wp_insert_term(
+		$results[] = wp_insert_term(
 			$label,
 			Mentors\PREFIX . '_task_category',
 			array(
@@ -336,17 +359,16 @@ function reset_tasks() {
 
 		$post_id = wp_insert_post( $args );
 
-		wp_set_object_terms( $post_id, $data['cat'], Mentors\PREFIX . '_task_category' );
+		$results[] = wp_set_object_terms( $post_id, $data['cat'], Mentors\PREFIX . '_task_category' );
 	}
 
-	$status_code = 'reset-success';
+	if ( in_array( false, $results, true ) ||
+	     ! empty( array_filter( $results, function( $i ) { return $i instanceof \WP_Error; } ) ) ) {
+		return 'reset-errors';
+	}
 
-	$redirect_url = add_query_arg( 'status', $status_code, $redirect_url );
-
-	wp_safe_redirect( esc_url_raw( $redirect_url ) );
+	return 'reset-success';
 }
-
-add_action( 'admin_post_' . Mentors\PREFIX . '-tasks-reset', __NAMESPACE__ . '\reset_tasks' );
 
 /**
  * Display admin notices at the top of the Planning Checklist page.
@@ -372,9 +394,13 @@ function admin_notices() {
 			$message = esc_html__( 'Invalid nonce.', 'wordcamp-mentors' );
 			break;
 
-		case 'success' :
-			$type = 'reset-success';
-			$message = esc_html__( 'Checklist tasks successfully reset.', 'wordcamp-mentors' );
+		case 'reset-errors' :
+			$message = esc_html__( 'Checklist data reset with errors.', 'wordcamp-mentors' );
+			break;
+
+		case 'reset-success' :
+			$type = 'success';
+			$message = esc_html__( 'Checklist data successfully reset.', 'wordcamp-mentors' );
 			break;
 	}
 

@@ -55,12 +55,12 @@ class List_Table extends \WP_List_Table {
 			</form>
 		</div>
 	<?php elseif ( 'bottom' === $which ) : ?>
-		<div class="alignleft actions">
+		<div class="alignright actions">
 			<?php if ( current_user_can( Mentors\MENTOR_CAP ) ) : ?>
 				<form id="tasks-reset" method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
 					<input type="hidden" name="action" value="<?php echo esc_attr( Mentors\PREFIX ); ?>-tasks-reset" />
 					<?php wp_nonce_field( Mentors\PREFIX . '-tasks-reset', Mentors\PREFIX . '-tasks-reset-nonce' ); ?>
-					<?php submit_button( __( 'Reset Tasks', 'wordcamp-mentors' ), 'delete', 'submit', false ); ?>
+					<?php submit_button( __( 'Reset Task Data', 'wordcamp-mentors' ), 'delete', 'submit', false ); ?>
 				</form>
 			<?php endif; ?>
 		</div>
