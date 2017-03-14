@@ -19,6 +19,21 @@
 
 		tick: 5000,
 
+		taskRequest: {
+			data: {
+				per_page: 300,
+				orderby: 'menu_order',
+				order: 'asc'
+			},
+			remove: false
+		},
+
+		categoryRequest: {
+			data: {
+				per_page: 100
+			}
+		},
+
 		initialize: function() {
 			this.$el.html( '<tr><td><span class="spinner is-active alignleft"></span></td></tr>' );
 
@@ -27,21 +42,9 @@
 			this.filter     = new wordcamp.mentors.views.Filter( { el: '#tasks-filter', list: this } );
 			this.reset      = new wordcamp.mentors.views.Reset( { el: '#tasks-reset' } );
 
-			var view = this,
-				taskData = {
-					data: {
-						per_page: 300,
-						orderby: 'menu_order',
-						order: 'asc'
-					}
-				},
-				categoryData = {
-					data: {
-						per_page: 100
-					}
-				};
+			var view = this;
 
-			$.when( this.tasks.fetch( taskData ), this.categories.fetch( categoryData ) ).done( function() {
+			$.when( this.tasks.fetch( this.taskRequest ), this.categories.fetch( this.categoryRequest ) ).done( function() {
 				if ( view.tasks.length ) {
 					view.render();
 				}
@@ -86,7 +89,7 @@
 		},
 
 		pollCollection: function() {
-			this.tasks.fetch( { remove: false } );
+			this.tasks.fetch( this.taskRequest );
 		},
 
 		_getVisibleTasks: function( filter ) {
