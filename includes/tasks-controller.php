@@ -88,7 +88,7 @@ class Controller extends \WP_REST_Posts_Controller {
 					return $result;
 				}
 			} else {
-				return new WP_Error( 'rest_forbidden_status', __( 'Status is forbidden.' ), array( 'status' => rest_authorization_required_code() ) );
+				return new \WP_Error( 'rest_forbidden_status', __( 'Status is forbidden.' ), array( 'status' => rest_authorization_required_code() ) );
 			}
 		}
 
