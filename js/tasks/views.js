@@ -35,7 +35,7 @@
 		},
 
 		initialize: function() {
-			this.$el.html( '<tr><td><span class="spinner is-active alignleft"></span></td></tr>' );
+			this.$el.html( '<tr><td colspan="3"><span class="spinner is-active"></span></td></tr>' );
 
 			this.tasks      = new wp.api.collections.Wcm_task();
 			this.categories = new wp.api.collections.Wcm_task_category();
