@@ -28,10 +28,8 @@
 				taskData = {
 					data: {
 						per_page: 300,
-						filter: {
-							'orderby': 'menu_order',
-							'order': 'ASC'
-						}
+						orderby: 'menu_order',
+						order: 'asc'
 					}
 				},
 				categoryData = {
@@ -75,6 +73,8 @@
 			});
 
 			this.trigger( 'setFilter', { skipHighlight: true } );
+
+			return this;
 		},
 
 		listeners: function() {
@@ -106,7 +106,7 @@
 		updateVisibleTasks: function( filter, data ) {
 			var visibleTasks = this._getVisibleTasks( filter );
 
-			_.each( this.tasks.models, function( task ) {
+			this.tasks.each( function( task ) {
 				if ( ! _.contains( visibleTasks, task ) ) {
 					task.trigger( 'visibility:hide', data );
 				}
