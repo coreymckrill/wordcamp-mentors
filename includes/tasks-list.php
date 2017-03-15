@@ -151,6 +151,7 @@ class List_Table extends \WP_List_Table {
 		$columns['task']          = esc_html__( 'Task', 'wordcamp-mentors' );
 		$columns['task_category'] = get_taxonomy( Mentors\PREFIX . '_task_category' )->labels->singular_name;
 		$columns['status']        = esc_html__( 'Status', 'wordcamp-mentors' );
+		$columns['modified']      = esc_html__( 'Modified', 'wordcamp-mentors' );
 
 		return $columns;
 	}
@@ -236,6 +237,21 @@ class List_Table extends \WP_List_Table {
 		}
 
 		echo '</select>';
+	}
+
+
+	public function column_modified( $task ) {
+		if ( $this->js ) {
+			?>
+			{{ data.modified.relative }}
+		<?php
+		} else {
+			printf(
+				/* translators: Time since an event has occurred. */
+				esc_html__( '% ago', 'wordcamp-mentors' ),
+				human_time_diff( strtotime( $task->post_modified ), time() )
+			);
+		}
 	}
 
 	/**

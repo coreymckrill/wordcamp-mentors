@@ -30,6 +30,25 @@ class Controller extends \WP_REST_Posts_Controller {
 		// Specify custom statuses
 		$schema['properties']['status']['enum'] = array_keys( get_task_statuses() );
 
+		// Add a localized, relative date string
+		$schema['properties']['modified']['type'] = 'object';
+		$schema['properties']['modified']['properties'] = array(
+			'raw' => array(
+				'description' => __( "The date the object was last modified, in the site's timezone." ),
+				'type'        => 'string',
+				'format'      => 'date-time',
+				'context'     => array( 'view', 'edit' ),
+				'readonly'    => true,
+			),
+			'relative' => array(
+				'description' => __( "The relative time since the object was last modified." ),
+				'type'        => 'string',
+				'format'      => 'date-time',
+				'context'     => array( 'view', 'edit' ),
+				'readonly'    => true,
+			),
+		);
+
 		return $this->add_additional_fields_schema( $schema );
 	}
 
