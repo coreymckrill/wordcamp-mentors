@@ -10,7 +10,8 @@
 		return;
 	}
 
-	var prefix = wordcamp.mentors.prefix;
+	var $document = $( document ),
+		prefix = wordcamp.mentors.prefix;
 
 	/**
 	 * A Backbone view for the list of tasks.
@@ -18,6 +19,10 @@
 	wordcamp.mentors.views.List = Backbone.View.extend( {
 
 		tick: 5000,
+
+		lastActive: 0,
+
+		hibernating: false,
 
 		taskRequest: {
 			data: {
@@ -41,6 +46,8 @@
 			this.$el
 				.addClass( 'loading-content' )
 				.html( '<tr><td colspan="4"><span class="spinner"></span></td></tr>' );
+
+			this.setLastActive();
 
 			this.tasks      = new wp.api.collections.Wcm_task();
 			this.categories = new wp.api.collections.Wcm_task_category();
@@ -91,12 +98,21 @@
 		},
 
 		listeners: function() {
+			this.listenTo( this, 'tick:' + this.tick,   this.maybePollCollection );
+			this.listenTo( this, 'hibernate',           this.hibernate );
 			this.listenTo( this.filter, 'filter:tasks', this.updateVisibleTasks );
-			this.listenTo( this, 'tick:' + this.tick, this.pollCollection );
 		},
 
-		pollCollection: function() {
-			this.tasks.fetch( this.taskRequest );
+		maybePollCollection: function() {
+			var elapsed = Date.now() - this.lastActive;
+
+			if ( elapsed < 30000 ) {
+				this.tasks.fetch( this.taskRequest );
+			} else if ( ! this.hibernating ) {
+				this.trigger( 'hibernate' );
+			}
+
+			return this;
 		},
 
 		_getVisibleTasks: function( filter ) {
@@ -136,6 +152,30 @@
 			_.each( visibleTasks, function( task ) {
 				task.trigger( 'visibility:show', data );
 			});
+
+			return this;
+		},
+
+		setLastActive: function() {
+			this.lastActive  = Date.now();
+			this.hibernating = false;
+
+			$document.off( '.' + prefix + '-tasks' );
+
+			return this;
+		},
+
+		hibernate: function() {
+			var view = this;
+
+			this.hibernating = true;
+
+			$document.on(
+				'mouseover.' + prefix + '-tasks keyup.' + prefix + '-tasks touchend.' + prefix + '-tasks',
+				function() {
+					view.setLastActive();
+				}
+			);
 
 			return this;
 		}
