@@ -40,7 +40,7 @@
 
 			this.$el
 				.addClass( 'loading-content' )
-				.html( '<tr><td colspan="3"><span class="spinner"></span></td></tr>' );
+				.html( '<tr><td colspan="4"><span class="spinner"></span></td></tr>' );
 
 			this.tasks      = new wp.api.collections.Wcm_task();
 			this.categories = new wp.api.collections.Wcm_task_category();
