@@ -184,6 +184,7 @@
 			this.listenTo( this.model, 'visibility:show', this.showMe );
 			this.listenTo( this.model, 'visibility:hide', this.hideMe );
 			this.listenTo( this.model, 'change:status',   this.changeStatus );
+			this.listenTo( this.model, 'change:modified', this.changeModified );
 		},
 
 		showMe: function( data ) {
@@ -227,6 +228,10 @@
 			setTimeout( function() {
 				list.trigger( 'setFilter' );
 			}, 1000 );
+		},
+
+		changeModified: function( model ) {
+			this.render( this._compileData( model ) );
 		},
 
 		events: {
