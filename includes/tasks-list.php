@@ -20,12 +20,16 @@ class List_Table extends \WP_List_Table {
 	/**
 	 * Switch the context between page load and JS template
 	 *
+	 * @since 1.0.0
+	 *
 	 * @var bool
 	 */
 	protected $js = false;
 
 	/**
 	 * List_Table constructor.
+	 *
+	 * @since 1.0.0
 	 *
 	 * @param array $args
 	 */
@@ -41,7 +45,9 @@ class List_Table extends \WP_List_Table {
 	}
 
 	/**
-	 * Add filter dropdowns
+	 * Add controls above and below the list table
+	 *
+	 * @since 1.0.0
 	 *
 	 * @param string $which
 	 */
@@ -69,6 +75,8 @@ class List_Table extends \WP_List_Table {
 
 	/**
 	 * Dropdown for task categories
+	 *
+	 * @since 1.0.0
 	 */
 	protected function task_category_dropdown() {
 		$task_categories = get_terms( array(
@@ -91,6 +99,8 @@ class List_Table extends \WP_List_Table {
 
 	/**
 	 * Dropdown for task statuses
+	 *
+	 * @since 1.0.0
 	 */
 	protected function status_dropdown() {
 		$task_statuses = get_task_statuses();
@@ -108,6 +118,8 @@ class List_Table extends \WP_List_Table {
 
 	/**
 	 * Prepare the table items
+	 *
+	 * @since 1.0.0
 	 */
 	public function prepare_items() {
 		$columns = $this->get_columns();
@@ -116,13 +128,16 @@ class List_Table extends \WP_List_Table {
 		$this->_column_headers = array($columns, $hidden, $sortable);
 
 		if ( $this->js ) {
-			// For the JS template, onyl one row is needed
+			// For the JS template, only one row is needed
 			$this->items = array(
 				(object) array(
 					'ID' => 'data.id',
 				)
 			);
-		} else {
+		}
+
+		/* At this point, no items need to be rendered at page load, since it happens via JS.
+		else {
 			$args = array(
 				'post_type'      => Mentors\PREFIX . '_task',
 				'orderby'        => 'menu_order',
@@ -131,10 +146,13 @@ class List_Table extends \WP_List_Table {
 			);
 			$this->items = get_posts( $args );
 		}
+		*/
 	}
 
 	/**
 	 * Message to be displayed when there are no items
+	 *
+	 * @since 1.0.0
 	 */
 	public function no_items() {
 		esc_html_e( 'No tasks found.', 'wordcamp-mentors' );
@@ -142,6 +160,8 @@ class List_Table extends \WP_List_Table {
 
 	/**
 	 * Specify the column names and order
+	 *
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -159,6 +179,8 @@ class List_Table extends \WP_List_Table {
 	/**
 	 * Render the Task column
 	 *
+	 * @since 1.0.0
+	 *
 	 * @param $task
 	 */
 	public function column_task( $task ) {
@@ -171,6 +193,8 @@ class List_Table extends \WP_List_Table {
 
 	/**
 	 * Render the Task Category column
+	 *
+	 * @since 1.0.0
 	 *
 	 * @param $task
 	 */
@@ -204,6 +228,8 @@ class List_Table extends \WP_List_Table {
 
 	/**
 	 * Render the Status column
+	 *
+	 * @since 1.0.0
 	 *
 	 * @param $task
 	 */
@@ -239,7 +265,13 @@ class List_Table extends \WP_List_Table {
 		echo '</select>';
 	}
 
-
+	/**
+	 * Render the Modified column
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param $task
+	 */
 	public function column_modified( $task ) {
 		if ( $this->js ) {
 			?>
@@ -256,6 +288,8 @@ class List_Table extends \WP_List_Table {
 
 	/**
 	 * Render the full markup for a table row
+	 *
+	 * @since 1.0.0
 	 *
 	 * @param object $item
 	 */

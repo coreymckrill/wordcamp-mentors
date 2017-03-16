@@ -62,14 +62,14 @@ function register_cpt() {
 
 	$args = array(
 		'label'                 => __( 'Task', 'wordcamp-mentors' ),
-		'description'           => __( 'Task Description', 'wordcamp-mentors' ),
+		'description'           => __( 'Planning Checklist tasks', 'wordcamp-mentors' ),
 		'labels'                => $labels,
 		'supports'              => array( 'title', 'page-attributes', ),
 		'taxonomies'            => array( Mentors\PREFIX . '_task_category' ),
 		'hierarchical'          => false,
 		'public'                => false,
-		'show_ui'               => true,
-		'show_in_menu'          => true,
+		'show_ui'               => false,
+		'show_in_menu'          => false,
 		'menu_position'         => 5,
 		'show_in_admin_bar'     => false,
 		'show_in_nav_menus'     => false,
@@ -119,7 +119,7 @@ function register_tax() {
 		'labels'                     => $labels,
 		'hierarchical'               => true,
 		'public'                     => false,
-		'show_ui'                    => true,
+		'show_ui'                    => false,
 		'show_admin_column'          => true,
 		'show_in_nav_menus'          => false,
 		'show_tagcloud'              => false,
@@ -152,6 +152,7 @@ function register_status() {
 					sprintf( '%s <span class="count">(%s)</span>', $label, '%s' ),
 					'wordcamp-mentors'
 				),
+				// Custom parameter to flag its use with the Task CPT
 				Mentors\PREFIX . '_task' => true,
 			)
 		);

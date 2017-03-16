@@ -8,14 +8,17 @@ defined( 'WPINC' ) or die();
 
 use WordCamp\Mentors;
 
-
+/**
+ * Class Controller
+ * @package WordCamp\Mentors\Tasks
+ */
 class Controller extends \WP_REST_Posts_Controller {
 	/**
 	 * Retrieves the Task post's schema, conforming to JSON Schema.
 	 *
 	 * Task-specific modifications to the standard post schema.
 	 *
-	 * @access public
+	 * @since 1.0.0
 	 *
 	 * @return array Item schema data.
 	 */
@@ -57,8 +60,7 @@ class Controller extends \WP_REST_Posts_Controller {
 	 *
 	 * Task-specific modifications to the standard posts collection query params.
 	 *
-	 * @since 4.7.0
-	 * @access public
+	 * @since 1.0.0
 	 *
 	 * @return array Collection parameters.
 	 */
@@ -84,13 +86,12 @@ class Controller extends \WP_REST_Posts_Controller {
 	 * Sanitizes and validates the list of post statuses, including whether the
 	 * user can query private statuses.
 	 *
-	 * @since 4.7.0
-	 * @access public
+	 * @since 1.0.0
 	 *
 	 * @param  string|array    $statuses  One or more post statuses.
-	 * @param  WP_REST_Request $request   Full details about the request.
+	 * @param  \WP_REST_Request $request   Full details about the request.
 	 * @param  string          $parameter Additional parameter to pass to validation.
-	 * @return array|WP_Error A list of valid statuses, otherwise WP_Error object.
+	 * @return array|\WP_Error A list of valid statuses, otherwise WP_Error object.
 	 */
 	public function sanitize_post_statuses( $statuses, $request, $parameter ) {
 		$statuses = wp_parse_slug_list( $statuses );

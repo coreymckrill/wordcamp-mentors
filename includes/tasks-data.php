@@ -542,8 +542,6 @@ function get_task_data() {
 /**
  * Handle a POST request to reset the task data.
  *
- * @access private
- *
  * @since 1.0.0
  *
  * @return void
@@ -638,8 +636,6 @@ function _reset_tasks() {
 /**
  * Insert translated strings into REST response for tasks.
  *
- * @access private
- *
  * @since 1.0.0
  *
  * @param \WP_REST_Response $response
@@ -672,8 +668,6 @@ add_filter( 'rest_prepare_' . Mentors\PREFIX . '_task', __NAMESPACE__ . '\locali
 
 /**
  * Insert translated strings into REST response for task categories.
- *
- * @access private
  *
  * @since 1.0.0
  *

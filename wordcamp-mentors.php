@@ -13,6 +13,7 @@
  */
 
 namespace WordCamp\Mentors;
+defined( 'WPINC' ) or die();
 
 const PLUGIN_VERSION = '1.0.0';
 const JS_VERSION     = '1.0.0';
