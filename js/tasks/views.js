@@ -190,12 +190,12 @@
 		tagName: 'tr',
 
 		id: function() {
-			return wordcamp.mentors.prefix + '-task-' + this.model.get( 'id' );
+			return prefix + '-task-' + this.model.get( 'id' );
 		},
 
-		className: wordcamp.mentors.prefix + '-task',
+		className: prefix + '-task',
 
-		template: wp.template( wordcamp.mentors.prefix + '-task' ),
+		template: wp.template( prefix + '-task' ),
 
 		_compileData: function( model ) {
 			return $.extend( {}, model.attributes, {
