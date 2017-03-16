@@ -1,8 +1,8 @@
 <?php
 /**
  * Plugin Name:     WordCamp Mentors
- * Plugin URI:      n/a
- * Description:     n/a
+ * Plugin URI:      https://wordcamp.org
+ * Description:     Tools for mentors and organizers of WordCamps.
  * Author:          WordCamp.org
  * Author URI:      https://wordcamp.org
  * Text Domain:     wordcamp-mentors
@@ -16,8 +16,9 @@ namespace WordCamp\Mentors;
 defined( 'WPINC' ) or die();
 
 const PLUGIN_VERSION = '1.0.0';
-const JS_VERSION     = '1.0.0';
-const CSS_VERSION    = '1.0.0';
+const JS_VERSION     = '20170315';
+const CSS_VERSION    = '20170315';
+const DATA_VERSION   = '20170315';
 
 define( __NAMESPACE__ . '\PLUGIN_DIR', \plugin_dir_path( __FILE__ ) );
 define( __NAMESPACE__ . '\PLUGIN_URL', \plugins_url( '/', __FILE__ ) );

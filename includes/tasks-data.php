@@ -43,20 +43,10 @@ function get_task_category_data() {
  */
 function get_task_data() {
 	/**
-	 * This array can be generated with the following steps:
+	 * When adding or editing items, be sure to update the value of DATA_VERSION in
+	 * the wordcamp-mentors.php file with the current YYYYMMDD timestamp.
 	 *
-	 * - Open the spreadsheet:
-	 *   https://docs.google.com/spreadsheets/d/1PMwyb8RcvOqcNOBzVgXrWFTniTr8utT8ew0lwNaWbeo/edit
-	 *
-	 * - Download the current sheet as a tab-delimited file.
-	 *
-	 * - Run a Regex search/replace:
-	 *   Search:  "?([^\t]+)"?\t"?([^\t]+)"?\t"?([^\t]+)"?\n
-	 *   Replace: '$1' => array(\n\t'title' => __( '$2', 'wordcamp-mentors' ),\n\t'cat' => array( '$3' ),\n),\n
-	 *
-	 * - Paste the output inside the outer array.
-	 *
-	 * When adding new task items, the unique ID keys can be created here:
+	 * When adding new task items, unique ID keys can be created here:
 	 * http://textmechanic.com/text-tools/randomization-tools/random-string-generator/
 	 */
 	return array(
@@ -620,6 +610,9 @@ function _reset_tasks() {
 			'post_status' => Mentors\PREFIX . '_task_pending',
 			'post_title'  => $l10n_id,
 			'menu_order'  => $order,
+			'meta_input'  => array(
+				Mentors\PREFIX . '-data-version' => Mentors\DATA_VERSION,
+			),
 		);
 
 		$post_id = wp_insert_post( $args );
