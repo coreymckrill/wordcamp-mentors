@@ -644,17 +644,19 @@ function localize_task( $response, $post ) {
 
 	if ( isset( $task_data[ $l10n_id ] ) ) {
 		$response->data['title']['rendered'] = apply_filters( 'the_title', $task_data[ $l10n_id ]['title'] );
-
-		$raw_modified = $response->data['modified'];
-		$response->data['modified'] = array(
-			'raw'      => $raw_modified,
-			'relative' => sprintf(
-				/* translators: Time since an event has occurred. */
-				esc_html__( '%s ago', 'wordcamp-mentors' ),
-				human_time_diff( strtotime( $raw_modified ), time() )
-			),
-		);
+	} else {
+		$response->data['title']['rendered'] = esc_html__( 'Unknown task.', 'wordcamp-mentors' );
 	}
+
+	$raw_modified = $response->data['modified'];
+	$response->data['modified'] = array(
+		'raw'      => $raw_modified,
+		'relative' => sprintf(
+		/* translators: Time since an event has occurred. */
+			esc_html__( '%s ago', 'wordcamp-mentors' ),
+			human_time_diff( strtotime( $raw_modified ), time() )
+		),
+	);
 
 	return $response;
 }
