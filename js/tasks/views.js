@@ -59,13 +59,13 @@
 
 				if ( view.tasks.length ) {
 					view.render();
+
+					view.ticker = setInterval( function() {
+						view.trigger( 'tick:' + view.tick );
+					}, view.tick );
 				} else {
 					view.$el.html( origContent );
 				}
-
-				view.ticker = setInterval( function() {
-					view.trigger( 'tick:' + view.tick );
-				}, view.tick );
 			});
 
 			this.listeners();
@@ -74,7 +74,7 @@
 		render: function() {
 			var view = this;
 
-			view.$el.empty();
+			this.$el.empty();
 
 			this.tasks.each( function( model ) {
 				var categories, task;
@@ -98,12 +98,12 @@
 		},
 
 		listeners: function() {
-			this.listenTo( this, 'tick:' + this.tick,   this.maybePollCollection );
+			this.listenTo( this, 'tick:' + this.tick,   this.pollCollectionOrHibernate );
 			this.listenTo( this, 'hibernate',           this.hibernate );
 			this.listenTo( this.filter, 'filter:tasks', this.updateVisibleTasks );
 		},
 
-		maybePollCollection: function() {
+		pollCollectionOrHibernate: function() {
 			var elapsed = Date.now() - this.lastActive;
 
 			if ( elapsed < 30000 ) {
@@ -116,8 +116,7 @@
 		},
 
 		_getVisibleTasks: function( filter ) {
-			var view = this,
-				visibleTasks = new Backbone.Collection( this.tasks.models );
+			var visibleTasks = new Backbone.Collection( this.tasks.models );
 
 			if ( 'any' !== filter[ prefix + '_task_category' ] ) {
 				visibleTasks = new Backbone.Collection( _.filter( visibleTasks.models, function( task ) {
@@ -160,6 +159,7 @@
 			this.lastActive  = Date.now();
 			this.hibernating = false;
 
+			$document.find( 'body' ).fadeTo( 200, 1 );
 			$document.off( '.' + prefix + '-tasks' );
 
 			return this;
@@ -170,6 +170,7 @@
 
 			this.hibernating = true;
 
+			$document.find( 'body' ).fadeTo( 400, 0.5 );
 			$document.on(
 				'mouseover.' + prefix + '-tasks keyup.' + prefix + '-tasks touchend.' + prefix + '-tasks',
 				function() {
