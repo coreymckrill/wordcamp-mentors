@@ -297,6 +297,10 @@ function admin_notices() {
 			$message = esc_html__( 'Invalid nonce.', 'wordcamp-mentors' );
 			break;
 
+		case 'insufficient-permissions' :
+			$message = esc_html__( 'Insufficient permissions to reset task data.', 'wordcamp-mentors' );
+			break;
+
 		case 'reset-errors' :
 			$message = esc_html__( 'Checklist data reset with errors.', 'wordcamp-mentors' );
 			break;
