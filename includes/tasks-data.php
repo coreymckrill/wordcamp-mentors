@@ -573,7 +573,7 @@ function _reset_tasks() {
 	// Delete existing tasks
 	$existing_tasks = get_posts( array(
 		'post_type'      => Mentors\PREFIX . '_task',
-		'post_status'    => get_task_statuses(),
+		'post_status'    => array_keys( get_task_statuses() ),
 		'posts_per_page' => 999,
 	) );
 
