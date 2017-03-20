@@ -159,7 +159,6 @@
 			this.lastActive  = Date.now();
 			this.hibernating = false;
 
-			$document.find( 'body' ).fadeTo( 200, 1 );
 			$document.off( '.' + prefix + '-tasks' );
 
 			return this;
@@ -169,8 +168,7 @@
 			var view = this;
 
 			this.hibernating = true;
-
-			$document.find( 'body' ).fadeTo( 400, 0.5 );
+			
 			$document.on(
 				'mouseover.' + prefix + '-tasks keyup.' + prefix + '-tasks touchend.' + prefix + '-tasks',
 				function() {
