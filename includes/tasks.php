@@ -78,12 +78,43 @@ function register_cpt() {
 		'exclude_from_search'   => true,
 		'publicly_queryable'    => false,
 		'rewrite'               => false,
-		'capability_type'       => 'page',
+		'capability_type'       => 'task',
 		'show_in_rest'          => true,
 		'rest_controller_class' => __NAMESPACE__ . '\Controller',
 	);
 
 	register_post_type( Mentors\PREFIX . '_task', $args );
+
+	add_filter( 'map_meta_cap', __NAMESPACE__ . '\map_task_caps', 10, 2 );
+}
+
+/**
+ * Map CPT capabilities.
+ *
+ * @since 1.0.0
+ *
+ * @param array  $caps
+ * @param string $cap
+ *
+ * @return array
+ */
+function map_task_caps( $caps, $cap ) {
+	switch ( $cap ) {
+		case 'edit_task' :
+		case 'edit_tasks' :
+		case 'edit_others_tasks' :
+		case 'read_task' :
+			$caps[] = Mentors\ORGANIZER_CAP;
+			break;
+
+		case 'read_private_tasks' :
+		case 'publish_tasks' :
+		case 'delete_task' :
+			$caps[] = Mentors\MENTOR_CAP;
+			break;
+	}
+
+	return $caps;
 }
 
 /**

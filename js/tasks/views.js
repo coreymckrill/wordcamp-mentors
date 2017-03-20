@@ -168,7 +168,7 @@
 			var view = this;
 
 			this.hibernating = true;
-			
+
 			$document.on(
 				'mouseover.' + prefix + '-tasks keyup.' + prefix + '-tasks touchend.' + prefix + '-tasks',
 				function() {
