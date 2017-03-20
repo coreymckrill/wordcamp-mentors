@@ -281,7 +281,7 @@ class List_Table extends \WP_List_Table {
 			printf(
 				/* translators: Time since an event has occurred. */
 				esc_html__( '% ago', 'wordcamp-mentors' ),
-				human_time_diff( strtotime( $task->post_modified ), time() )
+				human_time_diff( strtotime( $task->post_modified ), current_time( 'timestamp' ) )
 			);
 		}
 	}

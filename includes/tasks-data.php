@@ -654,7 +654,7 @@ function localize_task( $response, $post ) {
 		'relative' => sprintf(
 		/* translators: Time since an event has occurred. */
 			esc_html__( '%s ago', 'wordcamp-mentors' ),
-			human_time_diff( strtotime( $raw_modified ), time() )
+			human_time_diff( strtotime( $raw_modified ), current_time( 'timestamp' ) )
 		),
 	);
 
