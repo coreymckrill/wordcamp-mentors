@@ -7,10 +7,8 @@
 	window.wordcamp = window.wordcamp || {};
 
 	wordcamp.MentorsApp = function() {
-		return {
-			views: {},
-			cache: {}
-		};
+		this.cache = {};
+		this.views = {};
 	};
 
 	wordcamp.mentors = new wordcamp.MentorsApp();
