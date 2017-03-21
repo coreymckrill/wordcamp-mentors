@@ -17,13 +17,24 @@
 	 * A Backbone view for the list of tasks.
 	 */
 	wordcamp.mentors.views.List = Backbone.View.extend( {
-
+		/**
+		 * Time increment in ms for polling the server.
+		 */
 		tick: 5000,
 
+		/**
+		 * Unix timestamp of the last activity within the app.
+		 */
 		lastActive: 0,
 
+		/**
+		 *
+		 */
 		hibernating: false,
 
+		/**
+		 * Data to submit when fetching a task collection.
+		 */
 		taskRequest: {
 			data: {
 				per_page: 300,
@@ -33,12 +44,11 @@
 			remove: false
 		},
 
-		categoryRequest: {
-			data: {
-				per_page: 100
-			}
-		},
-
+		/**
+		 * Initialize the List view.
+		 *
+		 * @returns {wordcamp.mentors.views.List}
+		 */
 		initialize: function() {
 			var view = this,
 				origContent = this.$el.html();
@@ -61,8 +71,15 @@
 			}
 
 			this.listeners();
+
+			return this;
 		},
 
+		/**
+		 * Render the List view.
+		 *
+		 * @returns {wordcamp.mentors.views.List}
+		 */
 		render: function() {
 			var view = this;
 
@@ -89,12 +106,24 @@
 			return this;
 		},
 
+		/**
+		 * Set up event listeners.
+		 *
+		 * @returns {wordcamp.mentors.views.List}
+		 */
 		listeners: function() {
 			this.listenTo( this, 'tick:' + this.tick,   this.pollCollectionOrHibernate );
 			this.listenTo( this, 'hibernate',           this.hibernate );
 			this.listenTo( this.filter, 'filter:tasks', this.updateVisibleTasks );
+
+			return this;
 		},
 
+		/**
+		 * Poll the task collection for changes, or stop polling if the user is inactive.
+		 *
+		 * @returns {wordcamp.mentors.views.List}
+		 */
 		pollCollectionOrHibernate: function() {
 			var elapsed = Date.now() - this.lastActive;
 
@@ -107,6 +136,14 @@
 			return this;
 		},
 
+		/**
+		 * Get an array of models that should be visible based on filter parameters.
+		 *
+		 * @private
+		 *
+		 * @param filter object
+		 * @returns array
+		 */
 		_getVisibleTasks: function( filter ) {
 			var visibleTasks = new Backbone.Collection( this.tasks.models );
 
@@ -123,6 +160,13 @@
 			return visibleTasks.models;
 		},
 
+		/**
+		 * Update the visibility of tasks in the list based on filter parameters.
+		 *
+		 * @param filter object Required parameters to determine which tasks should be visible.
+		 * @param data   object Optional parameters to pass to the event trigger.
+		 * @returns {wordcamp.mentors.views.List}
+		 */
 		updateVisibleTasks: function( filter, data ) {
 			var visibleTasks = this._getVisibleTasks( filter ),
 				$parentTable = this.$el.parents( 'table' );
@@ -147,15 +191,26 @@
 			return this;
 		},
 
+		/**
+		 * Set or update the application as active so that it will poll for changes.
+		 *
+		 * @returns {wordcamp.mentors.views.List}
+		 */
 		setLastActive: function() {
 			this.lastActive  = Date.now();
 			this.hibernating = false;
 
+			// Stop listening for activity
 			$document.off( '.' + prefix + '-tasks' );
 
 			return this;
 		},
 
+		/**
+		 * Set the application as inactive so that it won't poll for changes.
+		 *
+		 * @returns {wordcamp.mentors.views.List}
+		 */
 		hibernate: function() {
 			var view = this;
 
@@ -176,17 +231,37 @@
 	 * A Backbone view for an individual task.
 	 */
 	wordcamp.mentors.views.Task = Backbone.View.extend( {
-
+		/**
+		 * HTML element to use as a container.
+		 */
 		tagName: 'tr',
 
+		/**
+		 * HTML element ID attribute.
+		 *
+		 * @returns {string}
+		 */
 		id: function() {
 			return prefix + '-task-' + this.model.get( 'id' );
 		},
 
+		/**
+		 * HTML element class attribute.
+		 */
 		className: prefix + '-task',
 
+		/**
+		 * The templating function for rendering the task.
+		 */
 		template: wp.template( prefix + '-task' ),
 
+		/**
+		 * Combine model attributes with other data necessary for rendering.
+		 *
+		 * @private
+		 *
+		 * @param model object
+		 */
 		_compileData: function( model ) {
 			return $.extend( {}, model.attributes, {
 				task_category: this.categories,
@@ -194,6 +269,12 @@
 			} );
 		},
 
+		/**
+		 * Initialize a task view.
+		 *
+		 * @param options
+		 * @returns {wordcamp.mentors.views.Task}
+		 */
 		initialize: function( options ) {
 			this.list       = options.list;
 			this.categories = options.categories;
@@ -205,19 +286,37 @@
 			return this;
 		},
 
+		/**
+		 * Render a task.
+		 *
+		 * @param data
+		 * @returns {wordcamp.mentors.views.Task}
+		 */
 		render: function( data ) {
 			this.$el.html( this.template( data ) );
 
 			return this;
 		},
 
+		/**
+		 * Set up event listeners.
+		 *
+		 * @returns {wordcamp.mentors.views.List}
+		 */
 		listeners: function() {
 			this.listenTo( this.model, 'visibility:show', this.showMe );
 			this.listenTo( this.model, 'visibility:hide', this.hideMe );
 			this.listenTo( this.model, 'change:status',   this.changeStatus );
 			this.listenTo( this.model, 'change:modified', this.changeModified );
+
+			return this;
 		},
 
+		/**
+		 * Make this task visible.
+		 *
+		 * @param data object
+		 */
 		showMe: function( data ) {
 			var data = data || {},
 				duration = 800;
@@ -233,6 +332,11 @@
 			});
 		},
 
+		/**
+		 * Make this task hidden.
+		 *
+		 * @param data object
+		 */
 		hideMe: function( data ) {
 			var data = data || {},
 				duration = 500;
@@ -248,6 +352,11 @@
 			});
 		},
 
+		/**
+		 * Re-render this task when the status changes.
+		 *
+		 * @param model
+		 */
 		changeStatus: function( model ) {
 			var list = this.list;
 
@@ -261,14 +370,28 @@
 			}, 1000 );
 		},
 
+		/**
+		 * Re-render this task when the modified timestamp changes.
+		 *
+		 * @param model
+		 */
 		changeModified: function( model ) {
 			this.render( this._compileData( model ) );
 		},
 
+		/**
+		 * Event binding.
+		 */
 		events: {
 			'change .column-status select': 'updateStatus'
 		},
 
+		/**
+		 * Update this task's model when the user chooses a new status in the UI.
+		 *
+		 * @param event
+		 * @returns {wordcamp.mentors.views.Task}
+		 */
 		updateStatus: function( event ) {
 			var value = $( event.target ).val();
 
@@ -283,23 +406,43 @@
 	 * A Backbone view for the controls that filter visible tasks.
 	 */
 	wordcamp.mentors.views.Filter = Backbone.View.extend( {
-
+		/**
+		 * Initialize the filter view.
+		 *
+		 * @param options
+		 */
 		initialize: function( options ) {
 			this.list = options.list;
 
 			this.listeners();
 		},
 
+		/**
+		 * Set up event listeners.
+		 *
+		 * @returns {wordcamp.mentors.views.List}
+		 */
 		listeners: function() {
 			this.listenTo( this.list, 'setFilter', function( data ) {
 				this.$el.trigger( 'submit', data );
 			} );
+
+			return this;
 		},
 
+		/**
+		 * Event binding.
+		 */
 		events: {
 			'submit': 'setFilter'
 		},
 
+		/**
+		 * Gather the parameters set for the list filter and pass them via event trigger.
+		 *
+		 * @param event
+		 * @param data
+		 */
 		setFilter: function( event, data ) {
 			event.preventDefault();
 
