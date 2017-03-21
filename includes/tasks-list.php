@@ -154,9 +154,7 @@ class List_Table extends \WP_List_Table {
 	 *
 	 * @since 1.0.0
 	 */
-	public function no_items() {
-		esc_html_e( 'No tasks found.', 'wordcamp-mentors' );
-	}
+	public function no_items() {}
 
 	/**
 	 * Specify the column names and order

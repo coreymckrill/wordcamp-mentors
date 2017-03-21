@@ -43,30 +43,22 @@
 			var view = this,
 				origContent = this.$el.html();
 
-			this.$el
-				.addClass( 'loading-content' )
-				.html( '<tr><td colspan="4"><span class="spinner"></span></td></tr>' );
-
 			this.setLastActive();
 
-			this.tasks      = new wp.api.collections.Wcm_task();
-			this.categories = new wp.api.collections.Wcm_task_category();
+			this.tasks      = new wp.api.collections.Wcm_task( WordCampMentorsTaskData );
+			this.categories = new wp.api.collections.Wcm_task_category( WordCampMentorsTaskCategoryData );
 			this.filter     = new wordcamp.mentors.views.Filter( { el: '#tasks-filter', list: this } );
 			this.reset      = new wordcamp.mentors.views.Reset( { el: '#tasks-reset' } );
 
-			$.when( this.tasks.fetch( this.taskRequest ), this.categories.fetch( this.categoryRequest ) ).done( function() {
-				view.$el.removeClass( 'loading-content' );
+			if ( this.tasks.length ) {
+				view.render();
 
-				if ( view.tasks.length ) {
-					view.render();
-
-					view.ticker = setInterval( function() {
-						view.trigger( 'tick:' + view.tick );
-					}, view.tick );
-				} else {
-					view.$el.html( origContent );
-				}
-			});
+				view.ticker = setInterval( function() {
+					view.trigger( 'tick:' + view.tick );
+				}, view.tick );
+			} else {
+				view.$el.html( origContent );
+			}
 
 			this.listeners();
 		},

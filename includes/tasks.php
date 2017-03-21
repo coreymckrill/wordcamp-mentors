@@ -300,6 +300,29 @@ function print_templates() {
 		<?php $js_list_table->single_row_columns( $js_list_table->items[0] ); ?>
 	</script>
 <?php
+	// Initial data
+	$request_url = add_query_arg( array(
+		'per_page' => 300,
+		'orderby'  => 'menu_order',
+		'order'    => 'asc',
+	), get_rest_url( null, 'wp/v2/' . Mentors\PREFIX . '_task' ) );
+
+	$initial_tasks = rest_do_request( \WP_REST_Request::from_url( $request_url ) );
+
+	$request_url = add_query_arg( array(
+		'per_page' => 100,
+	), get_rest_url( null, 'wp/v2/' . Mentors\PREFIX . '_task_category' ) );
+
+	$initial_task_categories = rest_do_request( \WP_REST_Request::from_url( $request_url ) );
+	?>
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		var WordCampMentorsTaskData = <?php echo wp_json_encode( $initial_tasks->data ); ?>;
+		var WordCampMentorsTaskCategoryData = <?php echo wp_json_encode( $initial_task_categories->data ); ?>;
+
+		/* ]]> */
+	</script>
+<?php
 }
 
 add_action( 'admin_print_footer_scripts-dashboard_page_' . Mentors\PREFIX . '-planning-checklist', __NAMESPACE__ . '\print_templates' );
