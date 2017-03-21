@@ -1,4 +1,4 @@
-/** global jQuery, Backbone, _, WordCampMentors, wp, userSettings */
+/*global jQuery, Backbone, _, wp, wordcamp, WordCampMentorsTaskData, WordCampMentorsTaskCategoryData, setUserSetting */
 
 ( function( window, $ ) {
 
@@ -6,7 +6,7 @@
 
 	window.wordcamp = window.wordcamp || {};
 
-	if ( ! wordcamp.mentors instanceof wordcamp.MentorsApp ) {
+	if ( ! ( wordcamp.mentors instanceof wordcamp.MentorsApp ) ) {
 		return;
 	}
 
@@ -149,7 +149,7 @@
 
 			if ( 'any' !== filter[ prefix + '_task_category' ] ) {
 				visibleTasks = new Backbone.Collection( _.filter( visibleTasks.models, function( task ) {
-					return _.contains( task.get( prefix + '_task_category' ), parseInt( filter[ prefix + '_task_category' ] ) );
+					return _.contains( task.get( prefix + '_task_category' ), parseInt( filter[ prefix + '_task_category' ], 10 ) );
 				}) );
 			}
 
@@ -172,7 +172,7 @@
 				$parentTable = this.$el.parents( 'table' );
 
 			// Remove row stripes if not showing everything
-			if ( _.every( filter, function( value ) { return 'any' === value } ) ) {
+			if ( _.every( filter, function( value ) { return 'any' === value; } ) ) {
 				$parentTable.addClass( 'striped' );
 			} else {
 				$parentTable.removeClass( 'striped' );
@@ -301,7 +301,7 @@
 		/**
 		 * Set up event listeners.
 		 *
-		 * @returns {wordcamp.mentors.views.List}
+		 * @returns {wordcamp.mentors.views.Task}
 		 */
 		listeners: function() {
 			this.listenTo( this.model, 'visibility:show', this.showMe );
@@ -318,10 +318,10 @@
 		 * @param data object
 		 */
 		showMe: function( data ) {
-			var data = data || {},
+			var params = data || {},
 				duration = 800;
 
-			if ( 'undefined' !== typeof data.skipHighlight ) {
+			if ( 'undefined' !== typeof params.skipHighlight ) {
 				duration = 0;
 			} else {
 				this.$el.addClass( prefix + '-highlight' );
@@ -338,10 +338,10 @@
 		 * @param data object
 		 */
 		hideMe: function( data ) {
-			var data = data || {},
+			var params = data || {},
 				duration = 500;
 
-			if ( 'undefined' !== typeof data.skipHighlight ) {
+			if ( 'undefined' !== typeof params.skipHighlight ) {
 				duration = 0;
 			} else {
 				this.$el.addClass( prefix + '-highlight' );
@@ -420,7 +420,7 @@
 		/**
 		 * Set up event listeners.
 		 *
-		 * @returns {wordcamp.mentors.views.List}
+		 * @returns {wordcamp.mentors.views.Filter}
 		 */
 		listeners: function() {
 			this.listenTo( this.list, 'setFilter', function( data ) {
@@ -450,10 +450,9 @@
 				settingPrefix = wordcamp.mentors.prefix;
 
 			$( event.target ).find( 'select' ).each( function() {
-				var attribute = $( this ).data( 'attribute' ),
-					value     = $( this ).val();
+				var attribute = $( this ).data( 'attribute' );
 
-				filter[ attribute ] = value;
+				filter[ attribute ] = $( this ).val();
 			});
 
 			// Save filter values as user settings

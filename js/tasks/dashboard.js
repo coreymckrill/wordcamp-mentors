@@ -1,4 +1,4 @@
-/** global jQuery, Backbone, _, WordCampMentors, wp, userSettings */
+/*global jQuery, wp, wordcamp, WordCampMentors */
 
 ( function( window, $ ) {
 
@@ -10,7 +10,7 @@
 		return {
 			views: {},
 			cache: {}
-		}
+		};
 	};
 
 	wordcamp.mentors = new wordcamp.MentorsApp();
