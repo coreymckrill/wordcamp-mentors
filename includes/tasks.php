@@ -237,6 +237,7 @@ add_action( 'admin_menu', __NAMESPACE__ . '\add_tasks_page' );
  */
 function render_tasks_page() {
 	$list_table = new List_Table();
+	$list_table->prepare_items();
 
 	require Mentors\get_views_dir_path() . 'tasks.php';
 }

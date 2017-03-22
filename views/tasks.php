@@ -12,7 +12,6 @@ use WordCamp\Mentors\Tasks;
 
 /* @var Tasks\List_Table $list_table */
 
-$list_table->prepare_items();
 ?>
 <div class="wrap">
 	<h1><?php esc_html_e( 'Planning Checklist', 'wordcamp-mentors' ); ?></h1>
