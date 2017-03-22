@@ -316,7 +316,7 @@
 		 */
 		showMe: function( data ) {
 			var params = data || {},
-				duration = 800;
+				duration = 500;
 
 			if ( 'undefined' !== typeof params.skipHighlight ) {
 				duration = 0;
@@ -336,7 +336,7 @@
 		 */
 		hideMe: function( data ) {
 			var params = data || {},
-				duration = 500;
+				duration = 300;
 
 			if ( 'undefined' !== typeof params.skipHighlight ) {
 				duration = 0;
