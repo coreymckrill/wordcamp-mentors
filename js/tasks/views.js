@@ -59,6 +59,8 @@
 			this.filter     = new wordcamp.mentors.views.Filter( { el: '#tasks-filter', list: this } );
 			this.reset      = new wordcamp.mentors.views.Reset( { el: '#tasks-reset' } );
 
+			this.listeners();
+
 			if ( this.tasks.length ) {
 				view.render();
 
@@ -66,8 +68,6 @@
 					view.trigger( 'tick:' + view.tick );
 				}, view.tick );
 			}
-
-			this.listeners();
 
 			return this;
 		},
@@ -276,9 +276,9 @@
 			this.list       = options.list;
 			this.categories = options.categories;
 
-			this.render( this._compileData( this.model ) );
-
 			this.listeners();
+
+			this.render( this._compileData( this.model ) );
 
 			return this;
 		},
