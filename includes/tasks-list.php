@@ -17,6 +17,13 @@ if ( ! class_exists( 'WP_List_Table' ) ) {
 /**
  * Class List_Table.
  *
+ * This class is used both to render the markup for the list table on the
+ * Planning Checklist page, and to generate the JS template for rendering
+ * each individual task row.
+ *
+ * When instantiating the class for the purpose of generating the JS template,
+ * the class should be passed an args array with a `js` key set to `true`.
+ *
  * @package WordCamp\Mentors\Tasks
  */
 class List_Table extends \WP_List_Table {
@@ -146,18 +153,6 @@ class List_Table extends \WP_List_Table {
 				),
 			);
 		}
-
-		/* At this point, no items need to be rendered at page load, since it happens via JS.
-		else {
-			$args = array(
-				'post_type'      => Mentors\PREFIX . '_task',
-				'orderby'        => 'menu_order',
-				'order'          => 'ASC',
-				'posts_per_page' => 999,
-			);
-			$this->items = get_posts( $args );
-		}
-		*/
 	}
 
 	/**
@@ -189,142 +184,64 @@ class List_Table extends \WP_List_Table {
 	 * Render the Task column.
 	 *
 	 * @since 1.0.0
-	 *
-	 * @param \WP_Post $task The current task.
 	 */
-	public function column_task( $task ) {
-		if ( $this->js ) {
-			echo '{{{ data.title.rendered }}}';
-		} else {
-			echo get_the_title( $task );
-		}
+	public function column_task() {
+		if ( $this->js ) : ?>
+			{{{ data.title.rendered }}}
+		<?php endif;
 	}
 
 	/**
 	 * Render the Task Category column
 	 *
 	 * @since 1.0.0
-	 *
-	 * @param \WP_Post $task The current task.
 	 */
-	public function column_task_category( $task ) {
-		$terms = get_the_terms( $task->ID, Mentors\PREFIX . '_task_category' );
-
-		echo "<ul>\n";
-
-		if ( $this->js ) {
-			?>
-			<# if ( data.task_category.length ) { #>
-				<# _.each( data.task_category, function( category ) { #>
-					<li class="category-{{ category.get( 'slug' ) }}">{{ category.get( 'name' ) }}</li>
-				<# }); #>
-			<# } else { #>
-				<li class="category-none"><?php esc_html_e( 'No category' , 'wordcamp-mentors' ) ?></li>
-			<# } #>
-		<?php
-		} else {
-			if ( $terms && ! is_wp_error( $terms ) ) {
-				foreach ( $terms as $term ) {
-					echo '<li class="category-' . esc_attr( $term->slug ) . '">' . esc_html( $term->name ) . "</li>\n";
-				}
-			} else {
-				echo '<li class="category-none">' . esc_html__( 'No category' , 'wordcamp-mentors' ) . "</li>\n";
-			}
-		}
-
-		echo "</ul>\n";
+	public function column_task_category() {
+		if ( $this->js ) : ?>
+			<ul>
+				<# if ( data.task_category.length ) { #>
+					<# _.each( data.task_category, function( category ) { #>
+						<li class="category-{{ category.get( 'slug' ) }}">{{ category.get( 'name' ) }}</li>
+					<# }); #>
+				<# } else { #>
+					<li class="category-none"><?php esc_html_e( 'No category' , 'wordcamp-mentors' ) ?></li>
+				<# } #>
+			</ul>
+		<?php endif;
 	}
 
 	/**
 	 * Render the Status column
 	 *
 	 * @since 1.0.0
-	 *
-	 * @param \WP_Post $task The current task.
 	 */
-	public function column_status( $task ) {
-		$task_stati = get_task_statuses();
-
-		echo '<select>';
-
-		if ( $this->js ) {
-			?>
-			<# if ( 'object' !== typeof data.stati[ data.status ] ) { #>
-				<option value="{{ data.status }}" selected disabled>
-					{{ data.status }}
-				</option>
-			<# } #>
-			<# _.each( data.stati, function( status, slug ) {
-				var selected = ( slug === data.status ) ? 'selected' : '';
-				#>
-				<option value="{{ slug }}" {{ selected }}>
-					{{ status.label }}
-				</option>
-			<# }); #>
-		<?php
-		} else {
-			$status_slug = get_post_status( $task );
-			$status = get_post_status_object( $status_slug );
-
-			if ( is_null( $status ) ) {
-				echo '<option value="" selected="selected" disabled="disabled"></option>';
-			} elseif ( ! isset( $task_stati[ $status_slug ] ) ) {
-				echo '<option value="' . esc_attr( $status_slug ) . '" selected="selected" disabled="disabled">' . esc_html( $status->label ) . '</option>';
-			}
-
-			foreach ( $task_stati as $slug => $object ) {
-				echo '<option value="' . esc_attr( $slug ) . '" ' . selected( $slug, $status_slug, false ) . '>' . esc_html( $object->label ) . '</option>';
-			}
-		}
-
-		echo '</select>';
+	public function column_status() {
+		if ( $this->js ) : ?>
+			<select>
+				<# if ( 'object' !== typeof data.stati[ data.status ] ) { #>
+					<option value="{{ data.status }}" selected disabled>
+						{{ data.status }}
+					</option>
+				<# } #>
+				<# _.each( data.stati, function( status, slug ) {
+					var selected = ( slug === data.status ) ? 'selected' : '';
+					#>
+					<option value="{{ slug }}" {{ selected }}>
+						{{ status.label }}
+					</option>
+				<# }); #>
+			</select>
+		<?php endif;
 	}
 
 	/**
 	 * Render the Modified column
 	 *
 	 * @since 1.0.0
-	 *
-	 * @param \WP_Post $task The current task.
 	 */
-	public function column_modified( $task ) {
-		if ( $this->js ) {
-			?>
+	public function column_modified() {
+		if ( $this->js ) : ?>
 			{{ data.modified.relative }}
-		<?php
-		} else {
-			printf(
-				/* translators: Time since an event has occurred. */
-				esc_html__( '% ago', 'wordcamp-mentors' ),
-				esc_html( human_time_diff( strtotime( $task->post_modified ), current_time( 'timestamp' ) ) )
-			);
-		}
-	}
-
-	/**
-	 * Render the full markup for a table row
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param \WP_Post $task The current task.
-	 */
-	public function single_row( $task ) {
-		$id = Mentors\PREFIX . '-task-' . $task->ID;
-
-		$classes = array(
-			Mentors\PREFIX . '-task',
-		);
-		if ( ! $this->js ) {
-			$classes[] = 'hide-if-js';
-		}
-		$class = implode( ' ', $classes );
-
-		printf(
-			'<tr id="%s" class="%s">',
-			esc_attr( $id ),
-			esc_attr( $class )
-		);
-		$this->single_row_columns( $task );
-		echo '</tr>';
+		<?php endif;
 	}
 }
