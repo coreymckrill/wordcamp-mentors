@@ -92,9 +92,13 @@ class List_Table extends \WP_List_Table {
 		?>
 		<label for="filter-by-task-category" class="screen-reader-text"><?php esc_html_e( 'Filter by task category', 'wordcamp-mentors' ); ?></label>
 		<select id="filter-by-task-category" data-attribute="<?php echo esc_attr( Mentors\PREFIX ); ?>_task_category">
-			<option value="any" <?php selected( 'any', $pref ); ?>><?php esc_html_e( 'All task categories', 'wordcamp-mentors' ); ?></option>
+			<option value="any" <?php selected( 'any', $pref ); ?>>
+				<?php esc_html_e( 'All task categories', 'wordcamp-mentors' ); ?>
+			</option>
 			<?php foreach ( $task_categories as $cat ) : ?>
-				<option value="<?php echo esc_attr( $cat->term_id ); ?>" <?php selected( $cat->term_id, $pref ); ?>><?php echo esc_html( $task_category_data[ $cat->slug ] ); ?></option>
+				<option value="<?php echo esc_attr( $cat->term_id ); ?>" <?php selected( $cat->term_id, $pref ); ?>>
+					<?php echo esc_html( $task_category_data[ $cat->slug ] ); ?>
+				</option>
 			<?php endforeach; ?>
 		</select>
 	<?php
@@ -111,9 +115,13 @@ class List_Table extends \WP_List_Table {
 		?>
 		<label for="filter-by-task-status" class="screen-reader-text"><?php esc_html_e( 'Filter by status', 'wordcamp-mentors' ); ?></label>
 		<select id="filter-by-task-status" data-attribute="status">
-			<option value="any" <?php selected( 'any', $pref ); ?>><?php esc_html_e( 'All statuses', 'wordcamp-mentors' ); ?></option>
+			<option value="any" <?php selected( 'any', $pref ); ?>>
+				<?php esc_html_e( 'All statuses', 'wordcamp-mentors' ); ?>
+			</option>
 			<?php foreach ( $task_statuses as $status ) : ?>
-				<option value="<?php echo esc_attr( $status->name ); ?>" <?php selected( $status->name, $pref ); ?>><?php echo esc_html( $status->label ); ?></option>
+				<option value="<?php echo esc_attr( $status->name ); ?>" <?php selected( $status->name, $pref ); ?>>
+					<?php echo esc_html( $status->label ); ?>
+				</option>
 			<?php endforeach; ?>
 		</select>
 	<?php
@@ -242,12 +250,16 @@ class List_Table extends \WP_List_Table {
 		if ( $this->js ) {
 			?>
 			<# if ( 'object' !== typeof data.stati[ data.status ] ) { #>
-				<option value="{{ data.status }}" selected disabled>{{ data.status }}</option>
+				<option value="{{ data.status }}" selected disabled>
+					{{ data.status }}
+				</option>
 			<# } #>
 			<# _.each( data.stati, function( status, slug ) {
-					var selected = ( slug === data.status ) ? 'selected' : '';
-					#>
-				<option value="{{ slug }}" {{ selected }}>{{ status.label }}</option>
+				var selected = ( slug === data.status ) ? 'selected' : '';
+				#>
+				<option value="{{ slug }}" {{ selected }}>
+					{{ status.label }}
+				</option>
 			<# }); #>
 		<?php
 		} else {
