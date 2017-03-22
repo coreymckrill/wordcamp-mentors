@@ -1,5 +1,7 @@
 <?php
 /**
+ * List Table for the tasks in the Planning Checklist.
+ *
  * @package WordCamp\Mentors
  */
 
@@ -13,7 +15,8 @@ if ( ! class_exists( 'WP_List_Table' ) ) {
 }
 
 /**
- * Class List_Table
+ * Class List_Table.
+ *
  * @package WordCamp\Mentors\Tasks
  */
 class List_Table extends \WP_List_Table {
@@ -49,7 +52,7 @@ class List_Table extends \WP_List_Table {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param string $which
+	 * @param string $which Location of the extra tablenav.
 	 */
 	public function extra_tablenav( $which = 'top' ) {
 		if ( 'top' === $which ) : ?>
@@ -125,14 +128,14 @@ class List_Table extends \WP_List_Table {
 		$columns = $this->get_columns();
 		$hidden = array();
 		$sortable = array();
-		$this->_column_headers = array($columns, $hidden, $sortable);
+		$this->_column_headers = array( $columns, $hidden, $sortable );
 
 		if ( $this->js ) {
-			// For the JS template, only one row is needed
+			// For the JS template, only one row is needed.
 			$this->items = array(
 				(object) array(
 					'ID' => 'data.id',
-				)
+				),
 			);
 		}
 
@@ -175,11 +178,11 @@ class List_Table extends \WP_List_Table {
 	}
 
 	/**
-	 * Render the Task column
+	 * Render the Task column.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param $task
+	 * @param \WP_Post $task The current task.
 	 */
 	public function column_task( $task ) {
 		if ( $this->js ) {
@@ -194,7 +197,7 @@ class List_Table extends \WP_List_Table {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param $task
+	 * @param \WP_Post $task The current task.
 	 */
 	public function column_task_category( $task ) {
 		$terms = get_the_terms( $task->ID, Mentors\PREFIX . '_task_category' );
@@ -229,7 +232,7 @@ class List_Table extends \WP_List_Table {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param $task
+	 * @param \WP_Post $task The current task.
 	 */
 	public function column_status( $task ) {
 		$task_stati = get_task_statuses();
@@ -241,8 +244,10 @@ class List_Table extends \WP_List_Table {
 			<# if ( 'object' !== typeof data.stati[ data.status ] ) { #>
 				<option value="{{ data.status }}" selected disabled>{{ data.status }}</option>
 			<# } #>
-			<# _.each( data.stati, function( status, slug ) { #>
-				<option value="{{ slug }}" <# if ( slug === data.status ) { print( 'selected' ) } #> >{{ status.label }}</option>
+			<# _.each( data.stati, function( status, slug ) {
+					var selected = ( slug === data.status ) ? 'selected' : '';
+					#>
+				<option value="{{ slug }}" {{ selected }}>{{ status.label }}</option>
 			<# }); #>
 		<?php
 		} else {
@@ -251,7 +256,7 @@ class List_Table extends \WP_List_Table {
 
 			if ( is_null( $status ) ) {
 				echo '<option value="" selected="selected" disabled="disabled"></option>';
-			} else if ( ! isset( $task_stati[ $status_slug ] ) ) {
+			} elseif ( ! isset( $task_stati[ $status_slug ] ) ) {
 				echo '<option value="' . esc_attr( $status_slug ) . '" selected="selected" disabled="disabled">' . esc_html( $status->label ) . '</option>';
 			}
 
@@ -268,7 +273,7 @@ class List_Table extends \WP_List_Table {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param $task
+	 * @param \WP_Post $task The current task.
 	 */
 	public function column_modified( $task ) {
 		if ( $this->js ) {
@@ -289,10 +294,10 @@ class List_Table extends \WP_List_Table {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param object $item
+	 * @param \WP_Post $task The current task.
 	 */
-	public function single_row( $item ) {
-		$id = 'id="' . Mentors\PREFIX . '-task-' . $item->ID . '"';
+	public function single_row( $task ) {
+		$id = 'id="' . Mentors\PREFIX . '-task-' . $task->ID . '"';
 
 		$classes = array(
 			Mentors\PREFIX . '-task',
@@ -303,7 +308,7 @@ class List_Table extends \WP_List_Table {
 		$class = 'class="' . implode( ' ', $classes ) . '"';
 
 		echo "<tr $id $class>";
-		$this->single_row_columns( $item );
+		$this->single_row_columns( $task );
 		echo '</tr>';
 	}
 }

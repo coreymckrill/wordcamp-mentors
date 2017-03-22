@@ -1,5 +1,7 @@
 <?php
 /**
+ * Template for the Planning Checklist page.
+ *
  * @package WordCamp\Mentors
  */
 
@@ -8,7 +10,7 @@ defined( 'WPINC' ) or die();
 
 use WordCamp\Mentors\Tasks;
 
-/** @var Tasks\List_Table $list_table */
+/* @var Tasks\List_Table $list_table */
 
 $list_table->prepare_items();
 ?>

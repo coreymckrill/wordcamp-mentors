@@ -1,5 +1,7 @@
 <?php
 /**
+ * Data for the Planning Checklist.
+ *
  * @package WordCamp\Mentors
  */
 
@@ -537,7 +539,7 @@ function get_task_data() {
  * @return void
  */
 function handle_tasks_reset() {
-	// Base redirect URL
+	// The base redirect URL.
 	$redirect_url = add_query_arg( array(
 		'page' => Mentors\PREFIX . '-planning-checklist',
 	), admin_url( 'index.php' ) );
@@ -570,7 +572,7 @@ add_action( 'admin_post_' . Mentors\PREFIX . '-tasks-reset', __NAMESPACE__ . '\h
 function _reset_tasks() {
 	$results = array();
 
-	// Delete existing tasks
+	// Delete existing tasks.
 	$existing_tasks = get_posts( array(
 		'post_type'      => Mentors\PREFIX . '_task',
 		'post_status'    => array_keys( get_task_statuses() ),
@@ -581,7 +583,7 @@ function _reset_tasks() {
 		$results[] = wp_delete_post( $existing_task->ID, true );
 	}
 
-	// Delete existing categories
+	// Delete existing categories.
 	$existing_categories = get_terms( array(
 		'taxonomy'   => Mentors\PREFIX . '_task_category',
 		'hide_empty' => false,
@@ -591,14 +593,14 @@ function _reset_tasks() {
 		$results[] = wp_delete_term( $existing_category->term_id, Mentors\PREFIX . '_task_category' );
 	}
 
-	// Create new categories
+	// Create new categories.
 	$new_category_data = get_task_category_data();
 
 	foreach ( $new_category_data as $slug => $label ) {
 		$results[] = wp_insert_term( $slug, Mentors\PREFIX . '_task_category' );
 	}
 
-	// Create new tasks
+	// Create new tasks.
 	$new_task_data = get_task_data();
 	$order = 0;
 
@@ -633,8 +635,8 @@ function _reset_tasks() {
  *
  * @since 1.0.0
  *
- * @param \WP_REST_Response $response
- * @param \WP_Post $post
+ * @param \WP_REST_Response $response The response object to be sent.
+ * @param \WP_Post          $post     The post in the response object.
  *
  * @return \WP_REST_Response
  */
@@ -652,7 +654,7 @@ function localize_task( $response, $post ) {
 	$response->data['modified'] = array(
 		'raw'      => $raw_modified,
 		'relative' => sprintf(
-		/* translators: Time since an event has occurred. */
+			/* translators: Time since an event has occurred. */
 			esc_html__( '%s ago', 'wordcamp-mentors' ),
 			human_time_diff( strtotime( $raw_modified ), current_time( 'timestamp' ) )
 		),
@@ -668,8 +670,8 @@ add_filter( 'rest_prepare_' . Mentors\PREFIX . '_task', __NAMESPACE__ . '\locali
  *
  * @since 1.0.0
  *
- * @param \WP_REST_Response$response
- * @param $item
+ * @param \WP_REST_Response $response The response object to be sent.
+ * @param \WP_Term          $item     The term in the response object.
  *
  * @return \WP_REST_Response
  */

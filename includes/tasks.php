@@ -1,5 +1,7 @@
 <?php
 /**
+ * Set up functionality for the Planning Checklist tool.
+ *
  * @package WordCamp\Mentors
  */
 
@@ -16,7 +18,7 @@ function init() {
 	register_tax();
 	register_status();
 
-	// Admin notices
+	// Admin notices.
 	if ( isset( $_GET['page'] ) && Mentors\PREFIX . '-planning-checklist' === $_GET['page'] ) {
 		add_action( 'admin_notices', __NAMESPACE__ . '\admin_notices' );
 	}
@@ -64,7 +66,7 @@ function register_cpt() {
 		'label'                 => __( 'Task', 'wordcamp-mentors' ),
 		'description'           => __( 'Planning Checklist tasks', 'wordcamp-mentors' ),
 		'labels'                => $labels,
-		'supports'              => array( 'title', 'page-attributes', ),
+		'supports'              => array( 'title', 'page-attributes' ),
 		'taxonomies'            => array( Mentors\PREFIX . '_task_category' ),
 		'hierarchical'          => false,
 		'public'                => false,
@@ -93,8 +95,8 @@ function register_cpt() {
  *
  * @since 1.0.0
  *
- * @param array  $caps
- * @param string $cap
+ * @param array  $caps The user's actual capabilities.
+ * @param string $cap  Capability name.
  *
  * @return array
  */
@@ -181,9 +183,9 @@ function register_status() {
 				'label_count' => array(
 					sprintf( '%s <span class="count">(%s)</span>', $label, '%s' ),
 					sprintf( '%s <span class="count">(%s)</span>', $label, '%s' ),
-					'wordcamp-mentors'
+					'wordcamp-mentors',
 				),
-				// Custom parameter to flag its use with the Task CPT
+				// Custom parameter to flag its use with the Task CPT.
 				Mentors\PREFIX . '_task' => true,
 			)
 		);
@@ -198,7 +200,12 @@ function register_status() {
  * @return array
  */
 function get_task_statuses() {
-	return get_post_stati( array( Mentors\PREFIX . '_task' => true ), false );
+	return get_post_stati(
+		array(
+			Mentors\PREFIX . '_task' => true,
+		),
+		false
+	);
 }
 
 /**
@@ -238,6 +245,8 @@ function render_tasks_page() {
  * Enqueue JavaScript and CSS assets for the Tasks Dashboard page.
  *
  * @since 1.0.0
+ *
+ * @param string $hook_suffix The current admin page.
  *
  * @return void
  */
@@ -293,14 +302,16 @@ add_action( 'admin_enqueue_scripts', __NAMESPACE__ . '\enqueue_page_assets', 20 
  * @return void
  */
 function print_templates() {
-	$js_list_table = new List_Table( array( 'js' => true ) );
+	$js_list_table = new List_Table( array(
+		'js' => true,
+	) );
 	$js_list_table->prepare_items();
 	?>
 	<script id="tmpl-<?php echo esc_attr( Mentors\PREFIX ); ?>-task" type="text/template">
 		<?php $js_list_table->single_row_columns( $js_list_table->items[0] ); ?>
 	</script>
 <?php
-	// Initial data
+	// Initial data.
 	$request_url = add_query_arg( array(
 		'per_page' => 300,
 		'orderby'  => 'menu_order',

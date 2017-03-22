@@ -1,5 +1,7 @@
 <?php
 /**
+ * REST Controller for Tasks.
+ *
  * @package WordCamp\Mentors
  */
 
@@ -9,7 +11,8 @@ defined( 'WPINC' ) or die();
 use WordCamp\Mentors;
 
 /**
- * Class Controller
+ * Class Controller.
+ *
  * @package WordCamp\Mentors\Tasks
  */
 class Controller extends \WP_REST_Posts_Controller {
@@ -25,15 +28,15 @@ class Controller extends \WP_REST_Posts_Controller {
 	public function get_item_schema() {
 		$schema = parent::get_item_schema();
 
-		// Show the custom statuses in REST response
+		// Show the custom statuses in the REST response.
 		if ( false === array_search( 'view', $schema['properties']['status']['context'] ) ) {
 			$schema['properties']['status']['context'][] = 'view';
 		}
 
-		// Specify custom statuses
+		// Specify custom statuses.
 		$schema['properties']['status']['enum'] = array_keys( get_task_statuses() );
 
-		// Add a localized, relative date string
+		// Add a localized, relative date string.
 		$schema['properties']['modified']['type'] = 'object';
 		$schema['properties']['modified']['properties'] = array(
 			'raw' => array(
@@ -44,7 +47,7 @@ class Controller extends \WP_REST_Posts_Controller {
 				'readonly'    => true,
 			),
 			'relative' => array(
-				'description' => __( "The relative time since the object was last modified." ),
+				'description' => __( 'The relative time since the object was last modified.' ),
 				'type'        => 'string',
 				'format'      => 'date-time',
 				'context'     => array( 'view', 'edit' ),
@@ -67,16 +70,18 @@ class Controller extends \WP_REST_Posts_Controller {
 	public function get_collection_params() {
 		$query_params = parent::get_collection_params();
 
-		// Allow posts with our custom statuses
+		// Allow posts with our custom statuses.
 		$query_params['status']['items']['enum'] = array_merge(
-			array_keys( get_post_stati( array( 'internal' => false ) ) ),
+			array_keys( get_post_stati( array(
+				'internal' => false,
+			) ) ),
 			array_keys( get_task_statuses() ),
 			array( 'any' )
 		);
 
 		$query_params['status']['default'] = $query_params['status']['items']['enum'];
 
-		// Allow a higher maximum for query results
+		// Allow a higher maximum for query results.
 		$query_params['per_page']['maximum'] = 300;
 
 		return $query_params;
@@ -88,9 +93,9 @@ class Controller extends \WP_REST_Posts_Controller {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param  string|array    $statuses  One or more post statuses.
+	 * @param  string|array     $statuses  One or more post statuses.
 	 * @param  \WP_REST_Request $request   Full details about the request.
-	 * @param  string          $parameter Additional parameter to pass to validation.
+	 * @param  string           $parameter Additional parameter to pass to validation.
 	 * @return array|\WP_Error A list of valid statuses, otherwise WP_Error object.
 	 */
 	public function sanitize_post_statuses( $statuses, $request, $parameter ) {
@@ -111,7 +116,13 @@ class Controller extends \WP_REST_Posts_Controller {
 					return $result;
 				}
 			} else {
-				return new \WP_Error( 'rest_forbidden_status', __( 'Status is forbidden.' ), array( 'status' => rest_authorization_required_code() ) );
+				return new \WP_Error(
+					'rest_forbidden_status',
+					__( 'Status is forbidden.' ),
+					array(
+						'status' => rest_authorization_required_code(),
+					)
+				);
 			}
 		}
 
