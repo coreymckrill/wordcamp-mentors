@@ -6,7 +6,7 @@
  */
 
 namespace WordCamp\Mentors\Tasks;
-defined( 'WPINC' ) or die();
+defined( 'WPINC' ) || die();
 
 use WordCamp\Mentors;
 
@@ -359,20 +359,20 @@ function admin_notices() {
 
 	switch ( $_GET['status'] ) {
 		case 'invalid-nonce' :
-			$message = esc_html__( 'Invalid nonce.', 'wordcamp-mentors' );
+			$message = __( 'Invalid nonce.', 'wordcamp-mentors' );
 			break;
 
 		case 'insufficient-permissions' :
-			$message = esc_html__( 'Insufficient permissions to reset task data.', 'wordcamp-mentors' );
+			$message = __( 'Insufficient permissions to reset task data.', 'wordcamp-mentors' );
 			break;
 
 		case 'reset-errors' :
-			$message = esc_html__( 'Checklist data reset with errors.', 'wordcamp-mentors' );
+			$message = __( 'Checklist data reset with errors.', 'wordcamp-mentors' );
 			break;
 
 		case 'reset-success' :
 			$type = 'success';
-			$message = esc_html__( 'Checklist data successfully reset.', 'wordcamp-mentors' );
+			$message = __( 'Checklist data successfully reset.', 'wordcamp-mentors' );
 			break;
 	}
 

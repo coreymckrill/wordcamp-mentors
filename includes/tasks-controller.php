@@ -6,9 +6,7 @@
  */
 
 namespace WordCamp\Mentors\Tasks;
-defined( 'WPINC' ) or die();
-
-use WordCamp\Mentors;
+defined( 'WPINC' ) || die();
 
 /**
  * Class Controller.
@@ -29,7 +27,7 @@ class Controller extends \WP_REST_Posts_Controller {
 		$schema = parent::get_item_schema();
 
 		// Show the custom statuses in the REST response.
-		if ( false === array_search( 'view', $schema['properties']['status']['context'] ) ) {
+		if ( false === array_search( 'view', $schema['properties']['status']['context'], true ) ) {
 			$schema['properties']['status']['context'][] = 'view';
 		}
 
@@ -104,7 +102,7 @@ class Controller extends \WP_REST_Posts_Controller {
 		$task_statuses = array_keys( get_task_statuses() );
 
 		foreach ( $statuses as $status ) {
-			if ( in_array( $status, $task_statuses ) ) {
+			if ( in_array( $status, $task_statuses, true ) ) {
 				continue;
 			}
 

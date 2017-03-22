@@ -6,7 +6,7 @@
  */
 
 namespace WordCamp\Mentors\Tasks;
-defined( 'WPINC' ) or die();
+defined( 'WPINC' ) || die();
 
 use WordCamp\Mentors;
 
@@ -547,7 +547,7 @@ function handle_tasks_reset() {
 	if ( ! isset( $_POST[ Mentors\PREFIX . '-tasks-reset-nonce' ] ) ||
 	     ! wp_verify_nonce( $_POST[ Mentors\PREFIX . '-tasks-reset-nonce' ], Mentors\PREFIX . '-tasks-reset' ) ) {
 		$status_code = 'invalid-nonce';
-	} else if ( ! current_user_can( Mentors\MENTOR_CAP ) ) {
+	} elseif ( ! current_user_can( Mentors\MENTOR_CAP ) ) {
 		$status_code = 'insufficient-permissions';
 	} else {
 		$status_code = _reset_tasks();

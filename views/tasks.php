@@ -6,7 +6,7 @@
  */
 
 namespace WordCamp\Mentors\Tasks\Dashboard;
-defined( 'WPINC' ) or die();
+defined( 'WPINC' ) || die();
 
 use WordCamp\Mentors\Tasks;
 

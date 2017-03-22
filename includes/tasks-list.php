@@ -6,7 +6,7 @@
  */
 
 namespace WordCamp\Mentors\Tasks;
-defined( 'WPINC' ) or die();
+defined( 'WPINC' ) || die();
 
 use WordCamp\Mentors;
 
@@ -217,7 +217,7 @@ class List_Table extends \WP_List_Table {
 		} else {
 			if ( $terms && ! is_wp_error( $terms ) ) {
 				foreach ( $terms as $term ) {
-					echo '<li class="category-' . esc_attr( $term->slug ) . '">' . $term->name . "</li>\n";
+					echo '<li class="category-' . esc_attr( $term->slug ) . '">' . esc_html( $term->name ) . "</li>\n";
 				}
 			} else {
 				echo '<li class="category-none">' . esc_html__( 'No category' , 'wordcamp-mentors' ) . "</li>\n";
@@ -284,7 +284,7 @@ class List_Table extends \WP_List_Table {
 			printf(
 				/* translators: Time since an event has occurred. */
 				esc_html__( '% ago', 'wordcamp-mentors' ),
-				human_time_diff( strtotime( $task->post_modified ), current_time( 'timestamp' ) )
+				esc_html( human_time_diff( strtotime( $task->post_modified ), current_time( 'timestamp' ) ) )
 			);
 		}
 	}
@@ -297,7 +297,7 @@ class List_Table extends \WP_List_Table {
 	 * @param \WP_Post $task The current task.
 	 */
 	public function single_row( $task ) {
-		$id = 'id="' . Mentors\PREFIX . '-task-' . $task->ID . '"';
+		$id = 'id="' . Mentors\PREFIX . '-task-' . esc_attr( $task->ID ) . '"';
 
 		$classes = array(
 			Mentors\PREFIX . '-task',
