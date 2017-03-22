@@ -50,8 +50,7 @@
 		 * @returns {wordcamp.mentors.views.List}
 		 */
 		initialize: function() {
-			var view = this,
-				origContent = this.$el.html();
+			var view = this;
 
 			this.setLastActive();
 
@@ -66,8 +65,6 @@
 				view.ticker = setInterval( function() {
 					view.trigger( 'tick:' + view.tick );
 				}, view.tick );
-			} else {
-				view.$el.html( origContent );
 			}
 
 			this.listeners();
