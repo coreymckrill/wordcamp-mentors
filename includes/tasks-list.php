@@ -297,7 +297,7 @@ class List_Table extends \WP_List_Table {
 	 * @param \WP_Post $task The current task.
 	 */
 	public function single_row( $task ) {
-		$id = 'id="' . Mentors\PREFIX . '-task-' . esc_attr( $task->ID ) . '"';
+		$id = Mentors\PREFIX . '-task-' . $task->ID;
 
 		$classes = array(
 			Mentors\PREFIX . '-task',
@@ -305,9 +305,13 @@ class List_Table extends \WP_List_Table {
 		if ( ! $this->js ) {
 			$classes[] = 'hide-if-js';
 		}
-		$class = 'class="' . implode( ' ', $classes ) . '"';
+		$class = implode( ' ', $classes );
 
-		echo "<tr $id $class>";
+		printf(
+			'<tr id="%s" class="%s">',
+			esc_attr( $id ),
+			esc_attr( $class )
+		);
 		$this->single_row_columns( $task );
 		echo '</tr>';
 	}
