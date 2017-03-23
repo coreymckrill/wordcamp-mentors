@@ -640,6 +640,10 @@ function _reset_tasks() {
 /**
  * Insert translated strings into REST response for tasks.
  *
+ * The strings are translated here instead of when the task posts are inserted so that
+ * they remain translatable if mentors and/or organizers who are viewing the Planning Checklist
+ * have a different locale than the one used when the task data was set up.
+ *
  * @since 1.0.0
  *
  * @param \WP_REST_Response $response The response object to be sent.
@@ -674,6 +678,10 @@ add_filter( 'rest_prepare_' . Mentors\PREFIX . '_task', __NAMESPACE__ . '\locali
 
 /**
  * Insert translated strings into REST response for task categories.
+ *
+ * The strings are translated here instead of when the task posts are inserted so that
+ * they remain translatable if mentors and/or organizers who are viewing the Planning Checklist
+ * have a different locale than the one used when the task data was set up.
  *
  * @since 1.0.0
  *
