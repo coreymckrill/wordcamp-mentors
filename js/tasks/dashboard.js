@@ -384,7 +384,7 @@
 		},
 
 		/**
-		 * Update this task's model when the user chooses a new status in the UI.
+		 * Save a new status value.
 		 *
 		 * @param {event} event
 		 *
@@ -393,8 +393,25 @@
 		updateStatus: function( event ) {
 			var value = $( event.target ).val();
 
-			this.model.set( 'status', value );
-			this.model.save();
+			this.updateTask( {
+				status: value
+			});
+
+			return this;
+		},
+
+		/**
+		 * Save new task attribute values to the server.
+		 *
+		 * @param {object} attributes
+		 *
+		 * @returns {wordcamp.mentors.views.Task}
+		 */
+		updateTask: function( attributes ) {
+			this.model.save( attributes, {
+				patch: true,
+				wait:  true
+			});
 
 			return this;
 		}
