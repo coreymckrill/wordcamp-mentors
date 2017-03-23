@@ -138,7 +138,8 @@
 		 *
 		 * @private
 		 *
-		 * @param filter object
+		 * @param {object} filter
+		 *
 		 * @returns array
 		 */
 		_getVisibleTasks: function( filter ) {
@@ -160,8 +161,8 @@
 		/**
 		 * Update the visibility of tasks in the list based on filter parameters.
 		 *
-		 * @param filter object Required parameters to determine which tasks should be visible.
-		 * @param data   object Optional parameters to pass to the event trigger.
+		 * @param {object} filter Required parameters to determine which tasks should be visible.
+		 * @param {object} data   Optional parameters to pass to the event trigger.
 		 * @returns {wordcamp.mentors.views.List}
 		 */
 		updateVisibleTasks: function( filter, data ) {
@@ -257,7 +258,9 @@
 		 *
 		 * @private
 		 *
-		 * @param model object
+		 * @param {wp.api.models.Wcm_task} model
+		 *
+		 * @returns {object}
 		 */
 		_compileData: function( model ) {
 			return $.extend( {}, model.attributes, {
@@ -269,7 +272,8 @@
 		/**
 		 * Initialize a task view.
 		 *
-		 * @param options
+		 * @param {object} options
+		 *
 		 * @returns {wordcamp.mentors.views.Task}
 		 */
 		initialize: function( options ) {
@@ -286,7 +290,8 @@
 		/**
 		 * Render a task.
 		 *
-		 * @param data
+		 * @param {object} data
+		 *
 		 * @returns {wordcamp.mentors.views.Task}
 		 */
 		render: function( data ) {
@@ -313,7 +318,7 @@
 		 *
 		 * @param {string} action
 		 * @param {object} options
-		 * 
+		 *
 		 * @returns {wordcamp.mentors.views.Task}
 		 */
 		changeVisibility: function( action, options ) {
@@ -365,7 +370,7 @@
 		/**
 		 * Re-render this task when the modified timestamp changes.
 		 *
-		 * @param model
+		 * @param {wp.api.models.Wcm_task} model
 		 */
 		changeModified: function( model ) {
 			this.render( this._compileData( model ) );
@@ -381,7 +386,8 @@
 		/**
 		 * Update this task's model when the user chooses a new status in the UI.
 		 *
-		 * @param event
+		 * @param {event} event
+		 *
 		 * @returns {wordcamp.mentors.views.Task}
 		 */
 		updateStatus: function( event ) {
@@ -401,12 +407,16 @@
 		/**
 		 * Initialize the filter view.
 		 *
-		 * @param options
+		 * @param {object} options
+		 *
+		 * @returns {wordcamp.mentors.views.Filter}
 		 */
 		initialize: function( options ) {
 			this.list = options.list;
 
 			this.listeners();
+
+			return this;
 		},
 
 		/**
@@ -432,8 +442,10 @@
 		/**
 		 * Gather the parameters set for the list filter and pass them via event trigger.
 		 *
-		 * @param event
-		 * @param data
+		 * @param {event}  event
+		 * @param {object} data
+		 *
+		 * @returns {wordcamp.mentors.views.Filter}
 		 */
 		setFilter: function( event, data ) {
 			event.preventDefault();
@@ -456,6 +468,8 @@
 			});
 
 			this.trigger( 'filter:tasks', filter, data );
+
+			return this;
 		}
 	});
 
