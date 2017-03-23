@@ -323,12 +323,12 @@
 		 */
 		changeVisibility: function( action, options ) {
 			options = _.defaults( options || {}, {
-				skipHighLight: false
+				skipHighlight: false
 			} );
 
-			var duration = ( options.skipHighLight ) ? 0 : 500;
+			var duration = ( options.skipHighlight ) ? 0 : 500;
 
-			if ( false === options.skipHighLight ) {
+			if ( false === options.skipHighlight ) {
 				this.$el.addClass( prefix + '-highlight' );
 			}
 
