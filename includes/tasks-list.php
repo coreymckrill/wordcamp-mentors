@@ -67,7 +67,7 @@ class List_Table extends \WP_List_Table {
 			<form id="tasks-filter">
 				<?php $this->task_category_dropdown(); ?>
 				<?php $this->status_dropdown(); ?>
-				<?php submit_button( __( 'Filter', 'wordcamp-mentors' ), 'secondary', 'submit', false ); ?>
+				<?php submit_button( __( 'Filter', 'wordcamporg' ), 'secondary', 'submit', false ); ?>
 			</form>
 		</div>
 	<?php elseif ( 'bottom' === $which ) : ?>
@@ -76,7 +76,7 @@ class List_Table extends \WP_List_Table {
 				<form id="tasks-reset" method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
 					<input type="hidden" name="action" value="<?php echo esc_attr( Mentors\PREFIX ); ?>-tasks-reset" />
 					<?php wp_nonce_field( Mentors\PREFIX . '-tasks-reset', Mentors\PREFIX . '-tasks-reset-nonce' ); ?>
-					<?php submit_button( __( 'Reset Task Data', 'wordcamp-mentors' ), 'delete', 'submit', false ); ?>
+					<?php submit_button( __( 'Reset Task Data', 'wordcamporg' ), 'delete', 'submit', false ); ?>
 				</form>
 			<?php endif; ?>
 		</div>
@@ -97,10 +97,10 @@ class List_Table extends \WP_List_Table {
 
 		$pref = get_user_setting( Mentors\PREFIX . '-' . Mentors\PREFIX . '_task_category', 'any' );
 		?>
-		<label for="filter-by-task-category" class="screen-reader-text"><?php esc_html_e( 'Filter by task category', 'wordcamp-mentors' ); ?></label>
+		<label for="filter-by-task-category" class="screen-reader-text"><?php esc_html_e( 'Filter by task category', 'wordcamporg' ); ?></label>
 		<select id="filter-by-task-category" data-attribute="<?php echo esc_attr( Mentors\PREFIX ); ?>_task_category">
 			<option value="any" <?php selected( 'any', $pref ); ?>>
-				<?php esc_html_e( 'All task categories', 'wordcamp-mentors' ); ?>
+				<?php esc_html_e( 'All task categories', 'wordcamporg' ); ?>
 			</option>
 			<?php foreach ( $task_categories as $cat ) : ?>
 				<option value="<?php echo esc_attr( $cat->term_id ); ?>" <?php selected( $cat->term_id, $pref ); ?>>
@@ -120,10 +120,10 @@ class List_Table extends \WP_List_Table {
 		$task_statuses = get_task_statuses();
 		$pref = get_user_setting( Mentors\PREFIX . '-status', Mentors\PREFIX . '_task_pending' );
 		?>
-		<label for="filter-by-task-status" class="screen-reader-text"><?php esc_html_e( 'Filter by status', 'wordcamp-mentors' ); ?></label>
+		<label for="filter-by-task-status" class="screen-reader-text"><?php esc_html_e( 'Filter by status', 'wordcamporg' ); ?></label>
 		<select id="filter-by-task-status" data-attribute="status">
 			<option value="any" <?php selected( 'any', $pref ); ?>>
-				<?php esc_html_e( 'All statuses', 'wordcamp-mentors' ); ?>
+				<?php esc_html_e( 'All statuses', 'wordcamporg' ); ?>
 			</option>
 			<?php foreach ( $task_statuses as $status ) : ?>
 				<option value="<?php echo esc_attr( $status->name ); ?>" <?php selected( $status->name, $pref ); ?>>
@@ -172,10 +172,10 @@ class List_Table extends \WP_List_Table {
 	public function get_columns() {
 		$columns = array();
 
-		$columns['task']          = esc_html__( 'Task', 'wordcamp-mentors' );
+		$columns['task']          = esc_html__( 'Task', 'wordcamporg' );
 		$columns['task_category'] = get_taxonomy( Mentors\PREFIX . '_task_category' )->labels->singular_name;
-		$columns['status']        = esc_html__( 'Status', 'wordcamp-mentors' );
-		$columns['modified']      = esc_html__( 'Modified', 'wordcamp-mentors' );
+		$columns['status']        = esc_html__( 'Status', 'wordcamporg' );
+		$columns['modified']      = esc_html__( 'Modified', 'wordcamporg' );
 
 		return $columns;
 	}
@@ -204,7 +204,7 @@ class List_Table extends \WP_List_Table {
 						<li class="category-{{ category.get( 'slug' ) }}">{{ category.get( 'name' ) }}</li>
 					<# }); #>
 				<# } else { #>
-					<li class="category-none"><?php esc_html_e( 'No category' , 'wordcamp-mentors' ) ?></li>
+					<li class="category-none"><?php esc_html_e( 'No category' , 'wordcamporg' ) ?></li>
 				<# } #>
 			</ul>
 		<?php endif;

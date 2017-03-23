@@ -14,7 +14,7 @@ use WordCamp\Mentors\Tasks;
 
 ?>
 <div class="wrap">
-	<h1><?php esc_html_e( 'Planning Checklist', 'wordcamp-mentors' ); ?></h1>
+	<h1><?php esc_html_e( 'Planning Checklist', 'wordcamporg' ); ?></h1>
 
 	<?php $list_table->display(); ?>
 </div>

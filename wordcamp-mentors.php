@@ -5,20 +5,17 @@
  * Description:     Tools for mentors and organizers of WordCamps.
  * Author:          WordCamp.org
  * Author URI:      https://wordcamp.org
- * Text Domain:     wordcamp-mentors
- * Domain Path:     /languages
  * Version:         1.0.0
  *
  * @package         WordCamp\Mentors
  */
 
 namespace WordCamp\Mentors;
-defined( 'WPINC' ) or die();
+defined( 'WPINC' ) || die();
 
-const PLUGIN_VERSION = '1.0.0';
-const JS_VERSION     = '20170315';
-const CSS_VERSION    = '20170315';
-const DATA_VERSION   = '20170315';
+const JS_VERSION     = '20170323';
+const CSS_VERSION    = '20170323';
+const DATA_VERSION   = '20170323';
 
 define( __NAMESPACE__ . '\PLUGIN_DIR', \plugin_dir_path( __FILE__ ) );
 define( __NAMESPACE__ . '\PLUGIN_URL', \plugins_url( '/', __FILE__ ) );
@@ -97,16 +94,3 @@ function load_files() {
 }
 
 add_action( 'plugins_loaded', __NAMESPACE__ . '\load_files' );
-
-/**
- * Load the translation file for the current locale.
- *
- * @since 1.0.0
- *
- * @return void
- */
-function localize() {
-	load_plugin_textdomain( 'wordcamp-mentors' );
-}
-
-add_action( 'plugins_loaded', __NAMESPACE__ . '\localize' );

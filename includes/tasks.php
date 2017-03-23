@@ -33,38 +33,38 @@ add_action( 'init', __NAMESPACE__ . '\init', 0 );
  */
 function register_cpt() {
 	$labels = array(
-		'name'                  => _x( 'Tasks', 'Post Type General Name', 'wordcamp-mentors' ),
-		'singular_name'         => _x( 'Task', 'Post Type Singular Name', 'wordcamp-mentors' ),
-		'menu_name'             => __( 'Tasks', 'wordcamp-mentors' ),
-		'name_admin_bar'        => __( 'Tasks', 'wordcamp-mentors' ),
-		'archives'              => __( 'Task Archives', 'wordcamp-mentors' ),
-		'attributes'            => __( 'Task Attributes', 'wordcamp-mentors' ),
-		'parent_item_colon'     => __( 'Parent Task:', 'wordcamp-mentors' ),
-		'all_items'             => __( 'All Tasks', 'wordcamp-mentors' ),
-		'add_new_item'          => __( 'Add New Task', 'wordcamp-mentors' ),
-		'add_new'               => __( 'Add New', 'wordcamp-mentors' ),
-		'new_item'              => __( 'New Task', 'wordcamp-mentors' ),
-		'edit_item'             => __( 'Edit Task', 'wordcamp-mentors' ),
-		'update_item'           => __( 'Update Task', 'wordcamp-mentors' ),
-		'view_item'             => __( 'View Task', 'wordcamp-mentors' ),
-		'view_items'            => __( 'View Tasks', 'wordcamp-mentors' ),
-		'search_items'          => __( 'Search Task', 'wordcamp-mentors' ),
-		'not_found'             => __( 'Not found', 'wordcamp-mentors' ),
-		'not_found_in_trash'    => __( 'Not found in Trash', 'wordcamp-mentors' ),
-		'featured_image'        => __( 'Featured Image', 'wordcamp-mentors' ),
-		'set_featured_image'    => __( 'Set featured image', 'wordcamp-mentors' ),
-		'remove_featured_image' => __( 'Remove featured image', 'wordcamp-mentors' ),
-		'use_featured_image'    => __( 'Use as featured image', 'wordcamp-mentors' ),
-		'insert_into_item'      => __( 'Insert into task', 'wordcamp-mentors' ),
-		'uploaded_to_this_item' => __( 'Uploaded to this task', 'wordcamp-mentors' ),
-		'items_list'            => __( 'Tasks list', 'wordcamp-mentors' ),
-		'items_list_navigation' => __( 'Tasks list navigation', 'wordcamp-mentors' ),
-		'filter_items_list'     => __( 'Filter tasks list', 'wordcamp-mentors' ),
+		'name'                  => _x( 'Tasks', 'Post Type General Name', 'wordcamporg' ),
+		'singular_name'         => _x( 'Task', 'Post Type Singular Name', 'wordcamporg' ),
+		'menu_name'             => __( 'Tasks', 'wordcamporg' ),
+		'name_admin_bar'        => __( 'Tasks', 'wordcamporg' ),
+		'archives'              => __( 'Task Archives', 'wordcamporg' ),
+		'attributes'            => __( 'Task Attributes', 'wordcamporg' ),
+		'parent_item_colon'     => __( 'Parent Task:', 'wordcamporg' ),
+		'all_items'             => __( 'All Tasks', 'wordcamporg' ),
+		'add_new_item'          => __( 'Add New Task', 'wordcamporg' ),
+		'add_new'               => __( 'Add New', 'wordcamporg' ),
+		'new_item'              => __( 'New Task', 'wordcamporg' ),
+		'edit_item'             => __( 'Edit Task', 'wordcamporg' ),
+		'update_item'           => __( 'Update Task', 'wordcamporg' ),
+		'view_item'             => __( 'View Task', 'wordcamporg' ),
+		'view_items'            => __( 'View Tasks', 'wordcamporg' ),
+		'search_items'          => __( 'Search Task', 'wordcamporg' ),
+		'not_found'             => __( 'Not found', 'wordcamporg' ),
+		'not_found_in_trash'    => __( 'Not found in Trash', 'wordcamporg' ),
+		'featured_image'        => __( 'Featured Image', 'wordcamporg' ),
+		'set_featured_image'    => __( 'Set featured image', 'wordcamporg' ),
+		'remove_featured_image' => __( 'Remove featured image', 'wordcamporg' ),
+		'use_featured_image'    => __( 'Use as featured image', 'wordcamporg' ),
+		'insert_into_item'      => __( 'Insert into task', 'wordcamporg' ),
+		'uploaded_to_this_item' => __( 'Uploaded to this task', 'wordcamporg' ),
+		'items_list'            => __( 'Tasks list', 'wordcamporg' ),
+		'items_list_navigation' => __( 'Tasks list navigation', 'wordcamporg' ),
+		'filter_items_list'     => __( 'Filter tasks list', 'wordcamporg' ),
 	);
 
 	$args = array(
-		'label'                 => __( 'Task', 'wordcamp-mentors' ),
-		'description'           => __( 'Planning Checklist tasks', 'wordcamp-mentors' ),
+		'label'                 => __( 'Task', 'wordcamporg' ),
+		'description'           => __( 'Planning Checklist tasks', 'wordcamporg' ),
 		'labels'                => $labels,
 		'supports'              => array( 'title', 'page-attributes' ),
 		'taxonomies'            => array( Mentors\PREFIX . '_task_category' ),
@@ -126,26 +126,26 @@ function map_task_caps( $caps, $cap ) {
  */
 function register_tax() {
 	$labels = array(
-		'name'                       => _x( 'Task Categories', 'Taxonomy General Name', 'wordcamp-mentors' ),
-		'singular_name'              => _x( 'Task Category', 'Taxonomy Singular Name', 'wordcamp-mentors' ),
-		'menu_name'                  => __( 'Category', 'wordcamp-mentors' ),
-		'all_items'                  => __( 'All Categories', 'wordcamp-mentors' ),
-		'parent_item'                => __( 'Parent Category', 'wordcamp-mentors' ),
-		'parent_item_colon'          => __( 'Parent Category:', 'wordcamp-mentors' ),
-		'new_item_name'              => __( 'New Category Name', 'wordcamp-mentors' ),
-		'add_new_item'               => __( 'Add New Category', 'wordcamp-mentors' ),
-		'edit_item'                  => __( 'Edit Category', 'wordcamp-mentors' ),
-		'update_item'                => __( 'Update Category', 'wordcamp-mentors' ),
-		'view_item'                  => __( 'View Category', 'wordcamp-mentors' ),
-		'separate_items_with_commas' => __( 'Separate categories with commas', 'wordcamp-mentors' ),
-		'add_or_remove_items'        => __( 'Add or remove categories', 'wordcamp-mentors' ),
-		'choose_from_most_used'      => __( 'Choose from the most used', 'wordcamp-mentors' ),
-		'popular_items'              => __( 'Popular Categories', 'wordcamp-mentors' ),
-		'search_items'               => __( 'Search Categories', 'wordcamp-mentors' ),
-		'not_found'                  => __( 'Not Found', 'wordcamp-mentors' ),
-		'no_terms'                   => __( 'No categories', 'wordcamp-mentors' ),
-		'items_list'                 => __( 'Categories list', 'wordcamp-mentors' ),
-		'items_list_navigation'      => __( 'Categories list navigation', 'wordcamp-mentors' ),
+		'name'                       => _x( 'Task Categories', 'Taxonomy General Name', 'wordcamporg' ),
+		'singular_name'              => _x( 'Task Category', 'Taxonomy Singular Name', 'wordcamporg' ),
+		'menu_name'                  => __( 'Category', 'wordcamporg' ),
+		'all_items'                  => __( 'All Categories', 'wordcamporg' ),
+		'parent_item'                => __( 'Parent Category', 'wordcamporg' ),
+		'parent_item_colon'          => __( 'Parent Category:', 'wordcamporg' ),
+		'new_item_name'              => __( 'New Category Name', 'wordcamporg' ),
+		'add_new_item'               => __( 'Add New Category', 'wordcamporg' ),
+		'edit_item'                  => __( 'Edit Category', 'wordcamporg' ),
+		'update_item'                => __( 'Update Category', 'wordcamporg' ),
+		'view_item'                  => __( 'View Category', 'wordcamporg' ),
+		'separate_items_with_commas' => __( 'Separate categories with commas', 'wordcamporg' ),
+		'add_or_remove_items'        => __( 'Add or remove categories', 'wordcamporg' ),
+		'choose_from_most_used'      => __( 'Choose from the most used', 'wordcamporg' ),
+		'popular_items'              => __( 'Popular Categories', 'wordcamporg' ),
+		'search_items'               => __( 'Search Categories', 'wordcamporg' ),
+		'not_found'                  => __( 'Not Found', 'wordcamporg' ),
+		'no_terms'                   => __( 'No categories', 'wordcamporg' ),
+		'items_list'                 => __( 'Categories list', 'wordcamporg' ),
+		'items_list_navigation'      => __( 'Categories list navigation', 'wordcamporg' ),
 	);
 
 	$args = array(
@@ -170,9 +170,9 @@ function register_tax() {
  */
 function register_status() {
 	$stati = array(
-		Mentors\PREFIX . '_task_pending'  => esc_html__( 'Pending',  'wordcamp-mentors' ),
-		Mentors\PREFIX . '_task_complete' => esc_html__( 'Complete', 'wordcamp-mentors' ),
-		Mentors\PREFIX . '_task_skipped'  => esc_html__( 'Skipped',  'wordcamp-mentors' ),
+		Mentors\PREFIX . '_task_pending'  => esc_html__( 'Pending',  'wordcamporg' ),
+		Mentors\PREFIX . '_task_complete' => esc_html__( 'Complete', 'wordcamporg' ),
+		Mentors\PREFIX . '_task_skipped'  => esc_html__( 'Skipped',  'wordcamporg' ),
 	);
 
 	foreach ( $stati as $id => $label ) {
@@ -183,7 +183,7 @@ function register_status() {
 				'label_count' => array(
 					sprintf( '%s <span class="count">(%s)</span>', $label, '%s' ),
 					sprintf( '%s <span class="count">(%s)</span>', $label, '%s' ),
-					'wordcamp-mentors',
+					'wordcamporg',
 				),
 				// Custom parameter to flag its use with the Task CPT.
 				Mentors\PREFIX . '_task' => true,
@@ -218,8 +218,8 @@ function get_task_statuses() {
 function add_tasks_page() {
 	\add_submenu_page(
 		'index.php',
-		__( 'Planning Checklist', 'wordcamp-mentors' ),
-		__( 'Planning', 'wordcamp-mentors' ),
+		__( 'Planning Checklist', 'wordcamporg' ),
+		__( 'Planning', 'wordcamporg' ),
 		Mentors\ORGANIZER_CAP,
 		Mentors\PREFIX . '-planning-checklist',
 		__NAMESPACE__ . '\render_tasks_page'
@@ -287,7 +287,7 @@ function enqueue_page_assets( $hook_suffix ) {
 			),
 			'stati'   => get_task_statuses(),
 			'l10n'    => array(
-				'confirmReset' => esc_html__( 'Are you sure you want to reset the task data? This action cannot be undone.', 'wordcamp-mentors' ),
+				'confirmReset' => esc_html__( 'Are you sure you want to reset the task data? This action cannot be undone.', 'wordcamporg' ),
 			),
 		)
 	);
@@ -360,20 +360,20 @@ function admin_notices() {
 
 	switch ( $_GET['status'] ) {
 		case 'invalid-nonce' :
-			$message = __( 'Invalid nonce.', 'wordcamp-mentors' );
+			$message = __( 'Invalid nonce.', 'wordcamporg' );
 			break;
 
 		case 'insufficient-permissions' :
-			$message = __( 'Insufficient permissions to reset task data.', 'wordcamp-mentors' );
+			$message = __( 'Insufficient permissions to reset task data.', 'wordcamporg' );
 			break;
 
 		case 'reset-errors' :
-			$message = __( 'Checklist data reset with errors.', 'wordcamp-mentors' );
+			$message = __( 'Checklist data reset with errors.', 'wordcamporg' );
 			break;
 
 		case 'reset-success' :
 			$type = 'success';
-			$message = __( 'Checklist data successfully reset.', 'wordcamp-mentors' );
+			$message = __( 'Checklist data successfully reset.', 'wordcamporg' );
 			break;
 	}
 
