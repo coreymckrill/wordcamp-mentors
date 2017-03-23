@@ -45,10 +45,17 @@ function get_task_category_data() {
  */
 function get_task_data() {
 	/**
-	 * When adding or editing items, be sure to update the value of DATA_VERSION in
-	 * the wordcamp-mentors.php file with the current YYYYMMDD timestamp.
+	 * When adding or editing items, be sure to update the value of the DATA_VERSION constant in
+	 * the wordcamp-mentors.php file with the current YYYYMMDD timestamp (include hours and
+	 * minutes if necessary).
 	 *
-	 * When adding new task items, unique ID keys can be created here:
+	 * The task data keys are randomized strings instead of sequential and/or contextual because:
+	 * - The order of the tasks could change, in which case having out-of-order sequential numbers
+	 *   could be confusing.
+	 * - The wording, category, or other properties of a task could change, in which case a key
+	 *   string based on these properties could be confusing.
+	 *
+	 * When adding new task items, randomized key strings can be created here:
 	 * http://textmechanic.com/text-tools/randomization-tools/random-string-generator/
 	 */
 	return array(
