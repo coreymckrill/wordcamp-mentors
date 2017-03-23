@@ -138,7 +138,7 @@
 		 *
 		 * @param {object} filter Required parameters to determine which tasks should be visible.
 		 * @param {object} data   Optional parameters to pass to the event trigger.
-		 * 
+		 *
 		 * @returns {wordcamp.mentors.views.List}
 		 */
 		updateVisibleTasks: function( filter, data ) {

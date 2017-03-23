@@ -8,6 +8,8 @@
 namespace WordCamp\Mentors\Tasks;
 defined( 'WPINC' ) || die();
 
+use WordCamp\Mentors;
+
 /**
  * Class Controller.
  *
@@ -69,14 +71,7 @@ class Controller extends \WP_REST_Posts_Controller {
 		$query_params = parent::get_collection_params();
 
 		// Allow posts with our custom statuses.
-		$query_params['status']['items']['enum'] = array_merge(
-			array_keys( get_post_stati( array(
-				'internal' => false,
-			) ) ),
-			array_keys( get_task_statuses() ),
-			array( 'any' )
-		);
-
+		$query_params['status']['items']['enum'] = array_keys( get_task_statuses() );
 		$query_params['status']['default'] = $query_params['status']['items']['enum'];
 
 		// Allow a higher maximum for query results.
@@ -106,9 +101,7 @@ class Controller extends \WP_REST_Posts_Controller {
 				continue;
 			}
 
-			$post_type_obj = get_post_type_object( $this->post_type );
-
-			if ( current_user_can( $post_type_obj->cap->edit_posts ) ) {
+			if ( current_user_can( Mentors\ORGANIZER_CAP ) ) {
 				$result = rest_validate_request_arg( $status, $request, $parameter );
 				if ( is_wp_error( $result ) ) {
 					return $result;
