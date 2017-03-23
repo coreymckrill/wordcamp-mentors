@@ -134,56 +134,44 @@
 		},
 
 		/**
-		 * Get an array of models that should be visible based on filter parameters.
-		 *
-		 * @private
-		 *
-		 * @param {object} filter
-		 *
-		 * @returns array
-		 */
-		_getVisibleTasks: function( filter ) {
-			var visibleTasks = new Backbone.Collection( this.tasks.models );
-
-			if ( 'any' !== filter[ prefix + '_task_category' ] ) {
-				visibleTasks = new Backbone.Collection( _.filter( visibleTasks.models, function( task ) {
-					return _.contains( task.get( prefix + '_task_category' ), parseInt( filter[ prefix + '_task_category' ], 10 ) );
-				}) );
-			}
-
-			if ( 'any' !== filter.status ) {
-				visibleTasks = new Backbone.Collection( visibleTasks.where( { status: filter.status } ) );
-			}
-
-			return visibleTasks.models;
-		},
-
-		/**
 		 * Update the visibility of tasks in the list based on filter parameters.
 		 *
 		 * @param {object} filter Required parameters to determine which tasks should be visible.
 		 * @param {object} data   Optional parameters to pass to the event trigger.
+		 * 
 		 * @returns {wordcamp.mentors.views.List}
 		 */
 		updateVisibleTasks: function( filter, data ) {
-			var visibleTasks = this._getVisibleTasks( filter ),
-				$parentTable = this.$el.parents( 'table' );
+			var $parentTable = this.$el.parents( 'table' );
 
-			// Remove row stripes if not showing everything
-			if ( _.every( filter, function( value ) { return 'any' === value; } ) ) {
+			// Remove row stripes if not showing everything. Otherwise, hidden rows can
+			// cause multiple rows of the same stripe color to stack up.
+			if ( _.isEmpty( filter ) ) {
 				$parentTable.addClass( 'striped' );
 			} else {
 				$parentTable.removeClass( 'striped' );
 			}
 
 			this.tasks.each( function( task ) {
-				if ( ! _.contains( visibleTasks, task ) ) {
+				var tests = true;
+
+				if ( ! _.isEmpty( filter ) ) {
+					tests = _.map( filter, function( value, key ) {
+						var attribute = task.get( key );
+
+						if ( _.isArray( attribute ) ) {
+							return _.contains( attribute, parseInt( value, 10 ) );
+						}
+
+						return attribute === value;
+					});
+				}
+
+				if ( _.every( tests ) ) {
+					task.trigger( 'visibility', 'show', data );
+				} else {
 					task.trigger( 'visibility', 'hide', data );
 				}
-			});
-
-			_.each( visibleTasks, function( task ) {
-				task.trigger( 'visibility', 'show', data );
 			});
 
 			return this;
@@ -471,17 +459,19 @@
 				settingPrefix = wordcamp.mentors.prefix;
 
 			$( event.target ).find( 'select' ).each( function() {
-				var attribute = $( this ).data( 'attribute' );
+				var attribute = $( this ).data( 'attribute' ),
+					value     = $( this ).val();
 
-				filter[ attribute ] = $( this ).val();
-			});
-
-			// Save filter values as user settings
-			_.each( filter, function( value, key ) {
+				// Save the filter value as a user setting.
 				setUserSetting(
-					settingPrefix + '-' + key,
+					settingPrefix + '-' + attribute,
 					value
 				);
+
+				// Don't include attributes set to "any".
+				if ( 'any' !== value ) {
+					filter[ attribute ] = value;
+				}
 			});
 
 			this.trigger( 'filter:tasks', filter, data );
