@@ -177,12 +177,12 @@
 
 			this.tasks.each( function( task ) {
 				if ( ! _.contains( visibleTasks, task ) ) {
-					task.trigger( 'visibility:hide', data );
+					task.trigger( 'visibility', 'hide', data );
 				}
 			});
 
 			_.each( visibleTasks, function( task ) {
-				task.trigger( 'visibility:show', data );
+				task.trigger( 'visibility', 'show', data );
 			});
 
 			return this;
@@ -301,8 +301,7 @@
 		 * @returns {wordcamp.mentors.views.Task}
 		 */
 		listeners: function() {
-			this.listenTo( this.model, 'visibility:show', this.showMe );
-			this.listenTo( this.model, 'visibility:hide', this.hideMe );
+			this.listenTo( this.model, 'visibility',      this.changeVisibility );
 			this.listenTo( this.model, 'change:status',   this.changeStatus );
 			this.listenTo( this.model, 'change:modified', this.changeModified );
 
@@ -310,43 +309,39 @@
 		},
 
 		/**
-		 * Make this task visible.
+		 * Change the visibility of this view's element.
 		 *
-		 * @param data object
+		 * @param {string} action
+		 * @param {object} options
+		 * 
+		 * @returns {wordcamp.mentors.views.Task}
 		 */
-		showMe: function( data ) {
-			var params = data || {},
-				duration = 500;
+		changeVisibility: function( action, options ) {
+			options = _.defaults( options || {}, {
+				skipHighLight: false
+			} );
 
-			if ( 'undefined' !== typeof params.skipHighlight ) {
-				duration = 0;
-			} else {
+			var duration = ( options.skipHighLight ) ? 0 : 500;
+
+			if ( false === options.skipHighLight ) {
 				this.$el.addClass( prefix + '-highlight' );
 			}
 
-			this.$el.fadeIn( duration, function() {
-				$( this ).removeClass( prefix + '-highlight' );
-			});
-		},
+			switch ( action ) {
+				case 'show' :
+					this.$el.fadeIn( duration );
+					break;
 
-		/**
-		 * Make this task hidden.
-		 *
-		 * @param data object
-		 */
-		hideMe: function( data ) {
-			var params = data || {},
-				duration = 300;
-
-			if ( 'undefined' !== typeof params.skipHighlight ) {
-				duration = 0;
-			} else {
-				this.$el.addClass( prefix + '-highlight' );
+				case 'hide' :
+					this.$el.fadeOut( duration );
+					break;
 			}
 
-			this.$el.fadeOut( duration, function() {
+			this.$el.promise().done( function() {
 				$( this ).removeClass( prefix + '-highlight' );
 			});
+
+			return this;
 		},
 
 		/**
