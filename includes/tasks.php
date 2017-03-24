@@ -282,13 +282,10 @@ function enqueue_page_assets( $hook_suffix ) {
 		'WordCampMentors',
 		array(
 			'prefix'  => Mentors\PREFIX,
-			'scripts' => array(
-				Mentors\get_js_url() . 'tasks/views.js',
-			),
-			'stati'   => get_task_statuses(),
 			'l10n'    => array(
 				'confirmReset' => esc_html__( 'Are you sure you want to reset the task data? This action cannot be undone.', 'wordcamporg' ),
 			),
+			'stati'   => get_task_statuses(),
 		)
 	);
 }
