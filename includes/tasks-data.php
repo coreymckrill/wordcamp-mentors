@@ -701,3 +701,20 @@ function localize_task_category( $response, $item ) {
 }
 
 add_filter( 'rest_prepare_' . Mentors\PREFIX . '_task_category', __NAMESPACE__ . '\localize_task_category', 10, 2 );
+
+/**
+ * Record the username of the user updating the task post.
+ *
+ * @since 1.0.0
+ *
+ * @param \WP_Post $post The task post currently being updated.
+ */
+function update_last_modifier( $post ) {
+	$user = wp_get_current_user();
+
+	if ( $user instanceof \WP_User ) {
+		update_post_meta( $post->ID, Mentors\PREFIX . '-last-modifier', $user->user_login );
+	}
+}
+
+add_action( 'rest_insert_' . Mentors\PREFIX . '_task', __NAMESPACE__ . '\update_last_modifier' );

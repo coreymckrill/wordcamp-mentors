@@ -66,12 +66,12 @@ function register_cpt() {
 		'label'                 => __( 'Task', 'wordcamporg' ),
 		'description'           => __( 'Planning Checklist tasks', 'wordcamporg' ),
 		'labels'                => $labels,
-		'supports'              => array( 'title', 'page-attributes' ),
+		'supports'              => array( 'title', 'page-attributes', 'custom-fields' ),
 		'taxonomies'            => array( Mentors\PREFIX . '_task_category' ),
 		'hierarchical'          => false,
-		'public'                => false,
-		'show_ui'               => false,
-		'show_in_menu'          => false,
+		'public'                => true, // @todo Change before deploying
+		'show_ui'               => true, // @todo Change before deploying
+		'show_in_menu'          => true, // @todo Change before deploying
 		'menu_position'         => 5,
 		'show_in_admin_bar'     => false,
 		'show_in_nav_menus'     => false,
@@ -180,10 +180,13 @@ function register_status() {
 			$id,
 			array(
 				'label'       => $label,
-				'label_count' => array(
+				'public'                    => true, // @todo Remove before deploying
+				'show_in_admin_all_list'    => true, // @todo Remove before deploying
+				'show_in_admin_status_list' => true, // @todo Remove before deploying
+				'label_count' => _n_noop(            // @todo Remove before deploying
 					sprintf( '%s <span class="count">(%s)</span>', $label, '%s' ),
 					sprintf( '%s <span class="count">(%s)</span>', $label, '%s' ),
-					'wordcamporg',
+					'wordcamporg'
 				),
 				// Custom parameter to flag its use with the Task CPT.
 				Mentors\PREFIX . '_task' => true,
@@ -191,6 +194,37 @@ function register_status() {
 		);
 	}
 }
+
+/**
+ * Register fields to include in REST responses.
+ *
+ * @since 1.0.0
+ *
+ * @return void
+ */
+function register_rest_fields() {
+	register_rest_field(
+		Mentors\PREFIX . '_task',
+		'lastModifier',
+		array(
+			'get_callback' => function( $object ) {
+				$object = (object) $object;
+
+				return get_post_meta( $object->id, Mentors\PREFIX . '-last-modifier', true );
+			},
+			'schema'       => array(
+				'description' => __( 'Username of the last user to modify the task post.', 'wordcamporg' ),
+				'type'        => 'string',
+				'context'     => array( 'view', 'edit' ),
+				'arg_options' => array(
+					'sanitize_callback' => 'sanitize_user',
+				),
+			),
+		)
+	);
+}
+
+add_action( 'rest_api_init', __NAMESPACE__ . '\register_rest_fields' );
 
 /**
  * Get the array of Task-specific status objects.

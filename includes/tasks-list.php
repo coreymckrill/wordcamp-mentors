@@ -241,7 +241,19 @@ class List_Table extends \WP_List_Table {
 	 */
 	public function column_modified() {
 		if ( $this->js ) : ?>
-			{{ data.modified.relative }}
+			<# if ( data.modified.raw !== data.date ) { #>
+				{{ data.modified.relative }}
+				<# if ( data.lastModifier ) { #>
+					<br />
+					<?php
+					printf(
+						/* translators: Attribution to a user, e.g. by wordcampadmin */
+						wp_kses( __( 'by <strong>%s</strong>', 'wordcamporg' ), array( 'strong' => true ) ),
+						'{{ data.lastModifier }}'
+					);
+					?>
+				<# } #>
+			<# } #>
 		<?php endif;
 	}
 }
