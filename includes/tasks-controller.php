@@ -17,6 +17,64 @@ use WordCamp\Mentors;
  */
 class Controller extends \WP_REST_Posts_Controller {
 	/**
+	 * Registers the routes for the objects of the controller.
+	 *
+	 * Based on the routes for the Posts controller, but more limited.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @see register_rest_route()
+	 */
+	public function register_routes() {
+		register_rest_route( $this->namespace, '/' . $this->rest_base, array(
+			array(
+				'methods'             => \WP_REST_Server::READABLE,
+				'callback'            => array( $this, 'get_items' ),
+				'permission_callback' => array( $this, 'get_permissions_check' ),
+				'args'                => $this->get_collection_params(),
+			),
+			'schema' => array( $this, 'get_public_item_schema' ),
+		) );
+
+		$get_item_args = array(
+			'context'  => $this->get_context_param( array( 'default' => 'view' ) ),
+		);
+
+		register_rest_route( $this->namespace, '/' . $this->rest_base . '/(?P<id>[\d]+)', array(
+			'args' => array(
+				'id' => array(
+					'description' => __( 'Unique identifier for the object.' ),
+					'type'        => 'integer',
+				),
+			),
+			array(
+				'methods'             => \WP_REST_Server::READABLE,
+				'callback'            => array( $this, 'get_item' ),
+				'permission_callback' => array( $this, 'get_permissions_check' ),
+				'args'                => $get_item_args,
+			),
+			array(
+				'methods'             => \WP_REST_Server::EDITABLE,
+				'callback'            => array( $this, 'update_item' ),
+				'permission_callback' => array( $this, 'get_permissions_check' ),
+				'args'                => $this->get_endpoint_args_for_item_schema( \WP_REST_Server::EDITABLE ),
+			),
+			'schema' => array( $this, 'get_public_item_schema' ),
+		) );
+	}
+
+	/**
+	 * Catchall permissions check for interacting with tasks via the REST API.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return bool
+	 */
+	public function get_permissions_check() {
+		return current_user_can( Mentors\ORGANIZER_CAP ) || current_user_can( Mentors\MENTOR_CAP );
+	}
+
+	/**
 	 * Retrieves the Task post's schema, conforming to JSON Schema.
 	 *
 	 * Task-specific modifications to the standard post schema.
