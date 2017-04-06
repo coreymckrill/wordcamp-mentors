@@ -267,6 +267,7 @@
 		initialize: function( options ) {
 			this.list       = options.list;
 			this.categories = options.categories;
+			this.more       = new wordcamp.mentors.views.TaskMore( { task: this } );
 
 			this.listeners();
 
@@ -368,7 +369,27 @@
 		 * Event binding.
 		 */
 		events: {
+			'click': 'toggleMore',
+			'click .column-status select': 'stopPropagation',
 			'change .column-status select': 'updateStatus'
+		},
+
+		/**
+		 * Toggle the visibility of the "more" row for the task.
+		 */
+		toggleMore: function() {
+			this.more.trigger( 'toggle', this._compileData( this.model ) );
+		},
+
+		/**
+		 * Stop the event on a target from propagating up to the target's parent nodes.
+		 *
+		 * Used to prevent clicks on interactive controls on a task from triggering the "more" row to toggle.
+		 *
+		 * @param {event} event
+		 */
+		stopPropagation: function( event ) {
+			event.stopPropagation();
 		},
 
 		/**
@@ -400,6 +421,99 @@
 				patch: true,
 				wait:  true
 			});
+
+			return this;
+		}
+	});
+
+	/**
+	 * A Backbone view for an individual task's additional info.
+	 */
+	wordcamp.mentors.views.TaskMore = Backbone.View.extend( {
+		/**
+		 * HTML element to use as a container.
+		 */
+		tagName: 'tr',
+
+		/**
+		 * HTML element class attribute.
+		 */
+		className: prefix + '-more',
+
+		/**
+		 * The templating function for rendering the task.
+		 */
+		template: wp.template( prefix + '-more' ),
+
+		/**
+		 * Initialize a task's "more" view.
+		 *
+		 * @param {object} options
+		 *
+		 * @returns {wordcamp.mentors.views.TaskMore}
+		 */
+		initialize: function( options ) {
+			this.task = options.task;
+			this.visible = false;
+
+			this.listeners();
+
+			this.$el.hide();
+
+			return this;
+		},
+
+		/**
+		 * Render a task's "more" view.
+		 *
+		 * @param {object} data
+		 *
+		 * @returns {wordcamp.mentors.views.TaskMore}
+		 */
+		render: function( data ) {
+			this.$el.html( this.template( data ) );
+
+			return this;
+		},
+
+		/**
+		 * Set up event listeners.
+		 *
+		 * @returns {wordcamp.mentors.views.TaskMore}
+		 */
+		listeners: function() {
+			this.listenTo( this, 'toggle', this.toggle );
+
+			return this;
+		},
+
+		/**
+		 * Toggle the visibility of the view element.
+		 *
+		 * @param {object} data
+		 *
+		 * @returns {wordcamp.mentors.views.TaskMore}
+		 */
+		toggle: function( data ) {
+			var $more;
+
+			if ( ! $( this.task.$el ).next( '.hidden' ).length ) {
+				$more = $( '<tr class="hidden">' ).add( this.$el );
+				this.task.$el.after( $more );
+			}
+
+			if ( this.visible ) {
+				this.$el.hide();
+				this.task.$el.removeClass( prefix + '-highlight' );
+				this.$el.removeClass( prefix + '-highlight' );
+			} else {
+				this.task.$el.addClass( prefix + '-highlight' );
+				this.$el.addClass( prefix + '-highlight' );
+				this.render( data );
+				this.$el.show();
+			}
+
+			this.visible = ! this.visible;
 
 			return this;
 		}

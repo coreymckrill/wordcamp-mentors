@@ -60,8 +60,9 @@ function get_task_data() {
 	 */
 	return array(
 		'8pb0' => array(
-			'title' => __( 'Update budget template', 'wordcamporg' ),
-			'cat'   => array( 'budget' ),
+			'title'   => __( 'Update budget template', 'wordcamporg' ),
+			'excerpt' => __( 'Add your camp\'s information into the sample budget template.', 'wordcamporg' ),
+			'cat'     => array( 'budget' ),
 		),
 		'v2cu' => array(
 			'title' => __( 'Explore venue options', 'wordcamporg' ),
@@ -656,7 +657,14 @@ function localize_task( $response, $post ) {
 	$task_data = get_task_data();
 
 	if ( isset( $task_data[ $l10n_id ] ) ) {
-		$response->data['title']['rendered'] = apply_filters( 'the_title', $task_data[ $l10n_id ]['title'] );
+		$parsed_data = wp_parse_args( $task_data[ $l10n_id ], array(
+			'title'   => '',
+			'excerpt' => '',
+			'cat'     => array(),
+		) );
+
+		$response->data['title']['rendered']   = apply_filters( 'the_title', $parsed_data['title'] );
+		$response->data['excerpt']['rendered'] = wp_kses( $parsed_data['excerpt'], array() );
 	} else {
 		$response->data['title']['rendered'] = esc_html__( 'Unknown task.', 'wordcamporg' );
 	}

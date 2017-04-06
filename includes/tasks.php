@@ -66,7 +66,7 @@ function register_cpt() {
 		'label'                 => __( 'Task', 'wordcamporg' ),
 		'description'           => __( 'Planning Checklist tasks', 'wordcamporg' ),
 		'labels'                => $labels,
-		'supports'              => array( 'title', 'page-attributes', 'custom-fields' ),
+		'supports'              => array( 'title', 'excerpt', 'page-attributes', 'custom-fields' ),
 		'taxonomies'            => array( Mentors\PREFIX . '_task_category' ),
 		'hierarchical'          => false,
 		'public'                => true, // @todo Change before deploying
@@ -338,9 +338,19 @@ function print_templates() {
 		'js' => true,
 	) );
 	$js_list_table->prepare_items();
+
+	$columns = $js_list_table->get_column_count();
 	?>
 	<script id="tmpl-<?php echo esc_attr( Mentors\PREFIX ); ?>-task" type="text/template">
 		<?php $js_list_table->single_row_columns( $js_list_table->items[0] ); ?>
+	</script>
+	<script id="tmpl-<?php echo esc_attr( Mentors\PREFIX ); ?>-more" type="text/template">
+		<td class="task column-task">
+			{{ data.excerpt.rendered }}
+		</td>
+		<td class="" colspan="<?php echo esc_attr( $columns - 1 ); ?>">
+
+		</td>
 	</script>
 <?php
 	// Initial data.

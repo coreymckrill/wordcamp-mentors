@@ -11,6 +11,10 @@
 	border-bottom: 1px solid #f9f9f9;
 }
 
+.wcm-task.wcm-highlight td {
+	border-bottom: 0;
+}
+
 .column-task {
 	width: 50%;
 }
