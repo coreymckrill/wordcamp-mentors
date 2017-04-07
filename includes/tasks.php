@@ -222,6 +222,30 @@ function register_rest_fields() {
 			),
 		)
 	);
+
+	register_rest_field(
+		Mentors\PREFIX . '_task',
+		'helpLink',
+		array(
+			'schema'       => array(
+				'description' => __( 'A help link for more information about a task.', 'wordcamporg' ),
+				'type'        => 'object',
+				'context'     => array( 'view' ),
+				'properties'  => array(
+					'text' => array(
+						'description' => __( 'The help link text.', 'wordcamporg' ),
+						'type'        => 'string',
+						'context'     => array( 'view' ),
+					),
+					'url'  => array(
+						'description' => __( 'The help link URL.', 'wordcamporg' ),
+						'type'        => 'string',
+						'context'     => array( 'view' ),
+					),
+				),
+			),
+		)
+	);
 }
 
 add_action( 'rest_api_init', __NAMESPACE__ . '\register_rest_fields' );
@@ -347,6 +371,10 @@ function print_templates() {
 	<script id="tmpl-<?php echo esc_attr( Mentors\PREFIX ); ?>-more" type="text/template">
 		<td class="task column-task">
 			{{ data.excerpt.rendered }}
+			<# if ( data.helpLink.text && data.helpLink.url ) { #>
+				<br />
+				<a href="{{ data.helpLink.url }}" target="_blank" class="<?php echo esc_attr( Mentors\PREFIX ); ?>-help-link">{{ data.helpLink.text }}</a>
+			<# } #>
 		</td>
 		<td class="" colspan="<?php echo esc_attr( $columns - 1 ); ?>">
 

@@ -63,6 +63,10 @@ function get_task_data() {
 			'title'   => __( 'Update budget template', 'wordcamporg' ),
 			'excerpt' => __( 'Add your camp\'s information into the sample budget template.', 'wordcamporg' ),
 			'cat'     => array( 'budget' ),
+			'link'    => array(
+				'text' => __( 'Budget template', 'wordcamporg' ),
+				'url'  => 'https://make.wordpress.org/community/handbook/wordcamp-organizer/first-steps/budget-and-finances/#sample-budgets',
+			),
 		),
 		'v2cu' => array(
 			'title' => __( 'Explore venue options', 'wordcamporg' ),
@@ -661,10 +665,16 @@ function localize_task( $response, $post ) {
 			'title'   => '',
 			'excerpt' => '',
 			'cat'     => array(),
+			'link'    => array(
+				'text' => '',
+				'url'  => '',
+			),
 		) );
 
 		$response->data['title']['rendered']   = apply_filters( 'the_title', $parsed_data['title'] );
 		$response->data['excerpt']['rendered'] = wp_kses( $parsed_data['excerpt'], array() );
+		$response->data['helpLink']['text']    = wp_kses( $parsed_data['link']['text'], array() );
+		$response->data['helpLink']['url']     = esc_url( $parsed_data['link']['url'] );
 	} else {
 		$response->data['title']['rendered'] = esc_html__( 'Unknown task.', 'wordcamporg' );
 	}
