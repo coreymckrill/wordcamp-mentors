@@ -1,18 +1,32 @@
 
-.wp-list-table > tbody > .wcm-highlight {
+.wp-list-table > tbody > .wcm-highlight,
+.wp-list-table > tbody > .wcm-expanded {
     background-color: #f7fcfe;
+}
+
+.wp-list-table > tbody > .wcm-more.wcm-expanded {
+	box-shadow: 0 8px 6px -9px #32373c;
 }
 
 .widefat td {
 	vertical-align: middle;
 }
 
+.wcm-task:hover {
+	box-shadow: inset 0 0 7px 7px #f7fcfe;
+	cursor: pointer;
+}
+
 .wcm-task td {
 	border-bottom: 1px solid #f9f9f9;
 }
 
-.wcm-task.wcm-highlight td {
+.wcm-task.wcm-expanded td {
 	border-bottom: 0;
+}
+
+.wcm-more td {
+	padding-bottom:
 }
 
 .column-task {
@@ -26,7 +40,7 @@
 .column-task_category li {
 	color: #fff;
 	float: left;
-	margin-right: 2px;
+	margin: 2px;
 	padding: 3px 6px;
 }
 .rtl .column-task_category li {

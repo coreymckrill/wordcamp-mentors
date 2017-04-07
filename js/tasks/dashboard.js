@@ -510,12 +510,12 @@
 
 			if ( this.visible ) {
 				this.$el.hide();
-				this.task.$el.removeClass( prefix + '-highlight' );
-				this.$el.removeClass( prefix + '-highlight' );
+				this.task.$el.removeClass( prefix + '-expanded' );
+				this.$el.removeClass( prefix + '-expanded' );
 				this.task.list.trigger( 'setFilter' );
 			} else {
-				this.task.$el.addClass( prefix + '-highlight' );
-				this.$el.addClass( prefix + '-highlight' );
+				this.task.$el.addClass( prefix + '-expanded' );
+				this.$el.addClass( prefix + '-expanded' );
 				this.render( data );
 				this.$el.show();
 			}
