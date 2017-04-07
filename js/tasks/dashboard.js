@@ -268,6 +268,7 @@
 			this.list       = options.list;
 			this.categories = options.categories;
 			this.more       = new wordcamp.mentors.views.TaskMore( { task: this } );
+			this.expanded   = false;
 
 			this.listeners();
 
@@ -311,6 +312,10 @@
 		 * @returns {wordcamp.mentors.views.Task}
 		 */
 		changeVisibility: function( action, options ) {
+			if ( this.expanded ) {
+				return this;
+			}
+
 			options = _.defaults( options || {}, {
 				skipHighlight: false
 			} );
@@ -378,6 +383,7 @@
 		 * Toggle the visibility of the "more" row for the task.
 		 */
 		toggleMore: function() {
+			this.expanded = ! this.expanded;
 			this.more.trigger( 'toggle', this._compileData( this.model ) );
 		},
 
@@ -506,6 +512,7 @@
 				this.$el.hide();
 				this.task.$el.removeClass( prefix + '-highlight' );
 				this.$el.removeClass( prefix + '-highlight' );
+				this.task.list.trigger( 'setFilter' );
 			} else {
 				this.task.$el.addClass( prefix + '-highlight' );
 				this.$el.addClass( prefix + '-highlight' );
