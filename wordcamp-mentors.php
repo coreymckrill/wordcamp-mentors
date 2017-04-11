@@ -22,7 +22,7 @@ define( __NAMESPACE__ . '\PLUGIN_URL', \plugins_url( '/', __FILE__ ) );
 
 const PREFIX = 'wcm';
 
-const MENTOR_CAP    = 'manage_network';
+const MENTOR_CAP    = 'switch_themes'; // Not all mentors are super admins, so the capability is currently the same as for organizers
 const ORGANIZER_CAP = 'switch_themes';
 
 /**
