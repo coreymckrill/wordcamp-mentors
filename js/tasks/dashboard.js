@@ -142,16 +142,6 @@
 		 * @returns {wordcamp.mentors.views.List}
 		 */
 		updateVisibleTasks: function( filter, data ) {
-			var $parentTable = this.$el.parents( 'table' );
-
-			// Remove row stripes if not showing everything. Otherwise, hidden rows can
-			// cause multiple rows of the same stripe color to stack up.
-			if ( _.isEmpty( filter ) ) {
-				$parentTable.addClass( 'striped' );
-			} else {
-				$parentTable.removeClass( 'striped' );
-			}
-
 			this.tasks.each( function( task ) {
 				var tests = true;
 

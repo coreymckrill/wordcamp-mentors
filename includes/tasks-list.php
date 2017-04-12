@@ -135,6 +135,17 @@ class List_Table extends \WP_List_Table {
 	}
 
 	/**
+	 * Get a list of CSS classes for the WP_List_Table table tag.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return array List of CSS classes for the table tag.
+	 */
+	protected function get_table_classes() {
+		return array( 'widefat', 'fixed', $this->_args['plural'] );
+	}
+
+	/**
 	 * Prepare the table items
 	 *
 	 * @since 1.0.0
