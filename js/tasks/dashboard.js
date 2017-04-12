@@ -299,6 +299,7 @@
 			this.listenTo( this.model, 'visibility',      this.changeVisibility );
 			this.listenTo( this.model, 'change:status',   this.changeStatus );
 			this.listenTo( this.model, 'change:modified', this.changeModified );
+			this.listenTo( this.list,  'collapseAll',     this.maybeCollapse );
 
 			return this;
 		},
@@ -371,6 +372,18 @@
 		},
 
 		/**
+		 * Toggle this task's more row to hidden if it is currently expanded and if
+		 * this isn't the task triggering the collapseAll event.
+		 *
+		 * @param {int} instigator The ID
+		 */
+		maybeCollapse: function( instigator ) {
+			if ( this.expanded && instigator !== this.model.get( 'id' ) ) {
+				this.toggleMore();
+			}
+		},
+
+		/**
 		 * Event binding.
 		 */
 		events: {
@@ -380,10 +393,16 @@
 		},
 
 		/**
-		 * Toggle the visibility of the "more" row for the task.
+		 * Toggle the visibility of the "more" row for this task. If this expands the task, collapse
+		 * all other expanded tasks.
 		 */
 		toggleMore: function() {
 			this.expanded = ! this.expanded;
+
+			if ( this.expanded ) {
+				this.list.trigger( 'collapseAll', this.model.get( 'id' ) );
+			}
+
 			this.more.trigger( 'toggle', this._compileData( this.model ) );
 		},
 
