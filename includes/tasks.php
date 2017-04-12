@@ -297,7 +297,7 @@ function render_tasks_page() {
 	$list_table = new List_Table();
 	$list_table->prepare_items();
 
-	require Mentors\get_views_dir_path() . 'tasks.php';
+	include Mentors\get_views_dir_path() . 'tasks.php';
 }
 
 /**
@@ -369,21 +369,9 @@ function print_templates() {
 		<?php $js_list_table->single_row_columns( $js_list_table->items[0] ); ?>
 	</script>
 	<script id="tmpl-<?php echo esc_attr( Mentors\PREFIX ); ?>-more" type="text/template">
-		<# if ( data.excerpt.rendered || data.helpLink.text ) { #>
-			<td class="task column-task">
-				{{ data.excerpt.rendered }}
-				<# if ( data.helpLink.text && data.helpLink.url ) { #>
-					<br /><br />
-					<a href="{{ data.helpLink.url }}" target="_blank" class="<?php echo esc_attr( Mentors\PREFIX ); ?>-help-link">
-						{{ data.helpLink.text }}
-						<span class="dashicons dashicons-external" aria-hidden="true"></span>
-					</a>
-				<# } #>
-			</td>
-			<td class="" colspan="<?php echo esc_attr( $columns - 1 ); ?>"></td>
-		<# } #>
+		<?php include Mentors\get_views_dir_path() . 'task-more.php'; ?>
 	</script>
-<?php
+	<?php
 	// Initial data.
 	$request_url = add_query_arg( array(
 		'per_page' => 300,
@@ -403,10 +391,9 @@ function print_templates() {
 		/* <![CDATA[ */
 		var WordCampMentorsTaskData = <?php echo wp_json_encode( $initial_tasks->data ); ?>;
 		var WordCampMentorsTaskCategoryData = <?php echo wp_json_encode( $initial_task_categories->data ); ?>;
-
 		/* ]]> */
 	</script>
-<?php
+	<?php
 }
 
 add_action( 'admin_print_footer_scripts-dashboard_page_' . Mentors\PREFIX . '-planning-checklist', __NAMESPACE__ . '\print_templates' );
@@ -453,5 +440,5 @@ function admin_notices() {
 	<div class="notice notice-<?php echo esc_attr( $type ); ?> is-dismissible">
 		<?php echo wpautop( esc_html( $message ) ); ?>
 	</div>
-<?php endif;
+	<?php endif;
 }

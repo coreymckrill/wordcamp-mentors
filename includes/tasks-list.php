@@ -41,7 +41,7 @@ class List_Table extends \WP_List_Table {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param array $args
+	 * @param array $args Class args.
 	 */
 	public function __construct( $args = array() ) {
 		$defaults = array(
@@ -70,7 +70,7 @@ class List_Table extends \WP_List_Table {
 				<?php submit_button( __( 'Filter', 'wordcamporg' ), 'secondary', 'submit', false ); ?>
 			</form>
 		</div>
-	<?php elseif ( 'bottom' === $which ) : ?>
+		<?php elseif ( 'bottom' === $which ) : ?>
 		<div class="<?php echo ( is_rtl() ) ? 'alignleft' : 'alignright'; ?> actions">
 			<?php if ( current_user_can( Mentors\MENTOR_CAP ) ) : ?>
 				<form id="tasks-reset" method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
@@ -80,7 +80,7 @@ class List_Table extends \WP_List_Table {
 				</form>
 			<?php endif; ?>
 		</div>
-	<?php endif;
+		<?php endif;
 	}
 
 	/**
@@ -108,7 +108,7 @@ class List_Table extends \WP_List_Table {
 				</option>
 			<?php endforeach; ?>
 		</select>
-	<?php
+		<?php
 	}
 
 	/**
@@ -131,7 +131,7 @@ class List_Table extends \WP_List_Table {
 				</option>
 			<?php endforeach; ?>
 		</select>
-	<?php
+		<?php
 	}
 
 	/**
