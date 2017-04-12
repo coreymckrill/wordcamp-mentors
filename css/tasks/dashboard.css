@@ -4,10 +4,6 @@
     background-color: #f7fcfe;
 }
 
-.wp-list-table > tbody > .wcm-more.wcm-expanded {
-	box-shadow: 0 8px 6px -9px #32373c;
-}
-
 .widefat td {
 	vertical-align: middle;
 }
@@ -17,16 +13,13 @@
 	cursor: pointer;
 }
 
-.wcm-task td {
+.wcm-task td,
+.wcm-more td {
 	border-bottom: 1px solid #f9f9f9;
 }
 
 .wcm-task.wcm-expanded td {
-	border-bottom: 0;
-}
-
-.wcm-more td {
-	padding-bottom:
+	border-bottom-color: #f7fcfe;
 }
 
 .column-task {

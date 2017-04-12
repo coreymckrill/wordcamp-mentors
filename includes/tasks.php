@@ -369,19 +369,19 @@ function print_templates() {
 		<?php $js_list_table->single_row_columns( $js_list_table->items[0] ); ?>
 	</script>
 	<script id="tmpl-<?php echo esc_attr( Mentors\PREFIX ); ?>-more" type="text/template">
-		<td class="task column-task">
-			{{ data.excerpt.rendered }}
-			<# if ( data.helpLink.text && data.helpLink.url ) { #>
-				<br /><br />
-				<a href="{{ data.helpLink.url }}" target="_blank" class="<?php echo esc_attr( Mentors\PREFIX ); ?>-help-link">
-					{{ data.helpLink.text }}
-					<span class="dashicons dashicons-external" aria-hidden="true"></span>
-				</a>
-			<# } #>
-		</td>
-		<td class="" colspan="<?php echo esc_attr( $columns - 1 ); ?>">
-
-		</td>
+		<# if ( data.excerpt.rendered || data.helpLink.text ) { #>
+			<td class="task column-task">
+				{{ data.excerpt.rendered }}
+				<# if ( data.helpLink.text && data.helpLink.url ) { #>
+					<br /><br />
+					<a href="{{ data.helpLink.url }}" target="_blank" class="<?php echo esc_attr( Mentors\PREFIX ); ?>-help-link">
+						{{ data.helpLink.text }}
+						<span class="dashicons dashicons-external" aria-hidden="true"></span>
+					</a>
+				<# } #>
+			</td>
+			<td class="" colspan="<?php echo esc_attr( $columns - 1 ); ?>"></td>
+		<# } #>
 	</script>
 <?php
 	// Initial data.
