@@ -70,7 +70,7 @@ function get_task_data() {
 		),
 		'22ix' => array(
 			'title'   => __( 'Recruit your ogranizing team', 'wordcamporg' ),
-			'excerpt' => __( 'Recruit a full organizing team from within your community', 'wordcamporg' ),
+			'excerpt' => __( 'Recruit a full organizing team from within your community.', 'wordcamporg' ),
 			'cat'     => array( 'lead' ),
 			'link'    => array(
 				'text' => __( 'Build your team', 'wordcamporg' ),
@@ -97,12 +97,12 @@ function get_task_data() {
 		),
 		'jv29' => array(
 			'title'   => __( 'Start design and branding', 'wordcamporg' ),
-			'excerpt' => __( 'Start thinking about and implementing Design process/branding', 'wordcamporg' ),
+			'excerpt' => __( 'Start thinking about and implementing Design process/branding.', 'wordcamporg' ),
 			'cat'     => array( 'design' ),
 		),
 		'o1rt' => array(
 			'title'   => __( 'Brainstorming speaker topics and ideas', 'wordcamporg' ),
-			'excerpt' => __( 'Brainstorm and discuss with your team topics/requested speaker topics', 'wordcamporg' ),
+			'excerpt' => __( 'Brainstorm and discuss with your team topics/requested speaker topics.', 'wordcamporg' ),
 			'cat'     => array( 'speaker' ),
 			'link'    => array(
 				'text' => __( 'Speakers', 'wordcamporg' ),
@@ -143,7 +143,7 @@ function get_task_data() {
 		),
 		'n7rk' => array(
 			'title'   => __( 'Budget approval', 'wordcamporg' ),
-			'excerpt' => __( 'Build your budget and submit it for review and approval', 'wordcamporg' ),
+			'excerpt' => __( 'Build your budget and submit it for review and approval.', 'wordcamporg' ),
 			'cat'     => array( 'budget' ),
 			'link'    => array(
 				'text' => __( 'Budget review and approval', 'wordcamporg' ),
@@ -166,7 +166,7 @@ function get_task_data() {
 		),
 		'75sp' => array(
 			'title'   => __( 'Find after party and speaker event venues', 'wordcamporg' ),
-			'excerpt' => __( 'Please keep in mind that all venues should be open and welcoming to everyone. No age restricted venues. Keep in mind ease of access from your event venue. ', 'wordcamporg' ),
+			'excerpt' => __( 'Please keep in mind that all venues should be open and welcoming to everyone. No age restricted venues. Keep in mind ease of access from your event venue.', 'wordcamporg' ),
 			'cat'     => array( 'after-party' ),
 			'link'    => array(
 				'text' => __( 'Parties', 'wordcamporg' ),
@@ -175,7 +175,7 @@ function get_task_data() {
 		),
 		'vbbj' => array(
 			'title'   => __( 'Setup and design your site', 'wordcamporg' ),
-			'excerpt' => __( 'begin website design - prepare to launch', 'wordcamporg' ),
+			'excerpt' => '',
 			'cat'     => array( 'web' ),
 			'link'    => array(
 				'text' => __( 'Site setup and design', 'wordcamporg' ),
@@ -207,7 +207,7 @@ function get_task_data() {
 		),
 		'erjt' => array(
 			'title'   => __( 'Create documents and templates', 'wordcamporg' ),
-			'excerpt' => __( 'Create/use email templates for sponsorship, volunteers, speakers, etc', 'wordcamporg' ),
+			'excerpt' => __( 'Create/use email templates for sponsorship, volunteers, speakers, etc.', 'wordcamporg' ),
 			'cat'     => array( 'committee' ),
 			'link'    => array(
 				'text' => __( 'Helpful documents and templates', 'wordcamporg' ),
@@ -216,7 +216,7 @@ function get_task_data() {
 		),
 		'5uqp' => array(
 			'title'   => __( 'Reach out to prior sponsors', 'wordcamporg' ),
-			'excerpt' => __( 'Reach out to sponsors from previous years. If this is your event\'s first year reach out to sponsors from past WordCamps in your region', 'wordcamporg' ),
+			'excerpt' => __( 'Reach out to sponsors from previous years. If this is your event\'s first year reach out to sponsors from past WordCamps in your region.', 'wordcamporg' ),
 			'cat'     => array( 'sponsor' ),
 			'link'    => array(
 				'text' => __( 'Local Sponsors', 'wordcamporg' ),
@@ -234,7 +234,7 @@ function get_task_data() {
 		),
 		'u1rl' => array(
 			'title'   => __( 'Vet sponsor applicants', 'wordcamporg' ),
-			'excerpt' => __( 'Vet all sponsor applicants to ensure they meet expectations of the WordPress Open Source Project with GPL and Trademark', 'wordcamporg' ),
+			'excerpt' => __( 'Vet all sponsor applicants to ensure they meet expectations of the WordPress Open Source Project with GPL and Trademark.', 'wordcamporg' ),
 			'cat'     => array( 'sponsor' ),
 			'link'    => array(
 				'text' => __( 'GPL primer', 'wordcamporg' ),
@@ -243,7 +243,7 @@ function get_task_data() {
 		),
 		'ibzq' => array(
 			'title'   => __( 'Open call for speakers', 'wordcamporg' ),
-			'excerpt' => __( 'Have web wrangler add call for speakers on site', 'wordcamporg' ),
+			'excerpt' => __( 'Have web wrangler add call for speakers on site.', 'wordcamporg' ),
 			'cat'     => array( 'speaker' ),
 			'link'    => array(
 				'text' => __( 'Speakers', 'wordcamporg' ),
@@ -270,7 +270,7 @@ function get_task_data() {
 		),
 		'rko5' => array(
 			'title'   => __( 'Open call for volunteers', 'wordcamporg' ),
-			'excerpt' => __( 'Have web wrangler add call for volunteers on website including descriptions', 'wordcamporg' ),
+			'excerpt' => __( 'Have web wrangler add call for volunteers on website including descriptions.', 'wordcamporg' ),
 			'cat'     => array( 'volunteer' ),
 			'link'    => array(
 				'text' => __( 'Volunteers', 'wordcamporg' ),
@@ -293,7 +293,7 @@ function get_task_data() {
 		),
 		'co30' => array(
 			'title'   => __( 'Review anonymized speaker submissions with your speaker panel', 'wordcamporg' ),
-			'excerpt' => __( 'After the team reviews all submissions, speaker lead should review rejected talks to ensure you\'re not discarding a spectacular speaker who didn\'t present well in application. ', 'wordcamporg' ),
+			'excerpt' => __( 'After the team reviews all submissions, speaker lead should review rejected talks to ensure you\'re not discarding a spectacular speaker who didn\'t present well in application.', 'wordcamporg' ),
 			'cat'     => array( 'speaker' ),
 			'link'    => array(
 				'text' => __( 'Speakers', 'wordcamporg' ),
@@ -302,17 +302,17 @@ function get_task_data() {
 		),
 		'eu82' => array(
 			'title'   => __( 'Send out update email to speaker applicants', 'wordcamporg' ),
-			'excerpt' => __( 'Let speaker appliants know their submissions were received and give them an idea of when they will hear back from the team.', 'wordcamporg' ),
+			'excerpt' => __( 'Let speaker applicants know their submissions were received and give them an idea of when they will hear back from the team.', 'wordcamporg' ),
 			'cat'     => array( 'speaker' ),
 		),
 		'm2sc' => array(
 			'title'   => __( 'Contact sponsors for details', 'wordcamporg' ),
-			'excerpt' => __( 'Contact sponsors to gather information needed for site and signage. If they qualify for a table or to hand out swag, let them know where to ship merchandise and what their space will be like. Provide them with coupon codes and remind them how many free tickets they receive. ', 'wordcamporg' ),
+			'excerpt' => __( 'Contact sponsors to gather information needed for site and signage. If they qualify for a table or to hand out swag, let them know where to ship merchandise and what their space will be like. Provide them with coupon codes and remind them how many free tickets they receive.', 'wordcamporg' ),
 			'cat'     => array( 'sponsor' ),
 		),
 		'k9k0' => array(
 			'title'   => __( 'Start fulfilling sponsor level benefits', 'wordcamporg' ),
-			'excerpt' => __( 'If you promised blog posts, tweets, or signage make sure that you\'re scheduling these in compliance with the offerings per level', 'wordcamporg' ),
+			'excerpt' => __( 'If you promised blog posts, tweets, or signage make sure that you\'re scheduling these in compliance with the offerings per level.', 'wordcamporg' ),
 			'cat'     => array( 'sponsor' ),
 		),
 		'fucx' => array(
@@ -349,7 +349,7 @@ function get_task_data() {
 		),
 		'c00l' => array(
 			'title'   => __( 'Email remaining speaker applicants', 'wordcamporg' ),
-			'excerpt' => __( 'Make sure that you notify applicants who were not selected BEFORE you announce your speakers publicly. ', 'wordcamporg' ),
+			'excerpt' => __( 'Make sure that you notify applicants who were not selected BEFORE you announce your speakers publicly.', 'wordcamporg' ),
 			'cat'     => array( 'speaker' ),
 		),
 		'84y3' => array(
@@ -369,7 +369,7 @@ function get_task_data() {
 		),
 		'p0ns' => array(
 			'title'   => __( 'Order speaker gifts', 'wordcamporg' ),
-			'excerpt' => __( 'Speaker gifts are not required but if it\'s in your budget and you plan to do something you should order at least 6-weeks in advance. Don\'t spend too much on this, remember we should always use funds on what will benefit attendees most. ', 'wordcamporg' ),
+			'excerpt' => __( 'Speaker gifts are not required but if it\'s in your budget and you plan to do something you should order at least 6-weeks in advance. Don\'t spend too much on this, remember we should always use funds on what will benefit attendees most.', 'wordcamporg' ),
 			'cat'     => array( 'speaker' ),
 		),
 		'03kv' => array(
@@ -388,7 +388,7 @@ function get_task_data() {
 		),
 		'bc1e' => array(
 			'title'   => __( 'Design name badges', 'wordcamporg' ),
-			'excerpt' => __( 'Review the guidlines for creating badges before finalizing your design', 'wordcamporg' ),
+			'excerpt' => __( 'Review the guidlines for creating badges before finalizing your design.', 'wordcamporg' ),
 			'cat'     => array( 'design' ),
 			'link'    => array(
 				'text' => __( 'Create WordCamp Badges', 'wordcamporg' ),
@@ -402,7 +402,7 @@ function get_task_data() {
 		),
 		'ws2p' => array(
 			'title'   => __( 'Confirm swag order from WordCamp Central', 'wordcamporg' ),
-			'excerpt' => __( '6 weeks out - WordPress stickers, buttons, and lanyards will come from WordCamp Central.  Confirm your shipping address and number of attendees when Central reaches out.', 'wordcamporg' ),
+			'excerpt' => __( '6 weeks out - WordPress stickers, buttons, and lanyards will come from WordCamp Central. Confirm your shipping address and number of attendees when Central reaches out.', 'wordcamporg' ),
 			'cat'     => array( 'swag' ),
 			'link'    => array(
 				'text' => __( 'Swag', 'wordcamporg' ),
@@ -411,7 +411,7 @@ function get_task_data() {
 		),
 		'2u4x' => array(
 			'title'   => __( 'Offer speaker mentorship', 'wordcamporg' ),
-			'excerpt' => __( '6 weeks out - Especially with less experienced speakers offer them mentorship or the chance to share their talk in advance. (via Google Hangouts, speaker training)', 'wordcamporg' ),
+			'excerpt' => __( '6 weeks out - Especially with less experienced speakers offer them mentorship or the chance to share their talk in advance (via Google Hangouts, speaker training).', 'wordcamporg' ),
 			'cat'     => array( 'speaker' ),
 			'link'    => array(
 				'text' => __( 'Speaking at a WordCamp', 'wordcamporg' ),
@@ -420,17 +420,17 @@ function get_task_data() {
 		),
 		'tpvw' => array(
 			'title'   => __( 'Create backup plans including backup speaker', 'wordcamporg' ),
-			'excerpt' => __( 'If a speaker gets sick, do you have someone who can fill in on the same topic? For out of town speakers, what if they miss their flights? Have one backup speaker per track. Back up speakers should not be rejected appliants.', 'wordcamporg' ),
+			'excerpt' => __( 'If a speaker gets sick, do you have someone who can fill in on the same topic? For out of town speakers, what if they miss their flights? Have one backup speaker per track. Back up speakers should not be rejected applicants.', 'wordcamporg' ),
 			'cat'     => array( 'lead' ),
 		),
 		'r3ge' => array(
 			'title'   => __( 'Remind speakers to send slides', 'wordcamporg' ),
-			'excerpt' => __( 'Remind speakers that you will need their slides by two weeks before the event. If they haven\'t signed the speaker agreement and av release, request those.', 'wordcamporg' ),
+			'excerpt' => __( 'Remind speakers that you will need their slides by two weeks before the event. If they haven\'t signed the speaker agreement and A/V release, request those.', 'wordcamporg' ),
 			'cat'     => array( 'speaker' ),
 		),
 		'ckzp' => array(
 			'title'   => __( 'Complete volunteer schedule and confirm volunteers.', 'wordcamporg' ),
-			'excerpt' => __( '4 weeks out -Email volunteers with details of their role, provide coupon code, and ask them to sign the volunteer agreement.', 'wordcamporg' ),
+			'excerpt' => __( '4 weeks out - Email volunteers with details of their role, provide coupon code, and ask them to sign the volunteer agreement.', 'wordcamporg' ),
 			'cat'     => array( 'volunteer' ),
 			'link'    => array(
 				'text' => __( 'Volunteers', 'wordcamporg' ),
@@ -439,12 +439,12 @@ function get_task_data() {
 		),
 		'q97z' => array(
 			'title'   => __( 'Review speaker slides', 'wordcamporg' ),
-			'excerpt' => __( '2 weeks out - Collect slides from speakers and review as a team. This helps avoid any inappropriate content in the presentations (WordCamps should be family-friendly, with no swearing or discriminatory jokes/comments), and also helps you catch any misspellings, fauxgos, or other problems in the slides. Check to make sure they properly camel case WordPress and WordCamp. ', 'wordcamporg' ),
+			'excerpt' => __( '2 weeks out - Collect slides from speakers and review as a team. This helps avoid any inappropriate content in the presentations (WordCamps should be family-friendly, with no swearing or discriminatory jokes/comments), and also helps you catch any misspellings, fauxgos, or other problems in the slides. Check to make sure they properly camel case WordPress and WordCamp.', 'wordcamporg' ),
 			'cat'     => array( 'committee' ),
 		),
 		'c46e' => array(
 			'title'   => __( 'Confirm catering ', 'wordcamporg' ),
-			'excerpt' => __( 'Confirm catering menu for any meals or snacks you have arranged based on attendee numbers. Ensure delivery/ pickup is scheudled. Please do not run out of coffee. At this time confirm menus for any ancillary events (ie: contributor day, speaker event, after party, etc.) you may be having. ', 'wordcamporg' ),
+			'excerpt' => __( 'Confirm catering menu for any meals or snacks you have arranged based on attendee numbers. Ensure delivery/ pickup is scheudled. Please do not run out of coffee. At this time confirm menus for any ancillary events (ie: contributor day, speaker event, after party, etc.) you may be having.', 'wordcamporg' ),
 			'cat'     => array( 'food' ),
 			'link'    => array(
 				'text' => __( 'Food and Beverage', 'wordcamporg' ),
@@ -458,22 +458,22 @@ function get_task_data() {
 		),
 		'f1ln' => array(
 			'title'   => __( 'Order signage', 'wordcamporg' ),
-			'excerpt' => __( 'Make sure to include additional wayfinding signage and confirm with sponsor coordinator that you\'re meeting sponsor level requirements ', 'wordcamporg' ),
+			'excerpt' => __( 'Make sure to include additional wayfinding signage and confirm with sponsor coordinator that you\'re meeting sponsor level requirements.', 'wordcamporg' ),
 			'cat'     => array( 'design' ),
 		),
 		'h641' => array(
 			'title'   => __( 'Email Speakers', 'wordcamporg' ),
-			'excerpt' => __( 'Email a final confirmation to your speakers. Include the date and time of their talk, when and with whom they should check in the day they\'re speaking, what the av setup is, and any other details you feel they should know. If you\'re hosting a speaker event make sure they have that information as well. ', 'wordcamporg' ),
+			'excerpt' => __( 'Email a final confirmation to your speakers. Include the date and time of their talk, when and with whom they should check in the day they\'re speaking, what the av setup is, and any other details you feel they should know. If you\'re hosting a speaker event make sure they have that information as well.', 'wordcamporg' ),
 			'cat'     => array( 'speaker' ),
 		),
 		'svit' => array(
 			'title'   => __( 'Email Sponsors', 'wordcamporg' ),
-			'excerpt' => __( 'Email a final confirmation to your sponsors. Include date and time of their load-in, when they can arrive day of the event, where they will setup and who their on site contact will be. If they\'re invited to your speaker event confirm those details with them as well. ', 'wordcamporg' ),
+			'excerpt' => __( 'Email a final confirmation to your sponsors. Include date and time of their load-in, when they can arrive day of the event, where they will setup and who their on site contact will be. If they\'re invited to your speaker event confirm those details with them as well.', 'wordcamporg' ),
 			'cat'     => array( 'sponsor' ),
 		),
 		'2iiq' => array(
 			'title'   => __( 'Test and prepare equipment from camera kit (if using)', 'wordcamporg' ),
-			'excerpt' => __( 'Check out your kits to make sure everything is there, the batteries are charged, and you or your video coordiantor understnad how to use them. ', 'wordcamporg' ),
+			'excerpt' => __( 'Check out your kits to make sure everything is there, the batteries are charged, and you or your video coordiantor understnad how to use them.', 'wordcamporg' ),
 			'cat'     => array( 'audio-video' ),
 			'link'    => array(
 				'text' => __( 'Video Quick Start Guide', 'wordcamporg' ),
@@ -482,7 +482,7 @@ function get_task_data() {
 		),
 		'w3l6' => array(
 			'title'   => __( 'Send a pre-event ttendee email', 'wordcamporg' ),
-			'excerpt' => __( '2-days prior - Send an email to all attendees (including speakers, sponsors, and volunteers) with important information they will need for attendance. Include information about parking, wifi, menus, and registration. If there will be any known traffic disruptions due to events or contruction let them know there may be traffic delays. Welcome them to your WordCamp.', 'wordcamporg' ),
+			'excerpt' => __( '2-days prior - Send an email to all attendees (including speakers, sponsors, and volunteers) with important information they will need for attendance. Include information about parking, wifi, menus, and registration. If there will be any known traffic disruptions due to events or construction let them know there may be traffic delays. Welcome them to your WordCamp.', 'wordcamporg' ),
 			'cat'     => array( 'committee' ),
 		),
 		'gmue' => array(
@@ -502,7 +502,7 @@ function get_task_data() {
 		),
 		'hscb' => array(
 			'title'   => __( 'Volunteer Training', 'wordcamporg' ),
-			'excerpt' => __( '1-day prior or early day-of - Make sure your volunteers have all the information they will need to carry out their tasks. Let them know that if someone asks a question to which they do not know the answer it\'s best to say "I don\'t know, but let\'s find out" and ask an organizer. ', 'wordcamporg' ),
+			'excerpt' => __( '1-day prior or early day-of - Make sure your volunteers have all the information they will need to carry out their tasks. Let them know that if someone asks a question to which they do not know the answer it\'s best to say "I don\'t know, but let\'s find out" and ask an organizer.', 'wordcamporg' ),
 			'cat'     => array( 'volunteer' ),
 			'link'    => array(
 				'text' => __( 'Volunteers', 'wordcamporg' ),
@@ -530,7 +530,7 @@ function get_task_data() {
 		),
 		'jccc' => array(
 			'title'   => __( 'Upload videos to WordPress.tv', 'wordcamporg' ),
-			'excerpt' => __( 'You\'ll need to do a small amount of post-production and upload your WordCamp videos to WordPress.tv', 'wordcamporg' ),
+			'excerpt' => __( 'You\'ll need to do a small amount of post-production and upload your WordCamp videos to WordPress.tv.', 'wordcamporg' ),
 			'cat'     => array( 'audio-video' ),
 			'link'    => array(
 				'text' => __( 'Post-Production', 'wordcamporg' ),
@@ -539,12 +539,12 @@ function get_task_data() {
 		),
 		'gnws' => array(
 			'title'   => __( 'Ship camera kits (if using WordCamp Central kits)', 'wordcamporg' ),
-			'excerpt' => __( 'If you used WordCamp Central\'s camera kits it\'s time to ship them on to the next event or back to their base for service. Someone for WordCamp Central will reach out to you with instructions. ', 'wordcamporg' ),
+			'excerpt' => __( 'If you used WordCamp Central\'s camera kits it\'s time to ship them on to the next event or back to their base for service. Someone for WordCamp Central will reach out to you with instructions.', 'wordcamporg' ),
 			'cat'     => array( 'audio-video' ),
 		),
 		'f8k2' => array(
 			'title'   => __( 'Close out your budget ', 'wordcamporg' ),
-			'excerpt' => __( 'Make sure all payment requests are submitted and balance your budget within two weeks of your event. If you have any questions reach out to support@wordcamp.org', 'wordcamporg' ),
+			'excerpt' => __( 'Make sure all payment requests are submitted and balance your budget within two weeks of your event. If you have any questions reach out to support@wordcamp.org.', 'wordcamporg' ),
 			'cat'     => array( 'budget' ),
 		),
 		'r95r' => array(
