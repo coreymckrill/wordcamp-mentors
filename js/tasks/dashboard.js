@@ -526,7 +526,7 @@
 				this.task.$el.addClass( prefix + '-expanded' );
 				this.$el.addClass( prefix + '-expanded' );
 				this.render( data );
-				this.$el.show();
+				this.$el.fadeIn( 300 );
 			}
 
 			this.visible = ! this.visible;
