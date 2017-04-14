@@ -69,7 +69,7 @@ function get_task_data() {
 			),
 		),
 		'22ix' => array(
-			'title'   => __( 'Recruit your ogranizing team', 'wordcamporg' ),
+			'title'   => __( 'Recruit your organizing team', 'wordcamporg' ),
 			'excerpt' => __( 'Recruit a full organizing team from within your community.', 'wordcamporg' ),
 			'cat'     => array( 'lead' ),
 			'link'    => array(
@@ -252,7 +252,7 @@ function get_task_data() {
 		),
 		'wccy' => array(
 			'title'   => __( 'Speaker recruitment and Speaker Applicant outreach', 'wordcamporg' ),
-			'excerpt' => __( 'Reach out to known/wanted community speakers and community groups. Encourage those from commonly-under represented groups to apply. Invite a keynote or feautred speaker if applicable. ', 'wordcamporg' ),
+			'excerpt' => __( 'Reach out to known/wanted community speakers and community groups. Encourage those from commonly-under represented groups to apply. Invite a keynote or featured speaker if applicable. ', 'wordcamporg' ),
 			'cat'     => array( 'speaker' ),
 			'link'    => array(
 				'text' => __( 'Speakers', 'wordcamporg' ),
@@ -279,7 +279,7 @@ function get_task_data() {
 		),
 		'uw8g' => array(
 			'title'   => __( 'Open ticket sales', 'wordcamporg' ),
-			'excerpt' => __( 'Set up your tickets -- make sure you ask for dietary preferences and t-shirt sizes (if providing tshirts). Also ask in registration if attendees require any special acoomodation to attend.', 'wordcamporg' ),
+			'excerpt' => __( 'Set up your tickets -- make sure you ask for dietary preferences and t-shirt sizes (if providing t-shirts). Also ask in registration if attendees require any special acoomodation to attend.', 'wordcamporg' ),
 			'cat'     => array( 'registration' ),
 			'link'    => array(
 				'text' => __( 'Selling Tickets', 'wordcamporg' ),
@@ -481,7 +481,7 @@ function get_task_data() {
 			),
 		),
 		'w3l6' => array(
-			'title'   => __( 'Send a pre-event ttendee email', 'wordcamporg' ),
+			'title'   => __( 'Send a pre-event attendee email', 'wordcamporg' ),
 			'excerpt' => __( '2-days prior - Send an email to all attendees (including speakers, sponsors, and volunteers) with important information they will need for attendance. Include information about parking, wifi, menus, and registration. If there will be any known traffic disruptions due to events or construction let them know there may be traffic delays. Welcome them to your WordCamp.', 'wordcamporg' ),
 			'cat'     => array( 'committee' ),
 		),
