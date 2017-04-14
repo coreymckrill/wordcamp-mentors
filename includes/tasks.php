@@ -69,9 +69,9 @@ function register_cpt() {
 		'supports'              => array( 'title', 'excerpt', 'page-attributes', 'custom-fields' ),
 		'taxonomies'            => array( Mentors\PREFIX . '_task_category' ),
 		'hierarchical'          => false,
-		'public'                => true, // @todo Change before deploying
-		'show_ui'               => true, // @todo Change before deploying
-		'show_in_menu'          => true, // @todo Change before deploying
+		'public'                => false,
+		'show_ui'               => false,
+		'show_in_menu'          => false,
 		'menu_position'         => 5,
 		'show_in_admin_bar'     => false,
 		'show_in_nav_menus'     => false,
@@ -180,14 +180,7 @@ function register_status() {
 			$id,
 			array(
 				'label'       => $label,
-				'public'                    => true, // @todo Remove before deploying
-				'show_in_admin_all_list'    => true, // @todo Remove before deploying
-				'show_in_admin_status_list' => true, // @todo Remove before deploying
-				'label_count' => _n_noop(            // @todo Remove before deploying
-					sprintf( '%s <span class="count">(%s)</span>', $label, '%s' ),
-					sprintf( '%s <span class="count">(%s)</span>', $label, '%s' ),
-					'wordcamporg'
-				),
+				'public'                    => false,
 				// Custom parameter to flag its use with the Task CPT.
 				Mentors\PREFIX . '_task' => true,
 			)
