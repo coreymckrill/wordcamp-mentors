@@ -1,0 +1,1220 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Project-Id-Version: WordCamp Mentors\n"
+"POT-Creation-Date: 2017-04-25 10:26-0700\n"
+"PO-Revision-Date: 2017-04-25 10:26-0700\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-WPHeader: wordcamp-mentors.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: includes/tasks-controller.php:46
+msgid "Unique identifier for the object."
+msgstr ""
+
+#: includes/tasks-controller.php:101
+msgid "The date the object was last modified, in the site's timezone."
+msgstr ""
+
+#: includes/tasks-controller.php:108
+msgid "The relative time since the object was last modified."
+msgstr ""
+
+#: includes/tasks-controller.php:170
+msgid "Status is forbidden."
+msgstr ""
+
+#: includes/tasks-data.php:22
+msgid "After Party"
+msgstr ""
+
+#: includes/tasks-data.php:23
+msgid "Audio/Video"
+msgstr ""
+
+#: includes/tasks-data.php:24
+msgid "Budget"
+msgstr ""
+
+#: includes/tasks-data.php:25
+msgid "Committee"
+msgstr ""
+
+#: includes/tasks-data.php:26
+msgid "Contributor Day"
+msgstr ""
+
+#: includes/tasks-data.php:27
+msgid "Design"
+msgstr ""
+
+#: includes/tasks-data.php:28
+msgid "Food"
+msgstr ""
+
+#: includes/tasks-data.php:29
+msgid "Lead"
+msgstr ""
+
+#: includes/tasks-data.php:30
+msgid "Registration"
+msgstr ""
+
+#: includes/tasks-data.php:31
+msgid "Speaker"
+msgstr ""
+
+#: includes/tasks-data.php:32
+msgid "Sponsor"
+msgstr ""
+
+#: includes/tasks-data.php:33 includes/tasks-data.php:408
+msgid "Swag"
+msgstr ""
+
+#: includes/tasks-data.php:34
+msgid "Volunteer"
+msgstr ""
+
+#: includes/tasks-data.php:35
+msgid "Web"
+msgstr ""
+
+#: includes/tasks-data.php:63
+msgid "Apply to organize your local WordCamp"
+msgstr ""
+
+#: includes/tasks-data.php:64
+msgid "You must fill out a new application each year."
+msgstr ""
+
+#: includes/tasks-data.php:67
+msgid "Apply"
+msgstr ""
+
+#: includes/tasks-data.php:72
+msgid "Recruit your organizing team"
+msgstr ""
+
+#: includes/tasks-data.php:73
+msgid "Recruit a full organizing team from within your community."
+msgstr ""
+
+#: includes/tasks-data.php:76
+msgid "Build your team"
+msgstr ""
+
+#: includes/tasks-data.php:81
+msgid "Explore venue options"
+msgstr ""
+
+#: includes/tasks-data.php:82
+msgid ""
+"Look into venues that may work for your event. Ask for suggestions from your "
+"team and meetup."
+msgstr ""
+
+#: includes/tasks-data.php:85 includes/tasks-data.php:117
+msgid "Venue Information"
+msgstr ""
+
+#: includes/tasks-data.php:90
+msgid "Update budget page"
+msgstr ""
+
+#: includes/tasks-data.php:91
+msgid ""
+"Add your camp's budget information to the budget tool located in your "
+"dashboard."
+msgstr ""
+
+#: includes/tasks-data.php:94
+msgid "Budget and Finances"
+msgstr ""
+
+#: includes/tasks-data.php:99
+msgid "Start design and branding"
+msgstr ""
+
+#: includes/tasks-data.php:100
+msgid "Start thinking about and implementing Design process/branding."
+msgstr ""
+
+#: includes/tasks-data.php:104
+msgid "Brainstorming speaker topics and ideas"
+msgstr ""
+
+#: includes/tasks-data.php:105
+msgid "Brainstorm and discuss with your team topics/requested speaker topics."
+msgstr ""
+
+#: includes/tasks-data.php:108 includes/tasks-data.php:249
+#: includes/tasks-data.php:258 includes/tasks-data.php:299
+msgid "Speakers"
+msgstr ""
+
+#: includes/tasks-data.php:113
+msgid "Venue walk-through"
+msgstr ""
+
+#: includes/tasks-data.php:114
+msgid ""
+"Before you lock-in your venue have a walk through with your leads and "
+"wranglers to ensure this venue will be accessible and functional for all "
+"areas of the event."
+msgstr ""
+
+#: includes/tasks-data.php:122
+msgid "Choose a Date"
+msgstr ""
+
+#: includes/tasks-data.php:123
+msgid ""
+"Consider holidays, other events in your city, and other WordCamps in your "
+"region. Be sure to have your budget approved and have a contract or "
+"agreement for the venue signed by WordCamp Central before you announce your "
+"dates."
+msgstr ""
+
+#: includes/tasks-data.php:126
+msgid "Pick a date"
+msgstr ""
+
+#: includes/tasks-data.php:131
+msgid "Get quotes from vendors"
+msgstr ""
+
+#: includes/tasks-data.php:136
+msgid "Select caterer and menu for event"
+msgstr ""
+
+#: includes/tasks-data.php:137
+msgid "Ensure that you accomodate all dietary requirements."
+msgstr ""
+
+#: includes/tasks-data.php:140 includes/tasks-data.php:450
+msgid "Food and Beverage"
+msgstr ""
+
+#: includes/tasks-data.php:145
+msgid "Budget approval"
+msgstr ""
+
+#: includes/tasks-data.php:146
+msgid "Build your budget and submit it for review and approval."
+msgstr ""
+
+#: includes/tasks-data.php:149
+msgid "Budget review and approval"
+msgstr ""
+
+#: includes/tasks-data.php:154
+msgid "Confirm your venue"
+msgstr ""
+
+#: includes/tasks-data.php:155
+msgid ""
+"Make sure you get a contract, agreement or confirmation email. In order to "
+"move your WordCamp to scheduled you need some sort of written confirmation "
+"that the venue is reserved for your dates. "
+msgstr ""
+
+#: includes/tasks-data.php:158
+msgid "Lock in your venue"
+msgstr ""
+
+#: includes/tasks-data.php:163
+msgid "Contributor day venue"
+msgstr ""
+
+#: includes/tasks-data.php:164
+msgid ""
+"If you're hosting a contributor day and it will not be held at your primary "
+"venue, find a location now."
+msgstr ""
+
+#: includes/tasks-data.php:168
+msgid "Find after party and speaker event venues"
+msgstr ""
+
+#: includes/tasks-data.php:169
+msgid ""
+"Please keep in mind that all venues should be open and welcoming to "
+"everyone. No age restricted venues. Keep in mind ease of access from your "
+"event venue."
+msgstr ""
+
+#: includes/tasks-data.php:172 includes/tasks-data.php:380
+msgid "Parties"
+msgstr ""
+
+#: includes/tasks-data.php:177
+msgid "Setup and design your site"
+msgstr ""
+
+#: includes/tasks-data.php:181
+msgid "Site setup and design"
+msgstr ""
+
+#: includes/tasks-data.php:186
+msgid "Launch website design"
+msgstr ""
+
+#: includes/tasks-data.php:187
+msgid "Launch site design and take site out of \"Coming Soon\" mode."
+msgstr ""
+
+#: includes/tasks-data.php:191
+msgid "Announce your event"
+msgstr ""
+
+#: includes/tasks-data.php:192
+msgid "Get the word out to the community!"
+msgstr ""
+
+#: includes/tasks-data.php:195
+msgid "Publicity"
+msgstr ""
+
+#: includes/tasks-data.php:200
+msgid "Set sponsorship levels"
+msgstr ""
+
+#: includes/tasks-data.php:201
+msgid "Identify internal sponsorship levels and what each level includes."
+msgstr ""
+
+#: includes/tasks-data.php:204
+msgid "Local sponsorshps"
+msgstr ""
+
+#: includes/tasks-data.php:209
+msgid "Create documents and templates"
+msgstr ""
+
+#: includes/tasks-data.php:210
+msgid "Create/use email templates for sponsorship, volunteers, speakers, etc."
+msgstr ""
+
+#: includes/tasks-data.php:213
+msgid "Helpful documents and templates"
+msgstr ""
+
+#: includes/tasks-data.php:218
+msgid "Reach out to prior sponsors"
+msgstr ""
+
+#: includes/tasks-data.php:219
+msgid ""
+"Reach out to sponsors from previous years. If this is your event's first "
+"year reach out to sponsors from past WordCamps in your region."
+msgstr ""
+
+#: includes/tasks-data.php:222
+msgid "Local Sponsors"
+msgstr ""
+
+#: includes/tasks-data.php:227
+msgid "Open call for sponsors"
+msgstr ""
+
+#: includes/tasks-data.php:228
+msgid ""
+"Having already reached out to prior sponsors with your completed sponsor "
+"packet, it's now time to publically open your call for sponsors on your "
+"site. At this time you can also reach out to sponsors who have supported "
+"other WordCamps in your area."
+msgstr ""
+
+#: includes/tasks-data.php:231
+msgid "Fundraising"
+msgstr ""
+
+#: includes/tasks-data.php:236
+msgid "Vet sponsor applicants"
+msgstr ""
+
+#: includes/tasks-data.php:237
+msgid ""
+"Vet all sponsor applicants to ensure they meet expectations of the WordPress "
+"Open Source Project with GPL and Trademark."
+msgstr ""
+
+#: includes/tasks-data.php:240
+msgid "GPL primer"
+msgstr ""
+
+#: includes/tasks-data.php:245
+msgid "Open call for speakers"
+msgstr ""
+
+#: includes/tasks-data.php:246
+msgid "Have web wrangler add call for speakers on site."
+msgstr ""
+
+#: includes/tasks-data.php:254
+msgid "Speaker recruitment and Speaker Applicant outreach"
+msgstr ""
+
+#: includes/tasks-data.php:255
+msgid ""
+"Reach out to known/wanted community speakers and community groups. Encourage "
+"those from commonly-under represented groups to apply. Invite a keynote or "
+"featured speaker if applicable. "
+msgstr ""
+
+#: includes/tasks-data.php:263
+msgid "Determine what volunteers roles are needed"
+msgstr ""
+
+#: includes/tasks-data.php:267 includes/tasks-data.php:276
+#: includes/tasks-data.php:332 includes/tasks-data.php:436
+#: includes/tasks-data.php:508
+msgid "Volunteers"
+msgstr ""
+
+#: includes/tasks-data.php:272
+msgid "Open call for volunteers"
+msgstr ""
+
+#: includes/tasks-data.php:273
+msgid ""
+"Have web wrangler add call for volunteers on website including descriptions."
+msgstr ""
+
+#: includes/tasks-data.php:281
+msgid "Open ticket sales"
+msgstr ""
+
+#: includes/tasks-data.php:282
+msgid ""
+"Set up your tickets -- make sure you ask for dietary preferences and t-shirt "
+"sizes (if providing t-shirts). Also ask in registration if attendees require "
+"any special acoomodation to attend."
+msgstr ""
+
+#: includes/tasks-data.php:285
+msgid "Selling Tickets"
+msgstr ""
+
+#: includes/tasks-data.php:290
+msgid ""
+"Anonymize speaker submissions (remove gender specific information, names)"
+msgstr ""
+
+#: includes/tasks-data.php:291
+msgid "Prepare the speaker submissions and prepare the speaker selection team."
+msgstr ""
+
+#: includes/tasks-data.php:295
+msgid "Review anonymized speaker submissions with your speaker panel"
+msgstr ""
+
+#: includes/tasks-data.php:296
+msgid ""
+"After the team reviews all submissions, speaker lead should review rejected "
+"talks to ensure you're not discarding a spectacular speaker who didn't "
+"present well in application."
+msgstr ""
+
+#: includes/tasks-data.php:304
+msgid "Send out update email to speaker applicants"
+msgstr ""
+
+#: includes/tasks-data.php:305
+msgid ""
+"Let speaker applicants know their submissions were received and give them an "
+"idea of when they will hear back from the team."
+msgstr ""
+
+#: includes/tasks-data.php:309
+msgid "Contact sponsors for details"
+msgstr ""
+
+#: includes/tasks-data.php:310
+msgid ""
+"Contact sponsors to gather information needed for site and signage. If they "
+"qualify for a table or to hand out swag, let them know where to ship "
+"merchandise and what their space will be like. Provide them with coupon "
+"codes and remind them how many free tickets they receive."
+msgstr ""
+
+#: includes/tasks-data.php:314
+msgid "Start fulfilling sponsor level benefits"
+msgstr ""
+
+#: includes/tasks-data.php:315
+msgid ""
+"If you promised blog posts, tweets, or signage make sure that you're "
+"scheduling these in compliance with the offerings per level."
+msgstr ""
+
+#: includes/tasks-data.php:319
+msgid "Finalize swag decision and place order"
+msgstr ""
+
+#: includes/tasks-data.php:320
+msgid ""
+"By now you should have a swag vendor, place order and ensure it will ship in "
+"time for your event. Order custom stickers from StickerGiant."
+msgstr ""
+
+#: includes/tasks-data.php:323
+msgid "Custom Swag"
+msgstr ""
+
+#: includes/tasks-data.php:328
+msgid "Makes plans for volunteer orientation"
+msgstr ""
+
+#: includes/tasks-data.php:329
+msgid ""
+"Decide if you will do an in person, video, or text orientation for "
+"volunteers and plan accordingly."
+msgstr ""
+
+#: includes/tasks-data.php:337
+msgid "Request video kit from WordCamp Central"
+msgstr ""
+
+#: includes/tasks-data.php:338
+msgid ""
+"If you haven't hired a videographer, please let WordCamp Central know how "
+"many tracks you have and where the camera kits should be received."
+msgstr ""
+
+#: includes/tasks-data.php:341
+msgid "Video"
+msgstr ""
+
+#: includes/tasks-data.php:346
+msgid "Email selected speakers"
+msgstr ""
+
+#: includes/tasks-data.php:347
+msgid ""
+"Contact selected speakers. Ask them to sign the speaker agreement and AV "
+"release. Remind them you'll need to review their slides 2 weeks prior to "
+"WordCamp. Give them their coupon code for a free ticket. Determine if they "
+"have any special AV requirements and relay that info to your AV person."
+msgstr ""
+
+#: includes/tasks-data.php:351
+msgid "Email remaining speaker applicants"
+msgstr ""
+
+#: includes/tasks-data.php:352
+msgid ""
+"Make sure that you notify applicants who were not selected BEFORE you "
+"announce your speakers publicly."
+msgstr ""
+
+#: includes/tasks-data.php:356
+msgid "Publish/Announce speakers"
+msgstr ""
+
+#: includes/tasks-data.php:357
+msgid "Also ask speakers to promote on their social channels."
+msgstr ""
+
+#: includes/tasks-data.php:361
+msgid "Begin posting original content"
+msgstr ""
+
+#: includes/tasks-data.php:362
+msgid ""
+"In order to drive traffic to the site and keep your followers engaged it's a "
+"good idea to publish more than just announcements. Try WordCamp stories, "
+"speaker profiles, community involvement stories, etc."
+msgstr ""
+
+#: includes/tasks-data.php:366
+msgid "Publish/Announce sessions and schedule"
+msgstr ""
+
+#: includes/tasks-data.php:371
+msgid "Order speaker gifts"
+msgstr ""
+
+#: includes/tasks-data.php:372
+msgid ""
+"Speaker gifts are not required but if it's in your budget and you plan to do "
+"something you should order at least 6-weeks in advance. Don't spend too much "
+"on this, remember we should always use funds on what will benefit attendees "
+"most."
+msgstr ""
+
+#: includes/tasks-data.php:376
+msgid "Send a pre-Camp event invite (if having)"
+msgstr ""
+
+#: includes/tasks-data.php:377
+msgid ""
+"If you're hosting a pre-camp event (e.g., a speaker event) make sure you "
+"invite the appropriate folks (e.g., speakers, sponsors, volunteers)."
+msgstr ""
+
+#: includes/tasks-data.php:385
+msgid "Publish sponsor posts"
+msgstr ""
+
+#: includes/tasks-data.php:390
+msgid "Design name badges"
+msgstr ""
+
+#: includes/tasks-data.php:391
+msgid "Review the guidlines for creating badges before finalizing your design."
+msgstr ""
+
+#: includes/tasks-data.php:394
+msgid "Create WordCamp Badges"
+msgstr ""
+
+#: includes/tasks-data.php:399
+msgid "Design signage"
+msgstr ""
+
+#: includes/tasks-data.php:404
+msgid "Confirm swag order from WordCamp Central"
+msgstr ""
+
+#: includes/tasks-data.php:405
+msgid ""
+"6 weeks out - WordPress stickers, buttons, and lanyards will come from "
+"WordCamp Central. Confirm your shipping address and number of attendees when "
+"Central reaches out."
+msgstr ""
+
+#: includes/tasks-data.php:413
+msgid "Offer speaker mentorship"
+msgstr ""
+
+#: includes/tasks-data.php:414
+msgid ""
+"6 weeks out - Especially with less experienced speakers offer them "
+"mentorship or the chance to share their talk in advance (via Google "
+"Hangouts, speaker training)."
+msgstr ""
+
+#: includes/tasks-data.php:417
+msgid "Speaking at a WordCamp"
+msgstr ""
+
+#: includes/tasks-data.php:422
+msgid "Create backup plans including backup speaker"
+msgstr ""
+
+#: includes/tasks-data.php:423
+msgid ""
+"If a speaker gets sick, do you have someone who can fill in on the same "
+"topic? For out of town speakers, what if they miss their flights? Have one "
+"backup speaker per track. Back up speakers should not be rejected applicants."
+msgstr ""
+
+#: includes/tasks-data.php:427
+msgid "Remind speakers to send slides"
+msgstr ""
+
+#: includes/tasks-data.php:428
+msgid ""
+"Remind speakers that you will need their slides by two weeks before the "
+"event. If they haven't signed the speaker agreement and A/V release, request "
+"those."
+msgstr ""
+
+#: includes/tasks-data.php:432
+msgid "Complete volunteer schedule and confirm volunteers."
+msgstr ""
+
+#: includes/tasks-data.php:433
+msgid ""
+"4 weeks out - Email volunteers with details of their role, provide coupon "
+"code, and ask them to sign the volunteer agreement."
+msgstr ""
+
+#: includes/tasks-data.php:441
+msgid "Review speaker slides"
+msgstr ""
+
+#: includes/tasks-data.php:442
+msgid ""
+"2 weeks out - Collect slides from speakers and review as a team. This helps "
+"avoid any inappropriate content in the presentations (WordCamps should be "
+"family-friendly, with no swearing or discriminatory jokes/comments), and "
+"also helps you catch any misspellings, fauxgos, or other problems in the "
+"slides. Check to make sure they properly camel case WordPress and WordCamp."
+msgstr ""
+
+#: includes/tasks-data.php:446
+msgid "Confirm catering "
+msgstr ""
+
+#: includes/tasks-data.php:447
+msgid ""
+"Confirm catering menu for any meals or snacks you have arranged based on "
+"attendee numbers. Ensure delivery/ pickup is scheudled. Please do not run "
+"out of coffee. At this time confirm menus for any ancillary events (ie: "
+"contributor day, speaker event, after party, etc.) you may be having."
+msgstr ""
+
+#: includes/tasks-data.php:455
+msgid "Finalize name badge order"
+msgstr ""
+
+#: includes/tasks-data.php:456
+msgid ""
+"Send your badge files off to the printer. Make sure they'll have them ready "
+"a day or two before your event."
+msgstr ""
+
+#: includes/tasks-data.php:460
+msgid "Order signage"
+msgstr ""
+
+#: includes/tasks-data.php:461
+msgid ""
+"Make sure to include additional wayfinding signage and confirm with sponsor "
+"coordinator that you're meeting sponsor level requirements."
+msgstr ""
+
+#: includes/tasks-data.php:465
+msgid "Email Speakers"
+msgstr ""
+
+#: includes/tasks-data.php:466
+msgid ""
+"Email a final confirmation to your speakers. Include the date and time of "
+"their talk, when and with whom they should check in the day they're "
+"speaking, what the av setup is, and any other details you feel they should "
+"know. If you're hosting a speaker event make sure they have that information "
+"as well."
+msgstr ""
+
+#: includes/tasks-data.php:470
+msgid "Email Sponsors"
+msgstr ""
+
+#: includes/tasks-data.php:471
+msgid ""
+"Email a final confirmation to your sponsors. Include date and time of their "
+"load-in, when they can arrive day of the event, where they will setup and "
+"who their on site contact will be. If they're invited to your speaker event "
+"confirm those details with them as well."
+msgstr ""
+
+#: includes/tasks-data.php:475
+msgid "Test and prepare equipment from camera kit (if using)"
+msgstr ""
+
+#: includes/tasks-data.php:476
+msgid ""
+"Check out your kits to make sure everything is there, the batteries are "
+"charged, and you or your video coordiantor understnad how to use them."
+msgstr ""
+
+#: includes/tasks-data.php:479
+msgid "Video Quick Start Guide"
+msgstr ""
+
+#: includes/tasks-data.php:484
+msgid "Send a pre-event attendee email"
+msgstr ""
+
+#: includes/tasks-data.php:485
+msgid ""
+"2-days prior - Send an email to all attendees (including speakers, sponsors, "
+"and volunteers) with important information they will need for attendance. "
+"Include information about parking, wifi, menus, and registration. If there "
+"will be any known traffic disruptions due to events or construction let them "
+"know there may be traffic delays. Welcome them to your WordCamp."
+msgstr ""
+
+#: includes/tasks-data.php:489
+msgid "Close registration"
+msgstr ""
+
+#: includes/tasks-data.php:490
+msgid ""
+"1-day prior - If you're not offering walk-in tickets, close registration."
+msgstr ""
+
+#: includes/tasks-data.php:494
+msgid "Sort swag"
+msgstr ""
+
+#: includes/tasks-data.php:495
+msgid ""
+"e.g., fold and sort t-shirts, stuff bags, generally prepare swag and badges "
+"to be distributed."
+msgstr ""
+
+#: includes/tasks-data.php:499
+msgid "Final venue walkthrough"
+msgstr ""
+
+#: includes/tasks-data.php:500
+msgid ""
+"Ensure you have contact info for technical and facilities. Count the "
+"signage, observe the flow, order additional signage as needed. Locate/setup "
+"volunteer stations in venue."
+msgstr ""
+
+#: includes/tasks-data.php:504
+msgid "Volunteer Training"
+msgstr ""
+
+#: includes/tasks-data.php:505
+msgid ""
+"1-day prior or early day-of - Make sure your volunteers have all the "
+"information they will need to carry out their tasks. Let them know that if "
+"someone asks a question to which they do not know the answer it's best to "
+"say \"I don't know, but let's find out\" and ask an organizer."
+msgstr ""
+
+#: includes/tasks-data.php:513
+msgid "Hold pre-camp event (e.g., speaker/sponsor dinner)"
+msgstr ""
+
+#: includes/tasks-data.php:518
+msgid "A/V setup"
+msgstr ""
+
+#: includes/tasks-data.php:519
+msgid ""
+"Whether it's volunteers or venue staff, make sure the A/V setup is complete "
+"prior to the start of your event day."
+msgstr ""
+
+#: includes/tasks-data.php:523
+msgid "Have a WordCamp!"
+msgstr ""
+
+#: includes/tasks-data.php:524
+msgid "Be present. Breathe. Enjoy the event!"
+msgstr ""
+
+#: includes/tasks-data.php:527
+msgid "During WordCamp"
+msgstr ""
+
+#: includes/tasks-data.php:532
+msgid "Upload videos to WordPress.tv"
+msgstr ""
+
+#: includes/tasks-data.php:533
+msgid ""
+"You'll need to do a small amount of post-production and upload your WordCamp "
+"videos to WordPress.tv."
+msgstr ""
+
+#: includes/tasks-data.php:536
+msgid "Post-Production"
+msgstr ""
+
+#: includes/tasks-data.php:541
+msgid "Ship camera kits (if using WordCamp Central kits)"
+msgstr ""
+
+#: includes/tasks-data.php:542
+msgid ""
+"If you used WordCamp Central's camera kits it's time to ship them on to the "
+"next event or back to their base for service. Someone for WordCamp Central "
+"will reach out to you with instructions."
+msgstr ""
+
+#: includes/tasks-data.php:546
+msgid "Close out your budget "
+msgstr ""
+
+#: includes/tasks-data.php:547
+msgid ""
+"Make sure all payment requests are submitted and balance your budget within "
+"two weeks of your event. If you have any questions reach out to "
+"support@wordcamp.org."
+msgstr ""
+
+#: includes/tasks-data.php:551
+msgid "Send attendee survey"
+msgstr ""
+
+#: includes/tasks-data.php:552
+msgid ""
+"Send your attendees, speakers, sponsors, and volunteers a post-event email "
+"recapping the event, sharing any information they may need, thanking them, "
+"and asking them to fill out the WordCamp attendee survey."
+msgstr ""
+
+#: includes/tasks-data.php:555
+msgid "Attendee Survey"
+msgstr ""
+
+#: includes/tasks-data.php:560 includes/tasks-data.php:565
+#: includes/tasks-data.php:570
+msgid "Thank you emails and request feedback"
+msgstr ""
+
+#: includes/tasks-data.php:561
+msgid ""
+"Thank your sponsors for their generous support and ask them if they have any "
+"feedback for future events."
+msgstr ""
+
+#: includes/tasks-data.php:566
+msgid ""
+"Thank your speakers for their participation and ask them if they have any "
+"feedback for future events."
+msgstr ""
+
+#: includes/tasks-data.php:571
+msgid ""
+"Thank your volunteers for helping to make the event possible and ask them if "
+"they have any feedback for future events."
+msgstr ""
+
+#: includes/tasks-data.php:575
+msgid "Fill out your WordCamp debrief"
+msgstr ""
+
+#: includes/tasks-data.php:576
+msgid ""
+"We'd love to hear how you feel the event went - what were your proudest "
+"moments and your greatest disappointments? We've created a WordCamp Debrief "
+"survey so we can get all the details of how things went with your "
+"illustrious event."
+msgstr ""
+
+#: includes/tasks-data.php:579
+msgid "Debrief"
+msgstr ""
+
+#: includes/tasks-data.php:719
+msgid "Unknown task."
+msgstr ""
+
+#: includes/tasks-data.php:727
+#, php-format
+msgid "%s ago"
+msgstr ""
+
+#: includes/tasks-list.php:70
+msgid "Filter"
+msgstr ""
+
+#: includes/tasks-list.php:79
+msgid "Reset Task Data"
+msgstr ""
+
+#: includes/tasks-list.php:100
+msgid "Filter by task category"
+msgstr ""
+
+#: includes/tasks-list.php:103
+msgid "All task categories"
+msgstr ""
+
+#: includes/tasks-list.php:123
+msgid "Filter by status"
+msgstr ""
+
+#: includes/tasks-list.php:126
+msgid "All statuses"
+msgstr ""
+
+#: includes/tasks-list.php:186 includes/tasks.php:66
+msgid "Task"
+msgstr ""
+
+#: includes/tasks-list.php:188
+msgid "Status"
+msgstr ""
+
+#: includes/tasks-list.php:189
+msgid "Modified"
+msgstr ""
+
+#: includes/tasks-list.php:218
+msgid "No category"
+msgstr ""
+
+#: includes/tasks-list.php:262
+#, php-format
+msgid "by <strong>%s</strong>"
+msgstr ""
+
+#: includes/tasks.php:36
+msgctxt "Post Type General Name"
+msgid "Tasks"
+msgstr ""
+
+#: includes/tasks.php:37
+msgctxt "Post Type Singular Name"
+msgid "Task"
+msgstr ""
+
+#: includes/tasks.php:38 includes/tasks.php:39
+msgid "Tasks"
+msgstr ""
+
+#: includes/tasks.php:40
+msgid "Task Archives"
+msgstr ""
+
+#: includes/tasks.php:41
+msgid "Task Attributes"
+msgstr ""
+
+#: includes/tasks.php:42
+msgid "Parent Task:"
+msgstr ""
+
+#: includes/tasks.php:43
+msgid "All Tasks"
+msgstr ""
+
+#: includes/tasks.php:44
+msgid "Add New Task"
+msgstr ""
+
+#: includes/tasks.php:45
+msgid "Add New"
+msgstr ""
+
+#: includes/tasks.php:46
+msgid "New Task"
+msgstr ""
+
+#: includes/tasks.php:47
+msgid "Edit Task"
+msgstr ""
+
+#: includes/tasks.php:48
+msgid "Update Task"
+msgstr ""
+
+#: includes/tasks.php:49
+msgid "View Task"
+msgstr ""
+
+#: includes/tasks.php:50
+msgid "View Tasks"
+msgstr ""
+
+#: includes/tasks.php:51
+msgid "Search Task"
+msgstr ""
+
+#: includes/tasks.php:52
+msgid "Not found"
+msgstr ""
+
+#: includes/tasks.php:53
+msgid "Not found in Trash"
+msgstr ""
+
+#: includes/tasks.php:54
+msgid "Featured Image"
+msgstr ""
+
+#: includes/tasks.php:55
+msgid "Set featured image"
+msgstr ""
+
+#: includes/tasks.php:56
+msgid "Remove featured image"
+msgstr ""
+
+#: includes/tasks.php:57
+msgid "Use as featured image"
+msgstr ""
+
+#: includes/tasks.php:58
+msgid "Insert into task"
+msgstr ""
+
+#: includes/tasks.php:59
+msgid "Uploaded to this task"
+msgstr ""
+
+#: includes/tasks.php:60
+msgid "Tasks list"
+msgstr ""
+
+#: includes/tasks.php:61
+msgid "Tasks list navigation"
+msgstr ""
+
+#: includes/tasks.php:62
+msgid "Filter tasks list"
+msgstr ""
+
+#: includes/tasks.php:67
+msgid "Planning Checklist tasks"
+msgstr ""
+
+#: includes/tasks.php:129
+msgctxt "Taxonomy General Name"
+msgid "Task Categories"
+msgstr ""
+
+#: includes/tasks.php:130
+msgctxt "Taxonomy Singular Name"
+msgid "Task Category"
+msgstr ""
+
+#: includes/tasks.php:131
+msgid "Category"
+msgstr ""
+
+#: includes/tasks.php:132
+msgid "All Categories"
+msgstr ""
+
+#: includes/tasks.php:133
+msgid "Parent Category"
+msgstr ""
+
+#: includes/tasks.php:134
+msgid "Parent Category:"
+msgstr ""
+
+#: includes/tasks.php:135
+msgid "New Category Name"
+msgstr ""
+
+#: includes/tasks.php:136
+msgid "Add New Category"
+msgstr ""
+
+#: includes/tasks.php:137
+msgid "Edit Category"
+msgstr ""
+
+#: includes/tasks.php:138
+msgid "Update Category"
+msgstr ""
+
+#: includes/tasks.php:139
+msgid "View Category"
+msgstr ""
+
+#: includes/tasks.php:140
+msgid "Separate categories with commas"
+msgstr ""
+
+#: includes/tasks.php:141
+msgid "Add or remove categories"
+msgstr ""
+
+#: includes/tasks.php:142
+msgid "Choose from the most used"
+msgstr ""
+
+#: includes/tasks.php:143
+msgid "Popular Categories"
+msgstr ""
+
+#: includes/tasks.php:144
+msgid "Search Categories"
+msgstr ""
+
+#: includes/tasks.php:145
+msgid "Not Found"
+msgstr ""
+
+#: includes/tasks.php:146
+msgid "No categories"
+msgstr ""
+
+#: includes/tasks.php:147
+msgid "Categories list"
+msgstr ""
+
+#: includes/tasks.php:148
+msgid "Categories list navigation"
+msgstr ""
+
+#: includes/tasks.php:173
+msgid "Pending"
+msgstr ""
+
+#: includes/tasks.php:174
+msgid "Complete"
+msgstr ""
+
+#: includes/tasks.php:175
+msgid "Skipped"
+msgstr ""
+
+#: includes/tasks.php:209
+msgid "Username of the last user to modify the task post."
+msgstr ""
+
+#: includes/tasks.php:224
+msgid "A help link for more information about a task."
+msgstr ""
+
+#: includes/tasks.php:229
+msgid "The help link text."
+msgstr ""
+
+#: includes/tasks.php:234
+msgid "The help link URL."
+msgstr ""
+
+#: includes/tasks.php:272 views/tasks.php:17
+msgid "Planning Checklist"
+msgstr ""
+
+#: includes/tasks.php:273
+msgid "Planning"
+msgstr ""
+
+#: includes/tasks.php:337
+msgid ""
+"Are you sure you want to reset the task data? This action cannot be undone."
+msgstr ""
+
+#: includes/tasks.php:415
+msgid "Invalid nonce."
+msgstr ""
+
+#: includes/tasks.php:419
+msgid "Insufficient permissions to reset task data."
+msgstr ""
+
+#: includes/tasks.php:423
+msgid "Checklist data reset with errors."
+msgstr ""
+
+#: includes/tasks.php:428
+msgid "Checklist data successfully reset."
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "WordCamp Mentors"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+#. Author URI of the plugin/theme
+msgid "https://wordcamp.org"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Tools for mentors and organizers of WordCamps."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "WordCamp.org"
+msgstr ""

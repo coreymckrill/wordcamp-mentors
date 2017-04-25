@@ -79,6 +79,8 @@ function get_css_url() {
  * @return void
  */
 function load_files() {
+	load_plugin_textdomain( 'wordcamporg', false, '/i18n/' );
+
 	$files = array(
 		'tasks.php',
 		'tasks-list.php',
