@@ -6,6 +6,8 @@
  * Author:          WordCamp.org
  * Author URI:      https://wordcamp.org
  * Version:         1.0.0
+ * Text Domain:     wordcamporg
+ * Domain Path:     i18n
  *
  * @package         WordCamp\Mentors
  */
